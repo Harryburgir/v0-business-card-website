@@ -10,8 +10,8 @@ export function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-        <Link href="/" className="font-serif text-2xl font-medium tracking-wide text-foreground">
-          Maleńki
+        <Link href="/" className="font-serif text-xl font-medium tracking-wide text-foreground md:text-2xl">
+          La de Bébé mini
         </Link>
 
         {/* Desktop Navigation */}

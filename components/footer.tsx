@@ -7,11 +7,11 @@ export function Footer() {
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-2">
-            <Link href="/" className="font-serif text-2xl font-medium tracking-wide text-foreground">
-              Maleńki
+            <Link href="/" className="font-serif text-xl font-medium tracking-wide text-foreground md:text-2xl">
+              La de Bébé mini
             </Link>
             <p className="mt-4 max-w-sm text-muted-foreground">
-              Skandynawski minimalizm dla najmłodszych. Organiczne tkaniny i ponadczasowy design.
+              Delikatne ubranka z naturalnych tkanin dla noworodków i niemowląt. Bez barwników chemicznych.
             </p>
             <div className="mt-6 flex gap-4">
               <a
@@ -69,7 +69,7 @@ export function Footer() {
               Kontakt
             </h4>
             <div className="mt-6 flex flex-col gap-3 text-muted-foreground">
-              <p>hello@malenki.pl</p>
+              <p>hello@ladebebemini.pl</p>
               <p>+48 512 345 678</p>
               <p>ul. Mokotowska 15</p>
               <p>00-640 Warszawa</p>
@@ -78,7 +78,7 @@ export function Footer() {
         </div>
 
         <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 text-sm text-muted-foreground md:flex-row">
-          <p>&copy; {new Date().getFullYear()} Maleńki. Wszelkie prawa zastrzeżone.</p>
+          <p>&copy; {new Date().getFullYear()} La de Bébé mini. Wszelkie prawa zastrzeżone.</p>
           <div className="flex gap-6">
             <Link href="/polityka-prywatnosci" className="transition-colors hover:text-foreground">
               Polityka prywatności

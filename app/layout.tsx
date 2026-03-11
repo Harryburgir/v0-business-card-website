@@ -15,8 +15,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Maleńki | Ubranka dla dzieci',
-  description: 'Skandynawski minimalizm dla najmłodszych. Organiczne tkaniny, ponadczasowy design i komfort dla Twojego dziecka.',
+  title: 'La de Bébé mini | Ubranka dla noworodków i niemowląt',
+  description: 'Delikatne ubranka z naturalnych tkanin dla noworodków i niemowląt. Bez barwników chemicznych, bezpieczne dla wrażliwej skóry dziecka.',
   generator: 'v0.app',
   icons: {
     icon: [

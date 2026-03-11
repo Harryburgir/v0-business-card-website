@@ -8,7 +8,7 @@ export function About() {
           <div className="relative aspect-[4/5] overflow-hidden">
             <Image
               src="/images/about-kids.jpg"
-              alt="Dziecko w naturalnych ubrankach"
+              alt="Niemowlę w naturalnych ubrankach"
               fill
               className="object-cover"
             />
@@ -18,17 +18,18 @@ export function About() {
               O nas
             </p>
             <h2 className="font-serif text-4xl font-light leading-tight text-foreground md:text-5xl lg:text-6xl">
-              <span className="block text-balance">Stworzone z miłością</span>
-              <span className="block text-balance">dla najmłodszych</span>
+              <span className="block text-balance">Stworzone z miłości</span>
+              <span className="block text-balance">do najmłodszych</span>
             </h2>
             <p className="mt-8 text-lg leading-relaxed text-muted-foreground">
-              Maleńki to polska marka ubranek dziecięcych inspirowana skandynawskim minimalizmem. 
-              Wierzymy, że dzieci zasługują na ubrania, które są nie tylko piękne, 
-              ale przede wszystkim wygodne i bezpieczne dla ich delikatnej skóry.
+              La de Bébé mini to marka stworzona z myślą o dzieciach, które dopiero przychodzą na świat 
+              oraz o maluszkach w pierwszym roku życia. Wierzymy, że pierwsze ubranka powinny być nie tylko piękne, 
+              ale przede wszystkim delikatne i bezpieczne dla wrażliwej skóry dziecka.
             </p>
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-              Wszystkie nasze produkty wykonujemy z certyfikowanych, organicznych tkanin. 
-              Dbamy o każdy detal - od wyboru materiałów, przez projekt, aż po ostatni szew.
+              W naszej ofercie znajdują się starannie wybrane ubranka wykonane z naturalnych tkanin, 
+              które nie są barwione chemicznie. Stawiamy na materiały przyjazne dla skóry, oddychające 
+              i komfortowe, aby zapewnić maluszkom wygodę już od pierwszych dni życia.
             </p>
           </div>
         </div>
@@ -37,28 +38,28 @@ export function About() {
           <div className="border-t border-border pt-8">
             <span className="font-serif text-5xl font-light text-primary">01</span>
             <h3 className="mt-4 text-lg font-medium uppercase tracking-wide text-foreground">
-              Organiczne materiały
+              Naturalne tkaniny
             </h3>
             <p className="mt-3 text-muted-foreground">
-              100% certyfikowana bawełna organiczna GOTS. Bezpieczna dla skóry i przyjazna środowisku.
+              Starannie wyselekcjonowane materiały bez barwników chemicznych. Bezpieczne dla najdelikatniejszej skóry.
             </p>
           </div>
           <div className="border-t border-border pt-8">
             <span className="font-serif text-5xl font-light text-primary">02</span>
             <h3 className="mt-4 text-lg font-medium uppercase tracking-wide text-foreground">
-              Ponadczasowy design
+              Subtelny design
             </h3>
             <p className="mt-3 text-muted-foreground">
-              Minimalistyczne wzory i stonowane kolory, które nigdy nie wychodzą z mody.
+              Ponadczasowy styl w naturalnych odcieniach. Piękno tkwi w prostocie i delikatności.
             </p>
           </div>
           <div className="border-t border-border pt-8">
             <span className="font-serif text-5xl font-light text-primary">03</span>
             <h3 className="mt-4 text-lg font-medium uppercase tracking-wide text-foreground">
-              Lokalna produkcja
+              Komfort od pierwszych dni
             </h3>
             <p className="mt-3 text-muted-foreground">
-              Szyjemy w Polsce, wspierając lokalnych rzemieślników i dbając o najwyższą jakość.
+              Oddychające i miękkie materiały, które otulają maluszka delikatnością i troską.
             </p>
           </div>
         </div>

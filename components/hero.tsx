@@ -11,7 +11,7 @@ export function Hero() {
       <div className="absolute inset-0">
         <Image
           src="/images/hero-kids.jpg"
-          alt="Dziecko w organicznych ubrankach"
+          alt="Noworodek w delikatnych naturalnych ubrankach"
           fill
           className="object-cover"
           priority
@@ -23,27 +23,27 @@ export function Hero() {
       <div className="relative flex min-h-screen flex-col items-center justify-center px-6 pt-20">
         <div className="mx-auto max-w-4xl text-center">
           <p className="mb-6 text-sm uppercase tracking-[0.3em] text-background/80">
-            Kolekcja Wiosna/Lato 2026
+            Stworzone z miłości do najmłodszych
           </p>
           <h1 className="font-serif text-5xl font-light leading-tight tracking-tight text-background md:text-7xl lg:text-8xl">
             <span className="block text-balance">Delikatność</span>
-            <span className="block text-balance">dla maluszków</span>
+            <span className="block text-balance">od pierwszych dni</span>
           </h1>
           <p className="mx-auto mt-8 max-w-xl text-lg leading-relaxed text-background/90 md:text-xl">
-            Organiczne tkaniny, ponadczasowy design i komfort, którego Twoje dziecko zasługuje.
+            Naturalne tkaniny bez barwników chemicznych. Bezpieczne i delikatne dla wrażliwej skóry Twojego maluszka.
           </p>
           <div className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Link
               href="#kolekcje"
               className="inline-flex items-center gap-2 bg-background px-8 py-4 text-sm uppercase tracking-widest text-foreground transition-all hover:bg-background/90"
             >
-              Zobacz kolekcje
+              Odkryj kolekcje
             </Link>
             <Link
               href="#kontakt"
               className="inline-flex items-center gap-2 border border-background/60 px-8 py-4 text-sm uppercase tracking-widest text-background transition-all hover:border-background"
             >
-              Napisz do nas
+              Skontaktuj się
             </Link>
           </div>
         </div>

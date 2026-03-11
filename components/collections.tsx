@@ -5,19 +5,19 @@ const collections = [
   {
     title: "Noworodki",
     subtitle: "0-3 miesiące",
-    description: "Delikatne body, śpioszki i kocyki dla najmniejszych",
+    description: "Pierwsze wyprawki, body i kaftaniki dla maluszków przychodzących na świat",
     image: "/images/collection-newborn.jpg",
   },
   {
     title: "Niemowlaki",
-    subtitle: "3-12 miesięcy",
-    description: "Wygodne komplety do zabawy i snu",
+    subtitle: "3-6 miesięcy",
+    description: "Delikatne śpioszki, komplety i kocyki dla rozwijających się maluszków",
     image: "/images/collection-baby.jpg",
   },
   {
-    title: "Maluchy",
-    subtitle: "1-3 lata",
-    description: "Praktyczne ubranka dla aktywnych odkrywców",
+    title: "Odkrywcy",
+    subtitle: "6-12 miesięcy",
+    description: "Wygodne ubranka dla pierwszych kroków i zabaw",
     image: "/images/collection-toddler.jpg",
   },
 ];
@@ -31,8 +31,12 @@ export function Collections() {
             Kolekcje
           </p>
           <h2 className="font-serif text-4xl font-light leading-tight text-foreground md:text-5xl lg:text-6xl">
-            Dla każdego wieku
+            <span className="block text-balance">Dla pierwszego roku życia</span>
           </h2>
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
+            Połączenie naturalności, subtelności i ponadczasowego stylu, który otula najmłodszych 
+            delikatnością i troską w ich pierwszych, najważniejszych chwilach.
+          </p>
         </div>
 
         <div className="grid gap-8 md:grid-cols-3">

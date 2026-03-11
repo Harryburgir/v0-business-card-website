@@ -2,24 +2,28 @@ import Image from "next/image";
 
 const products = [
   {
-    title: "Body z długim rękawem",
-    price: "89 zł",
+    title: "Body z naturalnej bawełny",
+    price: "79 zł",
     image: "/images/product-1.jpg",
+    description: "Bez barwników chemicznych",
   },
   {
-    title: "Spodnie z organicznej bawełny",
-    price: "119 zł",
+    title: "Śpioszki muślinowe",
+    price: "99 zł",
     image: "/images/product-2.jpg",
+    description: "Oddychająca tkanina",
   },
   {
-    title: "Kocyk muślinowy",
-    price: "159 zł",
+    title: "Kocyk otulacz",
+    price: "149 zł",
     image: "/images/product-3.jpg",
+    description: "100% naturalna bawełna",
   },
   {
-    title: "Komplet niemowlęcy",
-    price: "199 zł",
+    title: "Wyprawka dla noworodka",
+    price: "299 zł",
     image: "/images/product-4.jpg",
+    description: "Kompletny zestaw startowy",
   },
 ];
 
@@ -30,14 +34,14 @@ export function Products() {
         <div className="mb-16 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <div>
             <p className="mb-4 text-sm uppercase tracking-[0.3em] text-muted-foreground">
-              Bestsellery
+              Nasze produkty
             </p>
             <h2 className="font-serif text-4xl font-light leading-tight text-foreground md:text-5xl lg:text-6xl">
-              Ulubione produkty
+              Delikatność w każdym detalu
             </h2>
           </div>
           <p className="max-w-md text-muted-foreground">
-            Nasze najpopularniejsze produkty, które pokochały tysiące rodziców w całej Polsce.
+            Każdy produkt wykonany z naturalnych, niebarwionych tkanin, które są bezpieczne dla wrażliwej skóry maluszka.
           </p>
         </div>
 
@@ -55,7 +59,8 @@ export function Products() {
               </div>
               <div className="mt-4">
                 <h3 className="text-foreground">{product.title}</h3>
-                <p className="mt-1 font-serif text-lg text-muted-foreground">
+                <p className="mt-1 text-sm text-muted-foreground">{product.description}</p>
+                <p className="mt-2 font-serif text-lg text-foreground">
                   {product.price}
                 </p>
               </div>
@@ -65,7 +70,7 @@ export function Products() {
 
         <div className="mt-16 text-center">
           <p className="text-muted-foreground">
-            Aby zamówić lub dowiedzieć się więcej o dostępności, skontaktuj się z nami.
+            Zainteresowany naszymi produktami? Napisz do nas, a pomożemy dobrać idealne ubranka dla Twojego maluszka.
           </p>
         </div>
       </div>
