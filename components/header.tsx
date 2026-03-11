@@ -11,7 +11,7 @@ export function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
         <Link href="/" className="font-serif text-2xl font-medium tracking-wide text-foreground">
-          Studio Nordica
+          Maleńki
         </Link>
 
         {/* Desktop Navigation */}
@@ -19,11 +19,11 @@ export function Header() {
           <Link href="#o-nas" className="text-sm uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground">
             O nas
           </Link>
-          <Link href="#uslugi" className="text-sm uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground">
-            Usługi
+          <Link href="#kolekcje" className="text-sm uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground">
+            Kolekcje
           </Link>
-          <Link href="#realizacje" className="text-sm uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground">
-            Realizacje
+          <Link href="#produkty" className="text-sm uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground">
+            Produkty
           </Link>
           <Link href="#kontakt" className="text-sm uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground">
             Kontakt
@@ -52,18 +52,18 @@ export function Header() {
               O nas
             </Link>
             <Link
-              href="#uslugi"
+              href="#kolekcje"
               onClick={() => setIsMenuOpen(false)}
               className="text-sm uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
             >
-              Usługi
+              Kolekcje
             </Link>
             <Link
-              href="#realizacje"
+              href="#produkty"
               onClick={() => setIsMenuOpen(false)}
               className="text-sm uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
             >
-              Realizacje
+              Produkty
             </Link>
             <Link
               href="#kontakt"

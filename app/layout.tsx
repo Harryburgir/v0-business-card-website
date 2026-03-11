@@ -15,8 +15,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Studio Nordica | Design & Kreacja',
-  description: 'Minimalistyczny design skandynawski. Tworzymy wyjątkowe projekty z pasją do detalu.',
+  title: 'Maleńki | Ubranka dla dzieci',
+  description: 'Skandynawski minimalizm dla najmłodszych. Organiczne tkaniny, ponadczasowy design i komfort dla Twojego dziecka.',
   generator: 'v0.app',
   icons: {
     icon: [

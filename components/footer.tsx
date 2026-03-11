@@ -8,10 +8,10 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-2">
             <Link href="/" className="font-serif text-2xl font-medium tracking-wide text-foreground">
-              Studio Nordica
+              Maleńki
             </Link>
             <p className="mt-4 max-w-sm text-muted-foreground">
-              Minimalistyczny design skandynawski. Tworzymy wyjątkowe projekty z pasją do detalu.
+              Skandynawski minimalizm dla najmłodszych. Organiczne tkaniny i ponadczasowy design.
             </p>
             <div className="mt-6 flex gap-4">
               <a
@@ -52,11 +52,11 @@ export function Footer() {
               <Link href="#o-nas" className="text-muted-foreground transition-colors hover:text-foreground">
                 O nas
               </Link>
-              <Link href="#uslugi" className="text-muted-foreground transition-colors hover:text-foreground">
-                Usługi
+              <Link href="#kolekcje" className="text-muted-foreground transition-colors hover:text-foreground">
+                Kolekcje
               </Link>
-              <Link href="#realizacje" className="text-muted-foreground transition-colors hover:text-foreground">
-                Realizacje
+              <Link href="#produkty" className="text-muted-foreground transition-colors hover:text-foreground">
+                Produkty
               </Link>
               <Link href="#kontakt" className="text-muted-foreground transition-colors hover:text-foreground">
                 Kontakt
@@ -69,16 +69,16 @@ export function Footer() {
               Kontakt
             </h4>
             <div className="mt-6 flex flex-col gap-3 text-muted-foreground">
-              <p>hello@studionordica.pl</p>
-              <p>+48 123 456 789</p>
-              <p>ul. Skandynawska 12</p>
-              <p>00-001 Warszawa</p>
+              <p>hello@malenki.pl</p>
+              <p>+48 512 345 678</p>
+              <p>ul. Mokotowska 15</p>
+              <p>00-640 Warszawa</p>
             </div>
           </div>
         </div>
 
         <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 text-sm text-muted-foreground md:flex-row">
-          <p>&copy; {new Date().getFullYear()} Studio Nordica. Wszelkie prawa zastrzeżone.</p>
+          <p>&copy; {new Date().getFullYear()} Maleńki. Wszelkie prawa zastrzeżone.</p>
           <div className="flex gap-6">
             <Link href="/polityka-prywatnosci" className="transition-colors hover:text-foreground">
               Polityka prywatności

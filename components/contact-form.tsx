@@ -46,12 +46,12 @@ export function ContactForm() {
               Kontakt
             </p>
             <h2 className="font-serif text-4xl font-light leading-tight text-foreground md:text-5xl lg:text-6xl">
-              <span className="block text-balance">Porozmawiajmy</span>
-              <span className="block text-balance">o Twoim projekcie</span>
+              <span className="block text-balance">Masz pytania?</span>
+              <span className="block text-balance">Napisz do nas</span>
             </h2>
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-              Masz pomysł? Chętnie go wysłuchamy. Napisz do nas, a odpowiemy 
-              najszybciej jak to możliwe.
+              Chętnie pomożemy w doborze rozmiaru, odpowiemy na pytania o dostępność 
+              lub przyjmiemy indywidualne zamówienie.
             </p>
 
             <div className="mt-12 space-y-6">
@@ -61,7 +61,7 @@ export function ContactForm() {
                 </div>
                 <div>
                   <p className="text-xs uppercase tracking-widest text-muted-foreground">Email</p>
-                  <p className="mt-1 text-foreground">hello@studionordica.pl</p>
+                  <p className="mt-1 text-foreground">hello@malenki.pl</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">
@@ -70,7 +70,7 @@ export function ContactForm() {
                 </div>
                 <div>
                   <p className="text-xs uppercase tracking-widest text-muted-foreground">Telefon</p>
-                  <p className="mt-1 text-foreground">+48 123 456 789</p>
+                  <p className="mt-1 text-foreground">+48 512 345 678</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">
@@ -78,8 +78,8 @@ export function ContactForm() {
                   <MapPin className="h-5 w-5 text-primary" />
                 </div>
                 <div>
-                  <p className="text-xs uppercase tracking-widest text-muted-foreground">Adres</p>
-                  <p className="mt-1 text-foreground">ul. Skandynawska 12, Warszawa</p>
+                  <p className="text-xs uppercase tracking-widest text-muted-foreground">Showroom</p>
+                  <p className="mt-1 text-foreground">ul. Mokotowska 15, Warszawa</p>
                 </div>
               </div>
             </div>
@@ -150,7 +150,7 @@ export function ContactForm() {
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                     className="w-full border-b border-border bg-transparent py-3 text-foreground placeholder:text-muted-foreground/50 focus:border-primary focus:outline-none"
-                    placeholder="Zapytanie o współpracę"
+                    placeholder="Zapytanie o produkt"
                   />
                 </div>
 
@@ -165,7 +165,7 @@ export function ContactForm() {
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     className="w-full resize-none border-b border-border bg-transparent py-3 text-foreground placeholder:text-muted-foreground/50 focus:border-primary focus:outline-none"
-                    placeholder="Opisz swój projekt..."
+                    placeholder="Jakie produkty Cię interesują? W jakim rozmiarze?"
                   />
                 </div>
 

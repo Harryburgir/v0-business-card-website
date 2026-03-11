@@ -1,44 +1,61 @@
+"use client";
+
 import { ArrowDown } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-screen flex-col items-center justify-center px-6 pt-20">
-      <div className="mx-auto max-w-4xl text-center">
-        <p className="mb-6 text-sm uppercase tracking-[0.3em] text-muted-foreground">
-          Design & Kreacja
-        </p>
-        <h1 className="font-serif text-5xl font-light leading-tight tracking-tight text-foreground md:text-7xl lg:text-8xl">
-          <span className="block text-balance">Minimalizm</span>
-          <span className="block text-balance">spotyka elegancję</span>
-        </h1>
-        <p className="mx-auto mt-8 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-          Tworzymy wyjątkowe projekty inspirowane skandynawską estetyką. 
-          Prostota, funkcjonalność i dbałość o każdy detal.
-        </p>
-        <div className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-          <Link
-            href="#kontakt"
-            className="inline-flex items-center gap-2 bg-primary px-8 py-4 text-sm uppercase tracking-widest text-primary-foreground transition-all hover:bg-primary/90"
-          >
-            Napisz do nas
-          </Link>
-          <Link
-            href="#o-nas"
-            className="inline-flex items-center gap-2 border border-foreground/20 px-8 py-4 text-sm uppercase tracking-widest text-foreground transition-all hover:border-foreground/40"
-          >
-            Poznaj nas
-          </Link>
-        </div>
+    <section className="relative min-h-screen">
+      {/* Hero Image */}
+      <div className="absolute inset-0">
+        <Image
+          src="/images/hero-kids.jpg"
+          alt="Dziecko w organicznych ubrankach"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-foreground/20" />
       </div>
 
-      <Link
-        href="#o-nas"
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce text-muted-foreground transition-colors hover:text-foreground"
-        aria-label="Przewiń w dół"
-      >
-        <ArrowDown className="h-6 w-6" />
-      </Link>
+      {/* Content */}
+      <div className="relative flex min-h-screen flex-col items-center justify-center px-6 pt-20">
+        <div className="mx-auto max-w-4xl text-center">
+          <p className="mb-6 text-sm uppercase tracking-[0.3em] text-background/80">
+            Kolekcja Wiosna/Lato 2026
+          </p>
+          <h1 className="font-serif text-5xl font-light leading-tight tracking-tight text-background md:text-7xl lg:text-8xl">
+            <span className="block text-balance">Delikatność</span>
+            <span className="block text-balance">dla maluszków</span>
+          </h1>
+          <p className="mx-auto mt-8 max-w-xl text-lg leading-relaxed text-background/90 md:text-xl">
+            Organiczne tkaniny, ponadczasowy design i komfort, którego Twoje dziecko zasługuje.
+          </p>
+          <div className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+            <Link
+              href="#kolekcje"
+              className="inline-flex items-center gap-2 bg-background px-8 py-4 text-sm uppercase tracking-widest text-foreground transition-all hover:bg-background/90"
+            >
+              Zobacz kolekcje
+            </Link>
+            <Link
+              href="#kontakt"
+              className="inline-flex items-center gap-2 border border-background/60 px-8 py-4 text-sm uppercase tracking-widest text-background transition-all hover:border-background"
+            >
+              Napisz do nas
+            </Link>
+          </div>
+        </div>
+
+        <Link
+          href="#o-nas"
+          className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce text-background/70 transition-colors hover:text-background"
+          aria-label="Przewiń w dół"
+        >
+          <ArrowDown className="h-6 w-6" />
+        </Link>
+      </div>
     </section>
   );
 }
