@@ -56,7 +56,7 @@ export function ContactForm() {
 
             <div className="mt-12 space-y-6">
               <div className="flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center bg-secondary">
+                <div className="flex h-12 w-12 items-center justify-center bg-warm">
                   <Mail className="h-5 w-5 text-primary" />
                 </div>
                 <div>
@@ -65,7 +65,7 @@ export function ContactForm() {
                 </div>
               </div>
               <div className="flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center bg-secondary">
+                <div className="flex h-12 w-12 items-center justify-center bg-warm">
                   <Phone className="h-5 w-5 text-primary" />
                 </div>
                 <div>
@@ -74,7 +74,7 @@ export function ContactForm() {
                 </div>
               </div>
               <div className="flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center bg-secondary">
+                <div className="flex h-12 w-12 items-center justify-center bg-warm">
                   <MapPin className="h-5 w-5 text-primary" />
                 </div>
                 <div>
@@ -85,14 +85,14 @@ export function ContactForm() {
             </div>
           </div>
 
-          <div className="bg-card p-8 lg:p-12">
+          <div className="bg-warm/50 p-8 lg:p-12">
             <h3 className="mb-8 font-serif text-2xl font-light text-card-foreground">
               Wyślij zapytanie
             </h3>
 
             {status === "success" ? (
               <div className="py-12 text-center">
-                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
+                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-warm">
                   <Mail className="h-8 w-8 text-primary" />
                 </div>
                 <h4 className="font-serif text-xl text-foreground">Dziękujemy!</h4>

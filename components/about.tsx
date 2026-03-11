@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export function About() {
   return (
-    <section id="o-nas" className="bg-secondary/50 px-6 py-24 lg:py-32">
+    <section id="o-nas" className="bg-warm/40 px-6 py-24 lg:py-32">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
           <div className="relative aspect-[4/5] overflow-hidden">
@@ -35,7 +35,7 @@ export function About() {
         </div>
 
         <div className="mt-20 grid gap-8 md:grid-cols-3">
-          <div className="border-t border-border pt-8">
+          <div className="border-t border-warm pt-8">
             <span className="font-serif text-5xl font-light text-primary">01</span>
             <h3 className="mt-4 text-lg font-medium uppercase tracking-wide text-foreground">
               Naturalne tkaniny
@@ -44,7 +44,7 @@ export function About() {
               Starannie wyselekcjonowane materiały bez barwników chemicznych. Bezpieczne dla najdelikatniejszej skóry.
             </p>
           </div>
-          <div className="border-t border-border pt-8">
+          <div className="border-t border-warm pt-8">
             <span className="font-serif text-5xl font-light text-primary">02</span>
             <h3 className="mt-4 text-lg font-medium uppercase tracking-wide text-foreground">
               Subtelny design
@@ -53,7 +53,7 @@ export function About() {
               Ponadczasowy styl w naturalnych odcieniach. Piękno tkwi w prostocie i delikatności.
             </p>
           </div>
-          <div className="border-t border-border pt-8">
+          <div className="border-t border-warm pt-8">
             <span className="font-serif text-5xl font-light text-primary">03</span>
             <h3 className="mt-4 text-lg font-medium uppercase tracking-wide text-foreground">
               Komfort od pierwszych dni

@@ -3,7 +3,7 @@ import { Instagram, Linkedin, Facebook } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-background px-6 py-16">
+    <footer className="border-t border-warm bg-warm/30 px-6 py-16">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-2">
@@ -18,7 +18,7 @@ export function Footer() {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-10 w-10 items-center justify-center border border-border transition-colors hover:border-foreground hover:text-foreground"
+                className="flex h-10 w-10 items-center justify-center bg-warm transition-colors hover:bg-primary hover:text-primary-foreground"
                 aria-label="Instagram"
               >
                 <Instagram className="h-4 w-4" />
@@ -27,7 +27,7 @@ export function Footer() {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-10 w-10 items-center justify-center border border-border transition-colors hover:border-foreground hover:text-foreground"
+                className="flex h-10 w-10 items-center justify-center bg-warm transition-colors hover:bg-primary hover:text-primary-foreground"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="h-4 w-4" />
@@ -36,7 +36,7 @@ export function Footer() {
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-10 w-10 items-center justify-center border border-border transition-colors hover:border-foreground hover:text-foreground"
+                className="flex h-10 w-10 items-center justify-center bg-warm transition-colors hover:bg-primary hover:text-primary-foreground"
                 aria-label="Facebook"
               >
                 <Facebook className="h-4 w-4" />
@@ -80,7 +80,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 text-sm text-muted-foreground md:flex-row">
+        <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-warm pt-8 text-sm text-muted-foreground md:flex-row">
           <p>&copy; {new Date().getFullYear()} La de Bébé mini. Wszelkie prawa zastrzeżone.</p>
           <div className="flex gap-6">
             <Link href="/polityka-prywatnosci" className="transition-colors hover:text-foreground">

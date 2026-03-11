@@ -35,7 +35,7 @@ export function Hero() {
           <div className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Link
               href="#kolekcje"
-              className="inline-flex items-center gap-2 bg-background px-8 py-4 text-sm uppercase tracking-widest text-foreground transition-all hover:bg-background/90"
+              className="inline-flex items-center gap-2 bg-warm px-8 py-4 text-sm uppercase tracking-widest text-warm-foreground transition-all hover:bg-warm/90"
             >
               Odkryj kolekcje
             </Link>

@@ -37,7 +37,7 @@ const categories = [
 
 export function Categories() {
   return (
-    <section id="kategorie" className="bg-secondary/50 px-6 py-24 lg:py-32">
+    <section id="kategorie" className="bg-background px-6 py-24 lg:py-32">
       <div className="mx-auto max-w-7xl">
         <div className="mb-16 text-center">
           <p className="mb-4 text-sm uppercase tracking-[0.3em] text-muted-foreground">
@@ -57,9 +57,9 @@ export function Categories() {
             <Link
               key={index}
               href="#kontakt"
-              className="group relative flex flex-col items-center justify-center bg-background p-6 text-center transition-all duration-300 hover:shadow-lg sm:p-8 lg:p-10"
+              className="group relative flex flex-col items-center justify-center bg-warm/30 p-6 text-center transition-all duration-300 hover:bg-warm hover:shadow-lg sm:p-8 lg:p-10"
             >
-              <div className="absolute inset-0 border border-border transition-colors duration-300 group-hover:border-primary/30" />
+              <div className="absolute inset-0 border border-warm transition-colors duration-300 group-hover:border-primary/30" />
               <h3 className="relative font-serif text-lg text-foreground sm:text-xl lg:text-2xl">
                 {category.title}
               </h3>

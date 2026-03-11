@@ -29,7 +29,7 @@ const products = [
 
 export function Products() {
   return (
-    <section id="produkty" className="bg-secondary/50 px-6 py-24 lg:py-32">
+    <section id="produkty" className="bg-warm/40 px-6 py-24 lg:py-32">
       <div className="mx-auto max-w-7xl">
         <div className="mb-16 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <div>
