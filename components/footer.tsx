@@ -52,6 +52,9 @@ export function Footer() {
               <Link href="#o-nas" className="text-muted-foreground transition-colors hover:text-foreground">
                 O nas
               </Link>
+              <Link href="#kategorie" className="text-muted-foreground transition-colors hover:text-foreground">
+                Kategorie
+              </Link>
               <Link href="#kolekcje" className="text-muted-foreground transition-colors hover:text-foreground">
                 Kolekcje
               </Link>

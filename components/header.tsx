@@ -15,9 +15,12 @@ export function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden items-center gap-10 md:flex">
+        <div className="hidden items-center gap-8 lg:gap-10 md:flex">
           <Link href="#o-nas" className="text-sm uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground">
             O nas
+          </Link>
+          <Link href="#kategorie" className="text-sm uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground">
+            Kategorie
           </Link>
           <Link href="#kolekcje" className="text-sm uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground">
             Kolekcje
@@ -50,6 +53,13 @@ export function Header() {
               className="text-sm uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
             >
               O nas
+            </Link>
+            <Link
+              href="#kategorie"
+              onClick={() => setIsMenuOpen(false)}
+              className="text-sm uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Kategorie
             </Link>
             <Link
               href="#kolekcje"
