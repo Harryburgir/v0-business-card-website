@@ -1,0 +1,94 @@
+import Link from "next/link";
+import { Instagram, Linkedin, Facebook } from "lucide-react";
+
+export function Footer() {
+  return (
+    <footer className="border-t border-border bg-background px-6 py-16">
+      <div className="mx-auto max-w-7xl">
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+          <div className="lg:col-span-2">
+            <Link href="/" className="font-serif text-2xl font-medium tracking-wide text-foreground">
+              Studio Nordica
+            </Link>
+            <p className="mt-4 max-w-sm text-muted-foreground">
+              Minimalistyczny design skandynawski. Tworzymy wyjątkowe projekty z pasją do detalu.
+            </p>
+            <div className="mt-6 flex gap-4">
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-10 w-10 items-center justify-center border border-border transition-colors hover:border-foreground hover:text-foreground"
+                aria-label="Instagram"
+              >
+                <Instagram className="h-4 w-4" />
+              </a>
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-10 w-10 items-center justify-center border border-border transition-colors hover:border-foreground hover:text-foreground"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="h-4 w-4" />
+              </a>
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-10 w-10 items-center justify-center border border-border transition-colors hover:border-foreground hover:text-foreground"
+                aria-label="Facebook"
+              >
+                <Facebook className="h-4 w-4" />
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <h4 className="text-sm font-medium uppercase tracking-widest text-foreground">
+              Nawigacja
+            </h4>
+            <nav className="mt-6 flex flex-col gap-3">
+              <Link href="#o-nas" className="text-muted-foreground transition-colors hover:text-foreground">
+                O nas
+              </Link>
+              <Link href="#uslugi" className="text-muted-foreground transition-colors hover:text-foreground">
+                Usługi
+              </Link>
+              <Link href="#realizacje" className="text-muted-foreground transition-colors hover:text-foreground">
+                Realizacje
+              </Link>
+              <Link href="#kontakt" className="text-muted-foreground transition-colors hover:text-foreground">
+                Kontakt
+              </Link>
+            </nav>
+          </div>
+
+          <div>
+            <h4 className="text-sm font-medium uppercase tracking-widest text-foreground">
+              Kontakt
+            </h4>
+            <div className="mt-6 flex flex-col gap-3 text-muted-foreground">
+              <p>hello@studionordica.pl</p>
+              <p>+48 123 456 789</p>
+              <p>ul. Skandynawska 12</p>
+              <p>00-001 Warszawa</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 text-sm text-muted-foreground md:flex-row">
+          <p>&copy; {new Date().getFullYear()} Studio Nordica. Wszelkie prawa zastrzeżone.</p>
+          <div className="flex gap-6">
+            <Link href="/polityka-prywatnosci" className="transition-colors hover:text-foreground">
+              Polityka prywatności
+            </Link>
+            <Link href="/regulamin" className="transition-colors hover:text-foreground">
+              Regulamin
+            </Link>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
