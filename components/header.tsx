@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 
 export function Header() {
@@ -9,9 +10,16 @@ export function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-        <Link href="/" className="font-serif text-xl font-medium tracking-wide text-foreground md:text-2xl">
-          La de Bébé mini
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3 lg:px-8">
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/images/ladebebe-logo.png"
+            alt="La de Bébé mini"
+            width={140}
+            height={60}
+            className="h-12 w-auto object-contain mix-blend-multiply"
+            priority
+          />
         </Link>
 
         {/* Desktop Navigation */}
