@@ -33,10 +33,13 @@ export async function POST(request: Request) {
       );
     }
 
-    // Send email via Resend
+    // Send email via Resend - test mode: only gfijcyhf@gmail.com can receive
+    const recipientEmail = "gfijcyhf@gmail.com";
+    console.log("[v0] Sending email to:", recipientEmail);
+    
     const { data: emailData, error } = await resend.emails.send({
       from: "La de Bébé mini <onboarding@resend.dev>",
-      to: ["gfijcyhf@gmail.com"],
+      to: [recipientEmail],
       replyTo: email,
       subject: `[La de Bébé mini] ${subject}`,
       html: `
