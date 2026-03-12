@@ -72,8 +72,8 @@ export function Footer() {
               Kontakt
             </h4>
             <div className="mt-6 flex flex-col gap-3 text-muted-foreground">
-              <p>hello@ladebebemini.pl</p>
-              <p>+48 512 345 678</p>
+              <p>office.ladebebe@gmail.com</p>
+              <p>+48 518 845 751</p>
               <p>ul. Mokotowska 15</p>
               <p>00-640 Warszawa</p>
             </div>

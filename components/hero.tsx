@@ -25,10 +25,20 @@ export function Hero() {
           <p className="mb-6 text-sm uppercase tracking-[0.3em] text-background/80">
             Stworzone z miłości do najmłodszych
           </p>
-          <h1 className="font-serif text-5xl font-light leading-tight tracking-tight text-background md:text-7xl lg:text-8xl">
-            <span className="block text-balance">Delikatność</span>
-            <span className="block text-balance">od pierwszych dni</span>
-          </h1>
+          {/* Calligraphic logo */}
+          <div className="mx-auto mb-6 flex justify-center">
+            <div className="relative w-[340px] md:w-[480px] lg:w-[580px]">
+              <Image
+                src="/images/ladebebe-logo.jpg"
+                alt="La de Bébé mini"
+                width={580}
+                height={260}
+                className="w-full object-contain mix-blend-multiply opacity-90 brightness-[1.15] contrast-[1.05]"
+                priority
+              />
+            </div>
+          </div>
+          <h1 className="sr-only">La de Bébé mini – Delikatność od pierwszych dni</h1>
           <p className="mx-auto mt-8 max-w-xl text-lg leading-relaxed text-background/90 md:text-xl">
             Naturalne tkaniny bez barwników chemicznych. Bezpieczne i delikatne dla wrażliwej skóry Twojego maluszka.
           </p>

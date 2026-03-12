@@ -61,7 +61,7 @@ export function ContactForm() {
                 </div>
                 <div>
                   <p className="text-xs uppercase tracking-widest text-muted-foreground">Email</p>
-                  <p className="mt-1 text-foreground">hello@ladebebemini.pl</p>
+                  <p className="mt-1 text-foreground">office.ladebebe@gmail.com</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">
@@ -70,7 +70,7 @@ export function ContactForm() {
                 </div>
                 <div>
                   <p className="text-xs uppercase tracking-widest text-muted-foreground">Telefon</p>
-                  <p className="mt-1 text-foreground">+48 512 345 678</p>
+                  <p className="mt-1 text-foreground">518 845 751</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">
