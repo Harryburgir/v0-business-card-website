@@ -35,7 +35,7 @@ export async function POST(request: Request) {
     // Send email via Resend
     const { data: emailData, error } = await resend.emails.send({
       from: "La de Bébé mini <onboarding@resend.dev>",
-      to: ["gfijcyhf@gmail.com"],
+      to: ["filip.slaby02@gmail.com"],
       replyTo: email,
       subject: `[La de Bébé mini] ${subject}`,
       html: `
