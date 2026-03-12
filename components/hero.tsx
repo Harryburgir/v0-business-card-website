@@ -33,7 +33,7 @@ export function Hero() {
                 alt="La de Bébé mini"
                 width={580}
                 height={260}
-                className="w-full object-contain mix-blend-multiply opacity-90 brightness-[1.15] contrast-[1.05]"
+                className="h-auto w-full object-contain mix-blend-multiply opacity-90 brightness-[1.15] contrast-[1.05]"
                 priority
               />
             </div>
