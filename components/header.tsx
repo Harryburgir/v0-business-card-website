@@ -13,7 +13,7 @@ export function Header() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3 lg:px-8">
         <Link href="/" className="flex items-center">
           <Image
-            src="/images/ladebebe-logo.jpg"
+            src="/images/ladebebe-logo.png"
             alt="La de Bébé mini"
             width={140}
             height={60}
