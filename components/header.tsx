@@ -3,10 +3,12 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ShoppingBag } from "lucide-react";
+import { useCart } from "@/context/cart-context";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { totalCount, openCart } = useCart();
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md">
@@ -41,14 +43,31 @@ export function Header() {
           </Link>
         </div>
 
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="text-foreground md:hidden"
-          aria-label={isMenuOpen ? "Zamknij menu" : "Otwórz menu"}
-        >
-          {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
+        {/* Right side: Cart + mobile menu */}
+        <div className="flex items-center gap-3">
+          {/* Cart button */}
+          <button
+            onClick={openCart}
+            aria-label={`Koszyk${totalCount > 0 ? ` (${totalCount} produktów)` : ""}`}
+            className="relative flex items-center justify-center text-foreground transition-colors hover:text-primary"
+          >
+            <ShoppingBag className="h-5 w-5" />
+            {totalCount > 0 && (
+              <span className="absolute -right-1.5 -top-1.5 flex h-4 w-4 items-center justify-center bg-primary text-[10px] font-medium text-primary-foreground">
+                {totalCount > 9 ? "9+" : totalCount}
+              </span>
+            )}
+          </button>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="text-foreground md:hidden"
+            aria-label={isMenuOpen ? "Zamknij menu" : "Otwórz menu"}
+          >
+            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
       </nav>
 
       {/* Mobile Navigation */}
