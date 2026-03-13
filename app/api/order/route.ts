@@ -28,6 +28,14 @@ function generateOrderNumber(): string {
 
 export async function POST(request: Request) {
   try {
+    if (!process.env.RESEND_API_KEY) {
+      console.error("RESEND_API_KEY is not configured");
+      return NextResponse.json(
+        { error: "Konfiguracja serwera jest niepełna. Skontaktuj się z administratorem." },
+        { status: 500 }
+      );
+    }
+
     const resend = new Resend(process.env.RESEND_API_KEY);
     const data: OrderData = await request.json();
     const { name, email, phone, address, notes, items, totalPrice } = data;
