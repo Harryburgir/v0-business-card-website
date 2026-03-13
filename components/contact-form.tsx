@@ -79,7 +79,7 @@ export function ContactForm() {
                 </div>
                 <div>
                   <p className="text-xs uppercase tracking-widest text-muted-foreground">Showroom</p>
-                  <p className="mt-1 text-foreground">ul. Mokotowska 15, Warszawa</p>
+                  <p className="mt-1 text-foreground">Wrocław</p>
                 </div>
               </div>
             </div>
