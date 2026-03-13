@@ -1,8 +1,6 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 interface OrderItem {
   id: string;
   title: string;
@@ -24,6 +22,7 @@ interface OrderData {
 
 export async function POST(request: Request) {
   try {
+    const resend = new Resend(process.env.RESEND_API_KEY);
     const data: OrderData = await request.json();
     const { name, email, phone, address, notes, items, totalPrice } = data;
 

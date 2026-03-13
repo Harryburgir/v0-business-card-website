@@ -1,9 +1,6 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
 
-// Resend client - emails sent to account owner in test mode
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 interface ContactFormData {
   name: string;
   email: string;
@@ -13,6 +10,7 @@ interface ContactFormData {
 
 export async function POST(request: Request) {
   try {
+    const resend = new Resend(process.env.RESEND_API_KEY);
     const data: ContactFormData = await request.json();
     const { name, email, subject, message } = data;
 
