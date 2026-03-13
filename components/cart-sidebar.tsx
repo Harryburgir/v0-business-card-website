@@ -21,6 +21,7 @@ export function CartSidebar() {
   const [step, setStep] = useState<Step>("cart");
   const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const [orderNumber, setOrderNumber] = useState<string | null>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const [form, setForm] = useState<OrderFormData>({
     name: "",
@@ -61,6 +62,8 @@ export function CartSidebar() {
       });
 
       if (res.ok) {
+        const data = await res.json();
+        setOrderNumber(data.orderNumber ?? null);
         setStep("success");
         clearCart();
         setStatus("idle");
@@ -297,19 +300,32 @@ export function CartSidebar() {
 
           {/* SUCCESS STEP */}
           {step === "success" && (
-            <div className="flex flex-col items-center justify-center gap-4 px-6 py-20 text-center">
+            <div className="flex flex-col items-center justify-center gap-5 px-6 py-16 text-center">
               <div className="flex h-16 w-16 items-center justify-center bg-warm">
                 <Mail className="h-7 w-7 text-primary" />
               </div>
               <h3 className="font-serif text-2xl font-light text-foreground">
                 Dziękujemy!
               </h3>
-              <p className="text-muted-foreground">
-                Twoje zamówienie zostało złożone. Skontaktujemy się wkrótce, aby potwierdzić szczegóły.
+              {orderNumber && (
+                <div className="w-full border border-border bg-warm/40 px-4 py-3">
+                  <p className="text-xs uppercase tracking-widest text-muted-foreground">
+                    Numer zamówienia
+                  </p>
+                  <p className="mt-1 font-serif text-lg text-foreground">
+                    {orderNumber}
+                  </p>
+                </div>
+              )}
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Twoje zamówienie zostało przyjęte. Zapraszamy do kasy w celu opłacenia zamówienia.
+              </p>
+              <p className="text-xs text-muted-foreground/70">
+                Potwierdzenie zostało wysłane na podany adres email.
               </p>
               <button
                 onClick={closeCart}
-                className="mt-4 text-xs uppercase tracking-widest text-primary hover:text-primary/80"
+                className="mt-2 text-xs uppercase tracking-widest text-primary hover:text-primary/80"
               >
                 Zamknij
               </button>
