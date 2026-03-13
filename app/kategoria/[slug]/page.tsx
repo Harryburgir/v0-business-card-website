@@ -1,9 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Mail } from "lucide-react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import { ProductCard } from "@/components/product-card";
 import { getCategoryBySlug, getAllCategorySlugs } from "@/lib/products-data";
 
 export async function generateStaticParams() {
@@ -69,36 +69,11 @@ export default async function CategoryPage(props: { params: Promise<{ slug: stri
             {category.products.length > 0 ? (
               <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
                 {category.products.map((product) => (
-                  <div
+                  <ProductCard
                     key={product.id}
-                    className="group cursor-pointer"
-                  >
-                    <div className="relative aspect-[3/4] overflow-hidden bg-warm/50">
-                      <Image
-                        src={product.image}
-                        alt={product.title}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-foreground/0 transition-colors duration-300 group-hover:bg-foreground/5" />
-                    </div>
-                    <div className="mt-4">
-                      <h3 className="font-serif text-lg text-foreground">
-                        {product.title}
-                      </h3>
-                      <p className="mt-1 text-sm text-muted-foreground">
-                        {product.description}
-                      </p>
-                      {product.sizes && (
-                        <p className="mt-2 text-xs text-muted-foreground">
-                          Rozmiary: {product.sizes.join(", ")}
-                        </p>
-                      )}
-                      <p className="mt-3 font-serif text-xl text-foreground">
-                        {product.price}
-                      </p>
-                    </div>
-                  </div>
+                    product={product}
+                    categorySlug={category.slug}
+                  />
                 ))}
               </div>
             ) : (
