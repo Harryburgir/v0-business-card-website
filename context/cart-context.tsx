@@ -1,6 +1,8 @@
 "use client";
 
-import { createContext, useContext, useState, useCallback, ReactNode } from "react";
+import { createContext, useContext, useState, useCallback, useEffect, ReactNode } from "react";
+
+const CART_STORAGE_KEY = "ladebebe-cart";
 
 export interface CartItem {
   id: string;
@@ -39,6 +41,34 @@ function itemKey(id: string, size?: string) {
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  // Load cart from localStorage on mount
+  useEffect(() => {
+    try {
+      const savedCart = localStorage.getItem(CART_STORAGE_KEY);
+      if (savedCart) {
+        const parsed = JSON.parse(savedCart);
+        if (Array.isArray(parsed)) {
+          setItems(parsed);
+        }
+      }
+    } catch {
+      // Ignore localStorage errors
+    }
+    setIsHydrated(true);
+  }, []);
+
+  // Save cart to localStorage whenever items change
+  useEffect(() => {
+    if (isHydrated) {
+      try {
+        localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
+      } catch {
+        // Ignore localStorage errors (e.g., quota exceeded)
+      }
+    }
+  }, [items, isHydrated]);
 
   const addItem = useCallback((incoming: Omit<CartItem, "quantity">) => {
     setItems((prev) => {

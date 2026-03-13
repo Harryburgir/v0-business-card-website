@@ -16,12 +16,20 @@ interface OrderFormData {
   notes: string;
 }
 
+interface DeleteConfirmation {
+  id: string;
+  size?: string;
+  title: string;
+}
+
 export function CartSidebar() {
   const { items, isOpen, totalCount, totalPrice, removeItem, updateQuantity, clearCart, closeCart } = useCart();
   const [step, setStep] = useState<Step>("cart");
   const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const [orderNumber, setOrderNumber] = useState<string | null>(null);
+  const [phoneError, setPhoneError] = useState("");
+  const [deleteConfirm, setDeleteConfirm] = useState<DeleteConfirmation | null>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const [form, setForm] = useState<OrderFormData>({
     name: "",
@@ -49,8 +57,42 @@ export function CartSidebar() {
     return () => { document.body.style.overflow = ""; };
   }, [isOpen]);
 
+  const validatePhone = (phone: string): boolean => {
+    if (!phone) return true; // Phone is optional
+    const phoneClean = phone.replace(/[\s\-\(\)]/g, "");
+    const phoneRegex = /^(\+48)?[0-9]{9}$/;
+    return phoneRegex.test(phoneClean);
+  };
+
+  const handlePhoneChange = (value: string) => {
+    setForm({ ...form, phone: value });
+    if (value && !validatePhone(value)) {
+      setPhoneError("Format: +48 XXX XXX XXX lub XXX XXX XXX");
+    } else {
+      setPhoneError("");
+    }
+  };
+
+  const handleDeleteClick = (item: { id: string; size?: string; title: string }) => {
+    setDeleteConfirm({ id: item.id, size: item.size, title: item.title });
+  };
+
+  const confirmDelete = () => {
+    if (deleteConfirm) {
+      removeItem(deleteConfirm.id, deleteConfirm.size);
+      setDeleteConfirm(null);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate phone before submitting
+    if (form.phone && !validatePhone(form.phone)) {
+      setPhoneError("Format: +48 XXX XXX XXX lub XXX XXX XXX");
+      return;
+    }
+    
     setStatus("loading");
     setErrorMsg("");
 
@@ -67,6 +109,7 @@ export function CartSidebar() {
         setStep("success");
         clearCart();
         setStatus("idle");
+        setPhoneError("");
         setForm({ name: "", email: "", phone: "", address: "", notes: "" });
       } else {
         const data = await res.json();
@@ -85,6 +128,34 @@ export function CartSidebar() {
 
   return (
     <>
+      {/* Delete confirmation modal */}
+      {deleteConfirm && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-foreground/40 backdrop-blur-sm">
+          <div className="mx-4 w-full max-w-sm bg-background p-6 shadow-xl">
+            <h3 className="font-serif text-lg text-foreground">
+              Usuń z koszyka?
+            </h3>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Czy na pewno chcesz usunąć <strong>{deleteConfirm.title}</strong> z koszyka?
+            </p>
+            <div className="mt-6 flex gap-3">
+              <button
+                onClick={() => setDeleteConfirm(null)}
+                className="flex-1 border border-border py-2.5 text-xs uppercase tracking-widest text-muted-foreground transition-colors hover:border-foreground hover:text-foreground"
+              >
+                Anuluj
+              </button>
+              <button
+                onClick={confirmDelete}
+                className="flex-1 bg-destructive py-2.5 text-xs uppercase tracking-widest text-destructive-foreground transition-colors hover:bg-destructive/90"
+              >
+                Usuń
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Overlay */}
       <div
         ref={overlayRef}
@@ -175,7 +246,7 @@ export function CartSidebar() {
                               )}
                             </div>
                             <button
-                              onClick={() => removeItem(item.id, item.size)}
+                              onClick={() => handleDeleteClick(item)}
                               aria-label={`Usuń ${item.title}`}
                               className="flex-shrink-0 text-muted-foreground/50 transition-colors hover:text-destructive"
                             >
@@ -246,9 +317,12 @@ export function CartSidebar() {
                   type="tel"
                   placeholder="+48 500 000 000"
                   value={form.phone}
-                  onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                  className={inputClass}
+                  onChange={(e) => handlePhoneChange(e.target.value)}
+                  className={`${inputClass} ${phoneError ? "border-destructive" : ""}`}
                 />
+                {phoneError && (
+                  <p className="mt-1 text-xs text-destructive">{phoneError}</p>
+                )}
               </div>
               <div>
                 <label className={labelClass}>Adres dostawy *</label>

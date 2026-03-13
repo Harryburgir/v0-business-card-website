@@ -47,6 +47,18 @@ export async function POST(request: Request) {
       );
     }
 
+    // Validate phone format if provided (Polish format: +48 XXX XXX XXX or XXX XXX XXX)
+    if (phone) {
+      const phoneClean = phone.replace(/[\s\-\(\)]/g, "");
+      const phoneRegex = /^(\+48)?[0-9]{9}$/;
+      if (!phoneRegex.test(phoneClean)) {
+        return NextResponse.json(
+          { error: "Nieprawidłowy format numeru telefonu" },
+          { status: 400 }
+        );
+      }
+    }
+
     const orderNumber = generateOrderNumber();
 
     const itemsHtml = items
