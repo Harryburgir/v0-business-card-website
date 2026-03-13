@@ -20,6 +20,12 @@ interface OrderData {
   totalPrice: number;
 }
 
+function generateOrderNumber(): string {
+  const timestamp = Date.now().toString(36).toUpperCase();
+  const random = Math.random().toString(36).substring(2, 6).toUpperCase();
+  return `LDB-${timestamp}-${random}`;
+}
+
 export async function POST(request: Request) {
   try {
     const resend = new Resend(process.env.RESEND_API_KEY);
@@ -40,6 +46,8 @@ export async function POST(request: Request) {
         { status: 400 }
       );
     }
+
+    const orderNumber = generateOrderNumber();
 
     const itemsHtml = items
       .map(
@@ -67,7 +75,7 @@ export async function POST(request: Request) {
       from: "La de Bébé mini <onboarding@resend.dev>",
       to: [recipientEmail],
       replyTo: email,
-      subject: `[La de Bébé mini] Nowe zamówienie od ${name}`,
+      subject: `[La de Bébé mini] Nowe zamówienie #${orderNumber} od ${name}`,
       html: `
         <!DOCTYPE html>
         <html>
@@ -88,6 +96,9 @@ export async function POST(request: Request) {
                         </h1>
                         <p style="margin: 8px 0 0; font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: #8b8178;">
                           Nowe zamówienie z koszyka
+                        </p>
+                        <p style="margin: 12px 0 0; font-size: 13px; letter-spacing: 0.1em; color: #8b7355;">
+                          Nr zamówienia: <strong>${orderNumber}</strong>
                         </p>
                       </td>
                     </tr>
@@ -192,7 +203,7 @@ export async function POST(request: Request) {
       );
     }
 
-    return NextResponse.json({ success: true, message: "Zamówienie zostało złożone" });
+    return NextResponse.json({ success: true, orderNumber, message: "Zamówienie zostało złożone" });
   } catch (error) {
     console.error("Order API error:", error);
     return NextResponse.json({ error: "Wystąpił błąd serwera" }, { status: 500 });
