@@ -1,39 +1,5 @@
 import Link from "next/link";
-
-const categories = [
-  {
-    title: "Śpiochy",
-    description: "Miękkie i wygodne śpiochy z naturalnej bawełny",
-  },
-  {
-    title: "Pajace",
-    description: "Jednoczęściowe pajace idealne na co dzień",
-  },
-  {
-    title: "Body długi rękaw",
-    description: "Ciepłe body na chłodniejsze dni",
-  },
-  {
-    title: "Body krótki rękaw",
-    description: "Lekkie body na cieplejsze dni",
-  },
-  {
-    title: "Komplety do szpitala",
-    description: "Wyprawki na pierwsze dni życia",
-  },
-  {
-    title: "Pieluszki",
-    description: "Delikatne pieluszki muślinowe",
-  },
-  {
-    title: "Komplety",
-    description: "Dopasowane zestawy ubranek",
-  },
-  {
-    title: "Spodenki",
-    description: "Wygodne spodenki dla maluszków",
-  },
-];
+import { categories } from "@/lib/products-data";
 
 export function Categories() {
   return (
@@ -53,10 +19,10 @@ export function Categories() {
         </div>
 
         <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-4 lg:gap-8">
-          {categories.map((category, index) => (
+          {categories.map((category) => (
             <Link
-              key={index}
-              href="#kontakt"
+              key={category.slug}
+              href={`/kategoria/${category.slug}`}
               className="group relative flex flex-col items-center justify-center bg-warm/30 p-6 text-center transition-all duration-300 hover:bg-warm hover:shadow-lg sm:p-8 lg:p-10"
             >
               <div className="absolute inset-0 border border-warm transition-colors duration-300 group-hover:border-primary/30" />
@@ -67,7 +33,7 @@ export function Categories() {
                 {category.description}
               </p>
               <span className="relative mt-4 text-xs uppercase tracking-widest text-primary opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                Zobacz
+                Zobacz produkty
               </span>
             </Link>
           ))}
