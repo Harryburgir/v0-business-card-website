@@ -43,11 +43,11 @@ export function ProductCard({ product, categorySlug }: ProductCardProps) {
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-foreground/0 transition-colors duration-300 group-hover:bg-foreground/5" />
-        {/* Add to cart overlay */}
-        <div className="absolute inset-x-0 bottom-0 translate-y-full transition-transform duration-300 group-hover:translate-y-0">
+        {/* Add to cart overlay - visible on touch devices, slides in on hover for desktop */}
+        <div className="absolute inset-x-0 bottom-0 translate-y-0 md:translate-y-full transition-transform duration-300 md:group-hover:translate-y-0">
           <button
             onClick={handleAdd}
-            className="flex w-full items-center justify-center gap-2 bg-primary px-4 py-3 text-xs uppercase tracking-widest text-primary-foreground transition-colors hover:bg-primary/90"
+            className="flex w-full items-center justify-center gap-2 bg-primary px-4 py-3 text-xs uppercase tracking-widest text-primary-foreground transition-colors hover:bg-primary/90 active:bg-primary/80"
           >
             {added ? (
               <>
