@@ -18,6 +18,9 @@ interface OrderData {
   notes?: string;
   items: OrderItem[];
   totalPrice: number;
+  deliveryMethod?: string;
+  deliveryPrice?: number;
+  finalTotal?: number;
 }
 
 function generateOrderNumber(): string {
@@ -38,7 +41,7 @@ export async function POST(request: Request) {
 
     const resend = new Resend(process.env.RESEND_API_KEY);
     const data: OrderData = await request.json();
-    const { name, email, phone, address, notes, items, totalPrice } = data;
+    const { name, email, phone, address, notes, items, totalPrice, deliveryMethod, deliveryPrice, finalTotal } = data;
 
     if (!name || !email || !address || !items?.length) {
       return NextResponse.json(
@@ -159,6 +162,27 @@ export async function POST(request: Request) {
                     </tr>
                   </table>
 
+                  <!-- Delivery method -->
+                  ${deliveryMethod ? `
+                  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 24px;">
+                    <tr>
+                      <td>
+                        <p style="margin: 0 0 12px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: #8b8178;">
+                          Metoda dostawy
+                        </p>
+                        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background: #f0ede5; padding: 16px;">
+                          <tr>
+                            <td style="font-size: 15px; color: #2c2825; font-weight: 500;">${deliveryMethod}</td>
+                            <td style="text-align: right; font-size: 15px; color: #2c2825;">
+                              ${deliveryPrice === 0 ? '<span style="color: #16a34a;">Bezpłatnie</span>' : `${deliveryPrice?.toFixed(2)} zł`}
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                  ` : ""}
+
                   <!-- Products -->
                   <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 32px;">
                     <tr>
@@ -185,13 +209,27 @@ export async function POST(request: Request) {
 
                   <!-- Total -->
                   <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 16px; border-top: 2px solid #2c2825;">
+                    ${deliveryPrice !== undefined && deliveryPrice > 0 ? `
                     <tr>
-                      <td style="padding-top: 16px; text-align: right;">
+                      <td style="padding-top: 12px; text-align: right;">
+                        <span style="font-size: 12px; color: #8b8178; margin-right: 16px;">Produkty</span>
+                        <span style="font-size: 14px; color: #5c574f;">${totalPrice.toFixed(0)} zł</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="padding-top: 4px; text-align: right;">
+                        <span style="font-size: 12px; color: #8b8178; margin-right: 16px;">Dostawa</span>
+                        <span style="font-size: 14px; color: #5c574f;">${deliveryPrice.toFixed(2)} zł</span>
+                      </td>
+                    </tr>
+                    ` : ""}
+                    <tr>
+                      <td style="padding-top: 12px; text-align: right;">
                         <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: #8b8178; margin-right: 16px;">
-                          Łącznie
+                          Do zapłaty
                         </span>
                         <span style="font-size: 22px; font-weight: 300; color: #2c2825;">
-                          ${totalPrice.toFixed(0)} zł
+                          ${(finalTotal ?? totalPrice).toFixed(2)} zł
                         </span>
                       </td>
                     </tr>

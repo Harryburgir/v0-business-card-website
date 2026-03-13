@@ -2,11 +2,11 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { X, Minus, Plus, ShoppingBag, Trash2, Mail, ArrowRight } from "lucide-react";
+import { X, Minus, Plus, ShoppingBag, Trash2, Mail, ArrowRight, Package, Truck, MapPin, Building2 } from "lucide-react";
 import { useCart } from "@/context/cart-context";
 import { Spinner } from "@/components/ui/spinner";
 
-type Step = "cart" | "form" | "success";
+type Step = "cart" | "delivery" | "form" | "success";
 
 interface OrderFormData {
   name: string;
@@ -22,6 +22,58 @@ interface DeleteConfirmation {
   title: string;
 }
 
+interface DeliveryOption {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  estimatedDays: string;
+  icon: "paczkomat" | "courier" | "post" | "pickup";
+}
+
+const DELIVERY_OPTIONS: DeliveryOption[] = [
+  {
+    id: "inpost-paczkomat",
+    name: "InPost Paczkomat",
+    description: "Odbiór w wybranym Paczkomacie 24/7",
+    price: 12.99,
+    estimatedDays: "1-2 dni robocze",
+    icon: "paczkomat",
+  },
+  {
+    id: "inpost-kurier",
+    name: "InPost Kurier",
+    description: "Dostawa kurierem pod wskazany adres",
+    price: 16.99,
+    estimatedDays: "1-2 dni robocze",
+    icon: "courier",
+  },
+  {
+    id: "dpd",
+    name: "DPD Kurier",
+    description: "Dostawa kurierem DPD",
+    price: 15.99,
+    estimatedDays: "1-3 dni robocze",
+    icon: "courier",
+  },
+  {
+    id: "poczta-polska",
+    name: "Poczta Polska",
+    description: "Przesyłka pocztowa priorytetowa",
+    price: 9.99,
+    estimatedDays: "3-5 dni roboczych",
+    icon: "post",
+  },
+  {
+    id: "odbior-osobisty",
+    name: "Odbiór osobisty",
+    description: "Bezpłatny odbiór we Wrocławiu",
+    price: 0,
+    estimatedDays: "Po umówieniu",
+    icon: "pickup",
+  },
+];
+
 export function CartSidebar() {
   const { items, isOpen, totalCount, totalPrice, removeItem, updateQuantity, clearCart, closeCart } = useCart();
   const [step, setStep] = useState<Step>("cart");
@@ -30,7 +82,26 @@ export function CartSidebar() {
   const [orderNumber, setOrderNumber] = useState<string | null>(null);
   const [phoneError, setPhoneError] = useState("");
   const [deleteConfirm, setDeleteConfirm] = useState<DeleteConfirmation | null>(null);
+  const [selectedDelivery, setSelectedDelivery] = useState<DeliveryOption | null>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
+
+  const deliveryPrice = selectedDelivery?.price ?? 0;
+  const finalTotal = totalPrice + deliveryPrice;
+
+  const DeliveryIcon = ({ type }: { type: DeliveryOption["icon"] }) => {
+    switch (type) {
+      case "paczkomat":
+        return <Package className="h-5 w-5" />;
+      case "courier":
+        return <Truck className="h-5 w-5" />;
+      case "post":
+        return <Mail className="h-5 w-5" />;
+      case "pickup":
+        return <Building2 className="h-5 w-5" />;
+      default:
+        return <MapPin className="h-5 w-5" />;
+    }
+  };
   const [form, setForm] = useState<OrderFormData>({
     name: "",
     email: "",
@@ -100,7 +171,14 @@ export function CartSidebar() {
       const res = await fetch("/api/order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, items, totalPrice }),
+        body: JSON.stringify({ 
+          ...form, 
+          items, 
+          totalPrice,
+          deliveryMethod: selectedDelivery?.name ?? "Nie wybrano",
+          deliveryPrice: deliveryPrice,
+          finalTotal: finalTotal,
+        }),
       });
 
       if (res.ok) {
@@ -110,6 +188,7 @@ export function CartSidebar() {
         clearCart();
         setStatus("idle");
         setPhoneError("");
+        setSelectedDelivery(null);
         setForm({ name: "", email: "", phone: "", address: "", notes: "" });
       } else {
         const data = await res.json();
@@ -181,6 +260,7 @@ export function CartSidebar() {
             <ShoppingBag className="h-5 w-5 text-primary" />
             <h2 className="font-serif text-xl font-light text-foreground">
               {step === "cart" && "Koszyk"}
+              {step === "delivery" && "Metoda dostawy"}
               {step === "form" && "Dane zamówienia"}
               {step === "success" && "Zamówienie złożone"}
             </h2>
@@ -286,6 +366,64 @@ export function CartSidebar() {
             </div>
           )}
 
+          {/* DELIVERY STEP */}
+          {step === "delivery" && (
+            <div className="px-6 py-6">
+              <p className="mb-4 text-sm text-muted-foreground">
+                Wybierz preferowaną metodę dostawy:
+              </p>
+              <div className="space-y-3">
+                {DELIVERY_OPTIONS.map((option) => (
+                  <button
+                    key={option.id}
+                    onClick={() => setSelectedDelivery(option)}
+                    className={`w-full text-left border p-4 transition-all ${
+                      selectedDelivery?.id === option.id
+                        ? "border-primary bg-warm/50"
+                        : "border-border hover:border-primary/50"
+                    }`}
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className={`mt-0.5 ${selectedDelivery?.id === option.id ? "text-primary" : "text-muted-foreground"}`}>
+                        <DeliveryIcon type={option.icon} />
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between">
+                          <span className="font-medium text-foreground">{option.name}</span>
+                          <span className={`font-serif text-base ${option.price === 0 ? "text-green-600" : "text-foreground"}`}>
+                            {option.price === 0 ? "Bezpłatnie" : `${option.price.toFixed(2)} zł`}
+                          </span>
+                        </div>
+                        <p className="mt-1 text-xs text-muted-foreground">{option.description}</p>
+                        <p className="mt-1 text-xs text-muted-foreground/70">{option.estimatedDays}</p>
+                      </div>
+                    </div>
+                  </button>
+                ))}
+              </div>
+
+              {/* Summary with delivery */}
+              {selectedDelivery && (
+                <div className="mt-6 border-t border-border pt-4 space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Produkty</span>
+                    <span className="text-foreground">{totalPrice.toFixed(0)} zł</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Dostawa ({selectedDelivery.name})</span>
+                    <span className={selectedDelivery.price === 0 ? "text-green-600" : "text-foreground"}>
+                      {selectedDelivery.price === 0 ? "Bezpłatnie" : `${selectedDelivery.price.toFixed(2)} zł`}
+                    </span>
+                  </div>
+                  <div className="flex justify-between pt-2 border-t border-border">
+                    <span className="text-sm uppercase tracking-widest text-muted-foreground">Razem</span>
+                    <span className="font-serif text-lg text-foreground">{finalTotal.toFixed(2)} zł</span>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
           {/* FORM STEP */}
           {step === "form" && (
             <form id="order-form" onSubmit={handleSubmit} className="px-6 py-6 space-y-6">
@@ -363,7 +501,21 @@ export function CartSidebar() {
                       </span>
                     </li>
                   ))}
+                  {selectedDelivery && (
+                    <li className="flex justify-between text-sm pt-2 border-t border-border/50 mt-2">
+                      <span className="text-muted-foreground">
+                        Dostawa: {selectedDelivery.name}
+                      </span>
+                      <span className={selectedDelivery.price === 0 ? "text-green-600" : "text-foreground"}>
+                        {selectedDelivery.price === 0 ? "Bezpłatnie" : `${selectedDelivery.price.toFixed(2)} zł`}
+                      </span>
+                    </li>
+                  )}
                 </ul>
+                <div className="flex justify-between pt-3 mt-3 border-t border-border">
+                  <span className="text-sm uppercase tracking-widest text-muted-foreground">Razem</span>
+                  <span className="font-serif text-lg text-foreground">{finalTotal.toFixed(2)} zł</span>
+                </div>
               </div>
 
               {status === "error" && (
@@ -412,22 +564,42 @@ export function CartSidebar() {
           <div className="border-t border-border px-6 py-5">
             <div className="mb-4 flex items-center justify-between">
               <span className="text-sm uppercase tracking-widest text-muted-foreground">
-                Łącznie
+                Produkty
               </span>
               <span className="font-serif text-xl text-foreground">
                 {totalPrice.toFixed(0)} zł
               </span>
             </div>
             <button
-              onClick={() => setStep("form")}
+              onClick={() => setStep("delivery")}
               className="flex w-full items-center justify-center gap-2 bg-primary py-4 text-sm uppercase tracking-widest text-primary-foreground transition-colors hover:bg-primary/90"
             >
-              Złóż zamówienie
+              Wybierz dostawę
               <ArrowRight className="h-4 w-4" />
             </button>
             <p className="mt-3 text-center text-xs text-muted-foreground">
-              Finalizacja przez email — skontaktujemy się w celu potwierdzenia
+              + koszt dostawy od 0 zł
             </p>
+          </div>
+        )}
+
+        {step === "delivery" && (
+          <div className="border-t border-border px-6 py-5 space-y-3">
+            <button
+              onClick={() => setStep("form")}
+              disabled={!selectedDelivery}
+              className="flex w-full items-center justify-center gap-2 bg-primary py-4 text-sm uppercase tracking-widest text-primary-foreground transition-colors hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              Dalej
+              <ArrowRight className="h-4 w-4" />
+            </button>
+            <button
+              type="button"
+              onClick={() => setStep("cart")}
+              className="w-full py-2 text-xs uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Wróć do koszyka
+            </button>
           </div>
         )}
 
@@ -453,10 +625,10 @@ export function CartSidebar() {
             </button>
             <button
               type="button"
-              onClick={() => setStep("cart")}
+              onClick={() => setStep("delivery")}
               className="w-full py-2 text-xs uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
             >
-              Wróć do koszyka
+              Zmień dostawę
             </button>
           </div>
         )}
