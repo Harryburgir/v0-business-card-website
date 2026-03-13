@@ -74,8 +74,7 @@ export function Footer() {
             <div className="mt-6 flex flex-col gap-3 text-muted-foreground">
               <p>office.ladebebe@gmail.com</p>
               <p>+48 518 845 751</p>
-              <p>ul. Mokotowska 15</p>
-              <p>00-640 Warszawa</p>
+              <p>Wrocław</p>
             </div>
           </div>
         </div>
