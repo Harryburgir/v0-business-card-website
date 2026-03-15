@@ -112,24 +112,17 @@ export const categories: Category[] = [
     products: [
       {
         id: "pieluszka-1",
-        title: "Pieluszka muślinowa ecru",
+        title: "Zestaw 3 pieluszek kratka różowa",
         price: "49 zł",
         image: "/images/product-pieluszka-1.jpg",
-        description: "70x70 cm, 100% bawełna",
+        description: "3 sztuki, muślin 100% bawełna, wzór w kratkę",
       },
       {
         id: "pieluszka-2",
-        title: "Zestaw 3 pieluszek",
+        title: "Zestaw 3 pieluszek kratka niebieska",
         price: "49 zł",
         image: "/images/product-pieluszka-2.jpg",
-        description: "3 sztuki w naturalnych kolorach",
-      },
-      {
-        id: "pieluszka-3",
-        title: "Duża pieluszka otulacz",
-        price: "49 zł",
-        image: "/images/product-pieluszka-3.jpg",
-        description: "120x120 cm",
+        description: "3 sztuki, muślin 100% bawełna, wzór w kratkę",
       },
     ],
   },
