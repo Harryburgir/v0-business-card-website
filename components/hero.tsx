@@ -27,14 +27,14 @@ export function Hero() {
           {/* Centered Logo - main focal point */}
           <div className="mx-auto flex justify-center">
             <div className="relative w-[280px] sm:w-[380px] md:w-[480px] lg:w-[580px]">
-              {/* White glow effect behind logo */}
-              <div className="absolute inset-0 blur-2xl bg-white/30 rounded-full scale-110" />
+              {/* Subtle glow effect behind logo */}
+              <div className="absolute inset-0 blur-xl bg-white/15 rounded-full scale-105" />
               <Image
                 src="/images/ladebebe-logo.png"
                 alt="La de Bébé mini"
                 width={580}
                 height={260}
-                className="relative h-auto w-full object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.5)]"
+                className="relative h-auto w-full object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.25)]"
                 priority
               />
             </div>
