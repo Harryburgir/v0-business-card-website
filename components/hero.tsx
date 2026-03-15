@@ -13,7 +13,9 @@ export function Hero() {
           src="/images/hero-kids.jpg"
           alt="Przyszła mama otaczająca brzuszek dłońmi w kształcie serca"
           fill
-          className="object-cover"
+          className="object-cover object-[center_20%]"
+          style={{ objectPosition: "center 20%" }}
+          sizes="100vw"
           priority
         />
         <div className="absolute inset-0 bg-foreground/30" />
