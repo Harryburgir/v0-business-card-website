@@ -24,7 +24,7 @@ export const categories: Category[] = [
     products: [
       {
         id: "body-kr-1",
-        title: "Body krótki rękaw ecru",
+        title: "Body krótki rękaw",
         price: "69 zł",
         image: "/images/product-body-kr-1.jpg",
         description: "Kopertowe zapięcie, motywy western",
@@ -72,7 +72,7 @@ export const categories: Category[] = [
     products: [
       {
         id: "spiochy-1",
-        title: "Śpiochy bawełna organiczna wzór western ecru",
+        title: "Śpiochy bawełna organiczna wzór western",
         price: "109 zł",
         image: "/images/product-spiochy-1.jpg",
         description: "Bawełna organiczna, kołnierzyk peter pan, stópki",
@@ -88,7 +88,7 @@ export const categories: Category[] = [
       },
       {
         id: "spiochy-3",
-        title: "Śpiochy bawełna organiczna wzór jeździecki ecru",
+        title: "Śpiochy bawełna organiczna wzór jeździecki",
         price: "109 zł",
         image: "/images/product-spiochy-3.jpg",
         description: "Bawełna organiczna, kołnierzyk peter pan, stópki",
@@ -104,7 +104,7 @@ export const categories: Category[] = [
       },
       {
         id: "spiochy-5",
-        title: "Śpiochy bawełna organiczna ecru western",
+        title: "Śpiochy bawełna organiczna western",
         price: "109 zł",
         image: "/images/product-spiochy-5.jpg",
         description: "Bawełna organiczna, kołnierzyk peter pan, motywy western, stópki",
@@ -115,22 +115,22 @@ export const categories: Category[] = [
   {
     slug: "pieluszki",
     title: "Pieluszki",
-    description: "Delikatne pieluszki muślinowe",
-    longDescription: "Wielofunkcyjne pieluszki muślinowe, idealne do otulania, jako podkładka czy ściereczka. Wykonane z najdelikatniejszego muślinu, który z każdym praniem staje się coraz miększy.",
+    description: "Delikatne pieluszki bawełniane",
+    longDescription: "Wielofunkcyjne pieluszki bawełniane, idealne do otulania, jako podkładka czy ściereczka. Wykonane z najdelikatniejszej bawełny, który z każdym praniem staje się coraz miękka.",
     products: [
       {
         id: "pieluszka-1",
         title: "Zestaw 3 pieluszek kratka różowa",
         price: "49 zł",
         image: "/images/product-pieluszka-1.jpg",
-        description: "3 sztuki, muślin 100% bawełna, wzór w kratkę",
+        description: "3 sztuki,100% bawełna, wzór w kratkę",
       },
       {
         id: "pieluszka-2",
         title: "Zestaw 3 pieluszek kratka niebieska",
         price: "49 zł",
         image: "/images/product-pieluszka-2.jpg",
-        description: "3 sztuki, muślin 100% bawełna, wzór w kratkę",
+        description: "3 sztuki, 100% bawełna, wzór w kratkę",
       },
     ],
   },
@@ -138,7 +138,7 @@ export const categories: Category[] = [
     slug: "posciele",
     title: "Pościele",
     description: "Delikatne pościele i otulacze dla maluszków",
-    longDescription: "Nasze pościele wykonane są z najmiększego muślinu i bawełny, zapewniając maluszkowi bezpieczny i komfortowy sen. Każdy zestaw jest starannie dobrany pod kątem delikatności tkaniny i ponadczasowej estetyki.",
+    longDescription: "Nasze pościele wykonane są z najmiększejszej bawełny, zapewniając maluszkowi bezpieczny i komfortowy sen. Każdy zestaw jest starannie dobrany pod kątem delikatności tkaniny i ponadczasowej estetyki.",
     products: [
       {
         id: "posciel-1",
@@ -164,33 +164,41 @@ export const categories: Category[] = [
     ],
   },
   {
-    slug: "leginsy",
-    title: "Leginsy",
-    description: "Wygodne leginsy dla maluszków",
-    longDescription: "Miękkie i elastyczne leginsy, idealne do noszenia co dzień. Wykonane z naturalnych tkanin, zapewniają swobodę ruchów podczas zabawy i snu.",
+    slug: "spodenki",
+    title: "Spodenki",
+    description: "Wygodne spodenki dla maluszków",
+    longDescription: "Miękkie i elastyczne spodenki, idealne do noszenia co dzień. Wykonane z naturalnych tkanin, zapewniają swobodę ruchów podczas zabawy i snu.",
     products: [
       {
-        id: "leginsy-1",
-        title: "Leginsy muślinowe ecru",
+        id: "spodenki-1",
+        title: "Spodenki różowe z falbanką",
         price: "59 zł",
-        image: "/images/product-leginsy-1.jpg",
-        description: "Lekkie i przewiewne",
+        image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/spodnie-BqKjdb93YurCThQ1DuYuS0YiMLCqwW.jpeg",
+        description: "Miękka bawełna, ozdobna falbanka",
         sizes: ["56", "62", "74", "86"],
       },
       {
-        id: "leginsy-2",
-        title: "Leginsy bawełniane beżowe",
+        id: "spodenki-2",
+        title: "Spodenki niebieskie",
         price: "59 zł",
-        image: "/images/product-leginsy-2.jpg",
+        image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/spodnie%20%282%29-dleEzvDI28GOHKPrAyP8y6a9f5gSsp.jpeg",
         description: "Naturalna bawełna, wygodna gumka",
         sizes: ["56", "62", "74", "86"],
       },
       {
-        id: "leginsy-3",
-        title: "Leginsy kremowe",
+        id: "spodenki-3",
+        title: "Spodenki różowe w kratkę z falbanką",
         price: "59 zł",
-        image: "/images/product-leginsy-3.jpg",
-        description: "Miękka bawełna",
+        image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Spodnie%20%283%29-BGPTUy6cOz2wmPFzAgyyaVq8kle7qx.jpeg",
+        description: "Bawełna, wzór w kratkę, ozdobna falbanka",
+        sizes: ["56", "62", "74", "86"],
+      },
+      {
+        id: "spodenki-4",
+        title: "Spodenki białe ze stópkami",
+        price: "69 zł",
+        image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Spodenki-k41wMq21yNVYBmXWLwuyRtQk69Xjiv.jpeg",
+        description: "Bawełna organiczna, ażurowy wzór, kokardka",
         sizes: ["56", "62", "74", "86"],
       },
     ],
