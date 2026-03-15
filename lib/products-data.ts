@@ -24,7 +24,7 @@ export const categories: Category[] = [
     products: [
       {
         id: "body-kr-1",
-        title: "Body krótki rękaw ecru",
+        title: "Body krótki rękaw",
         price: "69 zł",
         image: "/images/product-body-kr-1.jpg",
         description: "Kopertowe zapięcie, motywy western",
@@ -72,7 +72,7 @@ export const categories: Category[] = [
     products: [
       {
         id: "spiochy-1",
-        title: "Śpiochy bawełna organiczna wzór western ecru",
+        title: "Śpiochy bawełna organiczna wzór western",
         price: "109 zł",
         image: "/images/product-spiochy-1.jpg",
         description: "Bawełna organiczna, kołnierzyk peter pan, stópki",
@@ -88,7 +88,7 @@ export const categories: Category[] = [
       },
       {
         id: "spiochy-3",
-        title: "Śpiochy bawełna organiczna wzór jeździecki ecru",
+        title: "Śpiochy bawełna organiczna wzór jeździecki",
         price: "109 zł",
         image: "/images/product-spiochy-3.jpg",
         description: "Bawełna organiczna, kołnierzyk peter pan, stópki",
@@ -104,7 +104,7 @@ export const categories: Category[] = [
       },
       {
         id: "spiochy-5",
-        title: "Śpiochy bawełna organiczna ecru western",
+        title: "Śpiochy bawełna organiczna western",
         price: "109 zł",
         image: "/images/product-spiochy-5.jpg",
         description: "Bawełna organiczna, kołnierzyk peter pan, motywy western, stópki",
@@ -115,22 +115,22 @@ export const categories: Category[] = [
   {
     slug: "pieluszki",
     title: "Pieluszki",
-    description: "Delikatne pieluszki muślinowe",
-    longDescription: "Wielofunkcyjne pieluszki muślinowe, idealne do otulania, jako podkładka czy ściereczka. Wykonane z najdelikatniejszego muślinu, który z każdym praniem staje się coraz miększy.",
+    description: "Delikatne pieluszki bawełniane",
+    longDescription: "Wielofunkcyjne pieluszki bawełniane, idealne do otulania, jako podkładka czy ściereczka. Wykonane z najdelikatniejszej bawełny, który z każdym praniem staje się coraz miękka.",
     products: [
       {
         id: "pieluszka-1",
         title: "Zestaw 3 pieluszek kratka różowa",
         price: "49 zł",
         image: "/images/product-pieluszka-1.jpg",
-        description: "3 sztuki, muślin 100% bawełna, wzór w kratkę",
+        description: "3 sztuki,100% bawełna, wzór w kratkę",
       },
       {
         id: "pieluszka-2",
         title: "Zestaw 3 pieluszek kratka niebieska",
         price: "49 zł",
         image: "/images/product-pieluszka-2.jpg",
-        description: "3 sztuki, muślin 100% bawełna, wzór w kratkę",
+        description: "3 sztuki, 100% bawełna, wzór w kratkę",
       },
     ],
   },
@@ -138,7 +138,7 @@ export const categories: Category[] = [
     slug: "posciele",
     title: "Pościele",
     description: "Delikatne pościele i otulacze dla maluszków",
-    longDescription: "Nasze pościele wykonane są z najmiększego muślinu i bawełny, zapewniając maluszkowi bezpieczny i komfortowy sen. Każdy zestaw jest starannie dobrany pod kątem delikatności tkaniny i ponadczasowej estetyki.",
+    longDescription: "Nasze pościele wykonane są z najmiększejszej bawełny, zapewniając maluszkowi bezpieczny i komfortowy sen. Każdy zestaw jest starannie dobrany pod kątem delikatności tkaniny i ponadczasowej estetyki.",
     products: [
       {
         id: "posciel-1",
