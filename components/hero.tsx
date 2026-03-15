@@ -7,53 +7,56 @@ import Image from "next/image";
 export function Hero() {
   return (
     <section className="relative min-h-screen">
-      {/* Hero Image */}
+      {/* Hero Background Image */}
       <div className="absolute inset-0">
         <Image
-          src="/images/hero-kids.jpg"
-          alt="Przyszła mama otaczająca brzuszek dłońmi w kształcie serca"
+          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/hero%20aktualne-DzDz9NkMVCuc9BvHRabOeJdX5V6Olk.png"
+          alt="Przyszła mama w różowym świetle"
           fill
-          className="object-cover object-[center_20%]"
-          style={{ objectPosition: "center 20%" }}
+          className="object-cover object-center"
           sizes="100vw"
           priority
         />
-        <div className="absolute inset-0 bg-foreground/30" />
+        {/* Subtle overlay for better logo visibility */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40" />
       </div>
 
       {/* Content */}
-      <div className="relative flex min-h-screen flex-col items-center justify-center px-6 pt-20">
+      <div className="relative flex min-h-screen flex-col items-center justify-center px-6">
         <div className="mx-auto max-w-4xl text-center">
-          <p className="mb-6 text-sm uppercase tracking-[0.3em] text-background/80">
-            Stworzone z miłości do najmłodszych
-          </p>
-          {/* Calligraphic logo */}
-          <div className="mx-auto mb-6 flex justify-center">
-            <div className="relative w-[340px] md:w-[480px] lg:w-[580px]">
+          {/* Centered Logo - main focal point */}
+          <div className="mx-auto flex justify-center">
+            <div className="relative w-[280px] sm:w-[380px] md:w-[480px] lg:w-[580px]">
+              {/* White glow effect behind logo */}
+              <div className="absolute inset-0 blur-2xl bg-white/30 rounded-full scale-110" />
               <Image
-                src="/images/ladebebe-logo.jpg"
+                src="/images/ladebebe-logo.png"
                 alt="La de Bébé mini"
                 width={580}
                 height={260}
-                className="h-auto w-full object-contain mix-blend-multiply opacity-90 brightness-[1.15] contrast-[1.05]"
+                className="relative h-auto w-full object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.5)]"
                 priority
               />
             </div>
           </div>
           <h1 className="sr-only">La de Bébé mini – Delikatność od pierwszych dni</h1>
-          <p className="mx-auto mt-8 max-w-xl text-lg leading-relaxed text-background/90 md:text-xl">
-            Naturalne tkaniny bez barwników chemicznych. Bezpieczne i delikatne dla wrażliwej skóry Twojego maluszka.
+          
+          {/* Tagline below logo */}
+          <p className="mx-auto mt-8 max-w-lg text-base leading-relaxed text-white/90 md:text-lg font-light tracking-wide">
+            Stworzone z miłości do najmłodszych
           </p>
-          <div className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+          
+          {/* CTA Buttons */}
+          <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Link
               href="#kolekcje"
-              className="inline-flex items-center gap-2 bg-warm px-8 py-4 text-sm uppercase tracking-widest text-warm-foreground transition-all hover:bg-warm/90"
+              className="inline-flex items-center gap-2 bg-white/95 px-8 py-4 text-sm uppercase tracking-widest text-pink-900 transition-all hover:bg-white shadow-lg"
             >
               Odkryj kolekcje
             </Link>
             <Link
               href="#kontakt"
-              className="inline-flex items-center gap-2 border border-background/60 px-8 py-4 text-sm uppercase tracking-widest text-background transition-all hover:border-background"
+              className="inline-flex items-center gap-2 border-2 border-white/80 px-8 py-4 text-sm uppercase tracking-widest text-white transition-all hover:bg-white/10 hover:border-white"
             >
               Skontaktuj się
             </Link>
@@ -62,7 +65,7 @@ export function Hero() {
 
         <Link
           href="#o-nas"
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce text-background/70 transition-colors hover:text-background"
+          className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce text-white/80 transition-colors hover:text-white"
           aria-label="Przewiń w dół"
         >
           <ArrowDown className="h-6 w-6" />
