@@ -25,7 +25,7 @@ export const categories: Category[] = [
       {
         id: "body-kr-1",
         title: "Body krótki rękaw ecru",
-        price: "59 zł",
+        price: "69 zł",
         image: "/images/product-body-kr-1.jpg",
         description: "Lekkie i przewiewne",
         sizes: ["56", "62", "68", "74", "80"],
@@ -33,7 +33,7 @@ export const categories: Category[] = [
       {
         id: "body-kr-2",
         title: "Body krótki rękaw beżowe",
-        price: "59 zł",
+        price: "69 zł",
         image: "/images/product-body-kr-2.jpg",
         description: "Naturalna bawełna",
         sizes: ["56", "62", "68", "74"],
@@ -57,7 +57,7 @@ export const categories: Category[] = [
       {
         id: "body-dl-3",
         title: "Body długi rękaw kremowe",
-        price: "75 zł",
+        price: "69 zł",
         image: "/images/product-body-dl-3.jpg",
         description: "Z delikatnym haftem",
         sizes: ["62", "68", "74", "80"],
@@ -73,7 +73,7 @@ export const categories: Category[] = [
       {
         id: "spiochy-1",
         title: "Śpiochy ecru z muślinu",
-        price: "89 zł",
+        price: "109 zł",
         image: "/images/product-spiochy-1.jpg",
         description: "Delikatny muślin, oddychający materiał",
         sizes: ["56", "62", "68", "74"],
@@ -81,7 +81,7 @@ export const categories: Category[] = [
       {
         id: "spiochy-2",
         title: "Śpiochy beżowe z bawełny",
-        price: "79 zł",
+        price: "109 zł",
         image: "/images/product-spiochy-2.jpg",
         description: "100% naturalna bawełna",
         sizes: ["56", "62", "68", "74", "80"],
@@ -89,7 +89,7 @@ export const categories: Category[] = [
       {
         id: "spiochy-3",
         title: "Śpiochy kremowe z gumką",
-        price: "85 zł",
+        price: "109 zł",
         image: "/images/product-spiochy-3.jpg",
         description: "Wygodna gumka w pasie",
         sizes: ["62", "68", "74"],
@@ -105,21 +105,21 @@ export const categories: Category[] = [
       {
         id: "pieluszka-1",
         title: "Pieluszka muślinowa ecru",
-        price: "39 zł",
+        price: "49 zł",
         image: "/images/product-pieluszka-1.jpg",
         description: "70x70 cm, 100% bawełna",
       },
       {
         id: "pieluszka-2",
         title: "Zestaw 3 pieluszek",
-        price: "99 zł",
+        price: "49 zł",
         image: "/images/product-pieluszka-2.jpg",
         description: "3 sztuki w naturalnych kolorach",
       },
       {
         id: "pieluszka-3",
         title: "Duża pieluszka otulacz",
-        price: "69 zł",
+        price: "49 zł",
         image: "/images/product-pieluszka-3.jpg",
         description: "120x120 cm",
       },
@@ -141,14 +141,14 @@ export const categories: Category[] = [
       {
         id: "posciel-2",
         title: "Pościel bawełniana beżowa",
-        price: "129 zł",
+        price: "149 zł",
         image: "/images/product-posciel-2.jpg",
         description: "Miękka bawełna, zestaw 2-częściowy",
       },
       {
         id: "posciel-3",
         title: "Zestaw pościel + otulacz",
-        price: "199 zł",
+        price: "149 zł",
         image: "/images/product-posciel-3.jpg",
         description: "Kompletny zestaw do łóżeczka",
       },
@@ -163,7 +163,7 @@ export const categories: Category[] = [
       {
         id: "leginsy-1",
         title: "Leginsy muślinowe ecru",
-        price: "65 zł",
+        price: "59 zł",
         image: "/images/product-leginsy-1.jpg",
         description: "Lekkie i przewiewne",
         sizes: ["62", "68", "74", "80"],
@@ -171,7 +171,7 @@ export const categories: Category[] = [
       {
         id: "leginsy-2",
         title: "Leginsy bawełniane beżowe",
-        price: "65 zł",
+        price: "59 zł",
         image: "/images/product-leginsy-2.jpg",
         description: "Naturalna bawełna, wygodna gumka",
         sizes: ["56", "62", "68", "74", "80"],
@@ -179,7 +179,7 @@ export const categories: Category[] = [
       {
         id: "leginsy-3",
         title: "Leginsy kremowe",
-        price: "69 zł",
+        price: "59 zł",
         image: "/images/product-leginsy-3.jpg",
         description: "Miękka bawełna",
         sizes: ["62", "68", "74", "80", "86"],
