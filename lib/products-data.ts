@@ -28,7 +28,7 @@ export const categories: Category[] = [
         price: "69 zł",
         image: "/images/product-body-kr-1.jpg",
         description: "Lekkie i przewiewne",
-        sizes: ["56", "62", "68", "74", "80"],
+        sizes: ["56", "62", "74", "86"],
       },
       {
         id: "body-kr-2",
@@ -36,7 +36,7 @@ export const categories: Category[] = [
         price: "69 zł",
         image: "/images/product-body-kr-2.jpg",
         description: "Naturalna bawełna",
-        sizes: ["56", "62", "68", "74"],
+        sizes: ["56", "62", "74", "86"],
       },
       {
         id: "body-dl-1",
@@ -44,7 +44,7 @@ export const categories: Category[] = [
         price: "69 zł",
         image: "/images/product-body-dl-1.jpg",
         description: "Kopertowe zapięcie",
-        sizes: ["56", "62", "68", "74", "80"],
+        sizes: ["56", "62", "74", "86"],
       },
       {
         id: "body-dl-2",
@@ -52,7 +52,7 @@ export const categories: Category[] = [
         price: "69 zł",
         image: "/images/product-body-dl-2.jpg",
         description: "Naturalna bawełna",
-        sizes: ["56", "62", "68", "74"],
+        sizes: ["56", "62", "74", "86"],
       },
       {
         id: "body-dl-3",
@@ -60,7 +60,7 @@ export const categories: Category[] = [
         price: "69 zł",
         image: "/images/product-body-dl-3.jpg",
         description: "Z delikatnym haftem",
-        sizes: ["62", "68", "74", "80"],
+        sizes: ["56", "62", "74", "86"],
       },
     ],
   },
@@ -76,7 +76,7 @@ export const categories: Category[] = [
         price: "109 zł",
         image: "/images/product-spiochy-1.jpg",
         description: "Delikatny muślin, oddychający materiał",
-        sizes: ["56", "62", "68", "74"],
+        sizes: ["56", "62", "74", "86"],
       },
       {
         id: "spiochy-2",
@@ -84,7 +84,7 @@ export const categories: Category[] = [
         price: "109 zł",
         image: "/images/product-spiochy-2.jpg",
         description: "100% naturalna bawełna",
-        sizes: ["56", "62", "68", "74", "80"],
+        sizes: ["56", "62", "74", "86"],
       },
       {
         id: "spiochy-3",
@@ -92,7 +92,7 @@ export const categories: Category[] = [
         price: "109 zł",
         image: "/images/product-spiochy-3.jpg",
         description: "Wygodna gumka w pasie",
-        sizes: ["62", "68", "74"],
+        sizes: ["56", "62", "74", "86"],
       },
     ],
   },
@@ -166,7 +166,7 @@ export const categories: Category[] = [
         price: "59 zł",
         image: "/images/product-leginsy-1.jpg",
         description: "Lekkie i przewiewne",
-        sizes: ["62", "68", "74", "80"],
+        sizes: ["56", "62", "74", "86"],
       },
       {
         id: "leginsy-2",
@@ -174,7 +174,7 @@ export const categories: Category[] = [
         price: "59 zł",
         image: "/images/product-leginsy-2.jpg",
         description: "Naturalna bawełna, wygodna gumka",
-        sizes: ["56", "62", "68", "74", "80"],
+        sizes: ["56", "62", "74", "86"],
       },
       {
         id: "leginsy-3",
@@ -182,7 +182,7 @@ export const categories: Category[] = [
         price: "59 zł",
         image: "/images/product-leginsy-3.jpg",
         description: "Miękka bawełna",
-        sizes: ["62", "68", "74", "80", "86"],
+        sizes: ["56", "62", "74", "86"],
       },
     ],
   },
