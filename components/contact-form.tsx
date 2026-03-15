@@ -61,7 +61,7 @@ export function ContactForm() {
                 </div>
                 <div>
                   <p className="text-xs uppercase tracking-widest text-muted-foreground">Email</p>
-                  <p className="mt-1 text-foreground">office.ladebebe@gmail.com</p>
+                  <p className="mt-1 text-foreground">Ladebebemini@gmail.com</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">

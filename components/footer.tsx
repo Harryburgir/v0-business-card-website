@@ -72,7 +72,7 @@ export function Footer() {
               Kontakt
             </h4>
             <div className="mt-6 flex flex-col gap-3 text-muted-foreground">
-              <p>office.ladebebe@gmail.com</p>
+              <p>Ladebebemini@gmail.com</p>
               <p>+48 518 845 751</p>
               <p>Wrocław</p>
             </div>
