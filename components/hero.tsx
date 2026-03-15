@@ -11,12 +11,12 @@ export function Hero() {
       <div className="absolute inset-0">
         <Image
           src="/images/hero-kids.jpg"
-          alt="Noworodek w delikatnych naturalnych ubrankach"
+          alt="Przyszła mama otaczająca brzuszek dłońmi w kształcie serca"
           fill
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-foreground/20" />
+        <div className="absolute inset-0 bg-foreground/30" />
       </div>
 
       {/* Content */}
