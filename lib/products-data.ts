@@ -102,6 +102,14 @@ export const categories: Category[] = [
         description: "Bawełna organiczna, kołnierzyk z koronką, stópki",
         sizes: ["56", "62", "74", "86"],
       },
+      {
+        id: "spiochy-5",
+        title: "Śpiochy bawełna organiczna ecru western",
+        price: "109 zł",
+        image: "/images/product-spiochy-5.jpg",
+        description: "Bawełna organiczna, kołnierzyk peter pan, motywy western, stópki",
+        sizes: ["56", "62", "74", "86"],
+      },
     ],
   },
   {
