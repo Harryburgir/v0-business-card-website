@@ -43,7 +43,7 @@ export function Hero() {
           
           {/* Tagline below logo */}
           <p className="mx-auto mt-8 max-w-lg text-base leading-relaxed text-white/90 md:text-lg font-light tracking-wide">
-            Stworzone z miłości do najmłodszych
+            {"Stworzone z miłości do najmłodszych"}
           </p>
           
           {/* CTA Buttons */}
