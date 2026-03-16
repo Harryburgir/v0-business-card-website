@@ -7,8 +7,8 @@ export function About() {
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
           <div className="relative aspect-[4/5] overflow-hidden">
             <Image
-              src="/images/about-kids.jpg"
-              alt="Niemowlę w naturalnych ubrankach"
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/aaaa7-v14rNPjELF92XTphf33ANaInx7Qr6x.jpg"
+              alt="Przyszła mama tworząca serce z dłoni na brzuszku"
               fill
               className="object-cover"
             />
