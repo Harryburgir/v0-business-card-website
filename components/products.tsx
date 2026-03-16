@@ -1,40 +1,20 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ShoppingBag, ArrowRight } from "lucide-react";
 import { useCart } from "@/context/cart-context";
-import { categories, type Product } from "@/lib/products-data";
+import { categories } from "@/lib/products-data";
 
 export function Products() {
   const { addItem } = useCart();
-  const [activeCategory, setActiveCategory] = useState<string>("wszystkie");
 
-  // Get featured products from each category (first 2 from each)
-  const getFeaturedProducts = () => {
-    if (activeCategory === "wszystkie") {
-      // Show 2 products from each category for diversity
-      return categories.flatMap((cat) => 
-        cat.products.slice(0, 2).map((product) => ({
-          ...product,
-          categorySlug: cat.slug,
-          categoryTitle: cat.title,
-        }))
-      );
-    }
-    
-    const category = categories.find((cat) => cat.slug === activeCategory);
-    if (!category) return [];
-    
-    return category.products.map((product) => ({
-      ...product,
-      categorySlug: category.slug,
-      categoryTitle: category.title,
-    }));
-  };
-
-  const featuredProducts = getFeaturedProducts();
+  // Get 1 product from each of the first 4 categories
+  const featuredProducts = categories.slice(0, 4).map((cat) => ({
+    ...cat.products[0],
+    categorySlug: cat.slug,
+    categoryTitle: cat.title,
+  }));
 
   return (
     <section id="produkty" className="bg-warm/40 px-6 py-24 lg:py-32">
@@ -54,37 +34,10 @@ export function Products() {
           </p>
         </div>
 
-        {/* Category Filter Tabs */}
-        <div className="mb-12 flex flex-wrap gap-2 border-b border-border pb-4">
-          <button
-            onClick={() => setActiveCategory("wszystkie")}
-            className={`px-4 py-2 text-sm uppercase tracking-wider transition-all ${
-              activeCategory === "wszystkie"
-                ? "bg-primary text-primary-foreground"
-                : "bg-transparent text-muted-foreground hover:bg-muted hover:text-foreground"
-            }`}
-          >
-            Wszystkie
-          </button>
-          {categories.map((category) => (
-            <button
-              key={category.slug}
-              onClick={() => setActiveCategory(category.slug)}
-              className={`px-4 py-2 text-sm uppercase tracking-wider transition-all ${
-                activeCategory === category.slug
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-transparent text-muted-foreground hover:bg-muted hover:text-foreground"
-              }`}
-            >
-              {category.title}
-            </button>
-          ))}
-        </div>
-
         {/* Products Grid */}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {featuredProducts.map((product, index) => (
-            <div key={`${product.categorySlug}-${product.id}-${index}`} className="group">
+          {featuredProducts.map((product) => (
+            <div key={product.id} className="group">
               <div className="relative aspect-[3/4] overflow-hidden bg-muted">
                 <Image
                   src={product.image}
