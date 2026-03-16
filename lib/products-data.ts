@@ -28,7 +28,7 @@ export const categories: Category[] = [
         price: "69 zł",
         image: "/images/product-body-kr-1.jpg",
         description: "Kopertowe zapięcie, motywy western",
-        sizes: ["56", "62", "74", "86"],
+        sizes: ["56", "62", "74", "80", "86"],
       },
       {
         id: "body-kr-2",
@@ -36,7 +36,7 @@ export const categories: Category[] = [
         price: "69 zł",
         image: "/images/product-body-kr-2.jpg",
         description: "Kopertowe zapięcie, motywy western",
-        sizes: ["56", "62", "74", "86"],
+        sizes: ["56", "62", "74", "80", "86"],
       },
       {
         id: "body-dl-1",
@@ -44,7 +44,7 @@ export const categories: Category[] = [
         price: "69 zł",
         image: "/images/product-body-dl-1.jpg",
         description: "Kopertowe zapięcie, wzór w kratkę",
-        sizes: ["56", "62", "74", "86"],
+        sizes: ["56", "62", "74", "80", "86"],
       },
       {
         id: "body-dl-2",
@@ -52,7 +52,7 @@ export const categories: Category[] = [
         price: "69 zł",
         image: "/images/product-body-dl-2.jpg",
         description: "Kopertowe zapięcie, motywy western",
-        sizes: ["56", "62", "74", "86"],
+        sizes: ["56", "62", "74", "80", "86"],
       },
       {
         id: "body-dl-3",
@@ -60,7 +60,7 @@ export const categories: Category[] = [
         price: "69 zł",
         image: "/images/product-body-dl-3.jpg",
         description: "Kopertowe zapięcie, wzór w kratkę",
-        sizes: ["56", "62", "74", "86"],
+        sizes: ["56", "62", "74", "80", "86"],
       },
     ],
   },
@@ -76,7 +76,7 @@ export const categories: Category[] = [
         price: "109 zł",
         image: "/images/product-spiochy-1.jpg",
         description: "Bawełna organiczna, kołnierzyk peter pan, stópki",
-        sizes: ["56", "62", "74", "86"],
+        sizes: ["56", "62", "74", "80", "86"],
       },
       {
         id: "spiochy-2",
@@ -84,7 +84,7 @@ export const categories: Category[] = [
         price: "109 zł",
         image: "/images/product-spiochy-2.jpg",
         description: "Bawełna organiczna, biały kołnierzyk peter pan, stópki",
-        sizes: ["56", "62", "74", "86"],
+        sizes: ["56", "62", "74", "80", "86"],
       },
       {
         id: "spiochy-3",
@@ -92,7 +92,7 @@ export const categories: Category[] = [
         price: "109 zł",
         image: "/images/product-spiochy-3.jpg",
         description: "Bawełna organiczna, kołnierzyk peter pan, stópki",
-        sizes: ["56", "62", "74", "86"],
+        sizes: ["56", "62", "74", "80", "86"],
       },
       {
         id: "spiochy-4",
@@ -100,7 +100,7 @@ export const categories: Category[] = [
         price: "109 zł",
         image: "/images/product-spiochy-4.jpg",
         description: "Bawełna organiczna, kołnierzyk z koronką, stópki",
-        sizes: ["56", "62", "74", "86"],
+        sizes: ["56", "62", "74", "80", "86"],
       },
       {
         id: "spiochy-5",
@@ -108,7 +108,7 @@ export const categories: Category[] = [
         price: "109 zł",
         image: "/images/product-spiochy-5.jpg",
         description: "Bawełna organiczna, kołnierzyk peter pan, motywy western, stópki",
-        sizes: ["56", "62", "74", "86"],
+        sizes: ["56", "62", "74", "80", "86"],
       },
     ],
   },
@@ -175,7 +175,7 @@ export const categories: Category[] = [
         price: "59 zł",
         image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/spodnie-BqKjdb93YurCThQ1DuYuS0YiMLCqwW.jpeg",
         description: "Miękka bawełna, ozdobna falbanka",
-        sizes: ["56", "62", "74", "86"],
+        sizes: ["56", "62", "74", "80", "86"],
       },
       {
         id: "spodenki-2",
@@ -183,7 +183,7 @@ export const categories: Category[] = [
         price: "59 zł",
         image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/spodnie%20%282%29-dleEzvDI28GOHKPrAyP8y6a9f5gSsp.jpeg",
         description: "Naturalna bawełna, wygodna gumka",
-        sizes: ["56", "62", "74", "86"],
+        sizes: ["56", "62", "74", "80", "86"],
       },
       {
         id: "spodenki-3",
@@ -191,7 +191,7 @@ export const categories: Category[] = [
         price: "59 zł",
         image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Spodnie%20%283%29-BGPTUy6cOz2wmPFzAgyyaVq8kle7qx.jpeg",
         description: "Bawełna, wzór w kratkę, ozdobna falbanka",
-        sizes: ["56", "62", "74", "86"],
+        sizes: ["56", "62", "74", "80", "86"],
       },
       {
         id: "spodenki-4",
@@ -199,7 +199,7 @@ export const categories: Category[] = [
         price: "69 zł",
         image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Spodenki-k41wMq21yNVYBmXWLwuyRtQk69Xjiv.jpeg",
         description: "Bawełna organiczna, ażurowy wzór, kokardka",
-        sizes: ["56", "62", "74", "86"],
+        sizes: ["56", "62", "74", "80", "86"],
       },
     ],
   },
