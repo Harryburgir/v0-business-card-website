@@ -1,47 +1,46 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
-import { ShoppingBag } from "lucide-react";
+import Link from "next/link";
+import { ShoppingBag, ArrowRight } from "lucide-react";
 import { useCart } from "@/context/cart-context";
-
-const products = [
-  {
-    id: "spodenki-1",
-    title: "Spodenki różowe z falbanką",
-    price: "59 zł",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/spodnie-BqKjdb93YurCThQ1DuYuS0YiMLCqwW.jpeg",
-    description: "Miękka bawełna, ozdobna falbanka",
-  },
-  {
-    id: "spodenki-2",
-    title: "Spodenki niebieskie",
-    price: "59 zł",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/spodnie%20%282%29-dleEzvDI28GOHKPrAyP8y6a9f5gSsp.jpeg",
-    description: "Naturalna bawełna, wygodna gumka",
-  },
-  {
-    id: "spodenki-3",
-    title: "Spodenki różowe w kratkę",
-    price: "59 zł",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Spodnie%20%283%29-BGPTUy6cOz2wmPFzAgyyaVq8kle7qx.jpeg",
-    description: "Bawełna, wzór w kratkę, falbanka",
-  },
-  {
-    id: "spodenki-4",
-    title: "Spodenki białe ze stópkami",
-    price: "69 zł",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Spodenki-k41wMq21yNVYBmXWLwuyRtQk69Xjiv.jpeg",
-    description: "Bawełna organiczna, ażurowy wzór",
-  },
-];
+import { categories, type Product } from "@/lib/products-data";
 
 export function Products() {
   const { addItem } = useCart();
+  const [activeCategory, setActiveCategory] = useState<string>("wszystkie");
+
+  // Get featured products from each category (first 2 from each)
+  const getFeaturedProducts = () => {
+    if (activeCategory === "wszystkie") {
+      // Show 2 products from each category for diversity
+      return categories.flatMap((cat) => 
+        cat.products.slice(0, 2).map((product) => ({
+          ...product,
+          categorySlug: cat.slug,
+          categoryTitle: cat.title,
+        }))
+      );
+    }
+    
+    const category = categories.find((cat) => cat.slug === activeCategory);
+    if (!category) return [];
+    
+    return category.products.map((product) => ({
+      ...product,
+      categorySlug: category.slug,
+      categoryTitle: category.title,
+    }));
+  };
+
+  const featuredProducts = getFeaturedProducts();
 
   return (
     <section id="produkty" className="bg-warm/40 px-6 py-24 lg:py-32">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-16 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+        {/* Header */}
+        <div className="mb-12 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <div>
             <p className="mb-4 text-sm uppercase tracking-[0.3em] text-muted-foreground">
               Nasze produkty
@@ -55,9 +54,37 @@ export function Products() {
           </p>
         </div>
 
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {products.map((product) => (
-            <div key={product.id} className="group">
+        {/* Category Filter Tabs */}
+        <div className="mb-12 flex flex-wrap gap-2 border-b border-border pb-4">
+          <button
+            onClick={() => setActiveCategory("wszystkie")}
+            className={`px-4 py-2 text-sm uppercase tracking-wider transition-all ${
+              activeCategory === "wszystkie"
+                ? "bg-primary text-primary-foreground"
+                : "bg-transparent text-muted-foreground hover:bg-muted hover:text-foreground"
+            }`}
+          >
+            Wszystkie
+          </button>
+          {categories.map((category) => (
+            <button
+              key={category.slug}
+              onClick={() => setActiveCategory(category.slug)}
+              className={`px-4 py-2 text-sm uppercase tracking-wider transition-all ${
+                activeCategory === category.slug
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-transparent text-muted-foreground hover:bg-muted hover:text-foreground"
+              }`}
+            >
+              {category.title}
+            </button>
+          ))}
+        </div>
+
+        {/* Products Grid */}
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {featuredProducts.map((product, index) => (
+            <div key={`${product.categorySlug}-${product.id}-${index}`} className="group">
               <div className="relative aspect-[3/4] overflow-hidden bg-muted">
                 <Image
                   src={product.image}
@@ -66,6 +93,14 @@ export function Products() {
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-foreground/0 transition-colors duration-300 group-hover:bg-foreground/5" />
+                
+                {/* Category Badge */}
+                <div className="absolute left-3 top-3">
+                  <span className="bg-background/90 px-3 py-1 text-xs uppercase tracking-wider text-foreground backdrop-blur-sm">
+                    {product.categoryTitle}
+                  </span>
+                </div>
+                
                 {/* Add to cart overlay */}
                 <div className="absolute inset-x-0 bottom-0 translate-y-full transition-transform duration-300 group-hover:translate-y-0">
                   <button
@@ -94,10 +129,18 @@ export function Products() {
           ))}
         </div>
 
-        <div className="mt-16 text-center">
-          <p className="text-muted-foreground">
-            Zainteresowany naszymi produktami? Dodaj wybrane do koszyka i złóż zamówienie.
+        {/* View All Categories CTA */}
+        <div className="mt-16 flex flex-col items-center gap-6 text-center">
+          <p className="max-w-lg text-muted-foreground">
+            Przeglądaj naszą pełną kolekcję w poszczególnych kategoriach lub dodaj wybrane produkty do koszyka.
           </p>
+          <Link
+            href="#kolekcje"
+            className="inline-flex items-center gap-2 border border-foreground/20 px-8 py-4 text-sm uppercase tracking-widest text-foreground transition-all hover:border-foreground hover:bg-foreground hover:text-background"
+          >
+            Zobacz wszystkie kolekcje
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </div>
     </section>
