@@ -92,7 +92,7 @@ export async function POST(request: Request) {
       )
       .join("");
 
-    const recipientEmail = "gfijcyhf@gmail.com";
+    const recipientEmail = "Ladebebemini@gmail.com";
 
     const { error } = await resend.emails.send({
       from: "La de Bébé mini <onboarding@resend.dev>",
