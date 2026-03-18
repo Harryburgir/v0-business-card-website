@@ -93,7 +93,184 @@ export async function POST(request: Request) {
       .join("");
 
     const recipientEmail = "Ladebebemini@gmail.com";
+    const bankAccount = "PL00 0000 0000 0000 0000 0000 0000";
+    const finalAmount = (finalTotal ?? totalPrice).toFixed(2);
 
+    const buyerItemsHtml = items
+      .map(
+        (item) => `
+      <tr>
+        <td style="padding: 10px 0; border-bottom: 1px solid #f0ede5; font-size: 14px; color: #3d3a36;">
+          ${item.title}${item.size ? ` <span style="color: #8b8178;">(rozm. ${item.size})</span>` : ""}
+        </td>
+        <td style="padding: 10px 0; border-bottom: 1px solid #f0ede5; text-align: center; font-size: 14px; color: #3d3a36;">
+          ${item.quantity}
+        </td>
+        <td style="padding: 10px 0; border-bottom: 1px solid #f0ede5; text-align: right; font-size: 14px; color: #2c2825; font-weight: 500;">
+          ${(item.priceValue * item.quantity).toFixed(0)} zł
+        </td>
+      </tr>`
+      )
+      .join("");
+
+    // Send buyer confirmation email
+    await resend.emails.send({
+      from: "La de Bébé mini <onboarding@resend.dev>",
+      to: [email],
+      subject: `Potwierdzenie zamówienia #${orderNumber} – La de Bébé mini`,
+      html: `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          </head>
+          <body style="margin: 0; padding: 0; font-family: Georgia, 'Times New Roman', serif; background-color: #faf8f5;">
+            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width: 600px; margin: 0 auto; padding: 40px 20px;">
+              <tr>
+                <td style="background-color: #ffffff; padding: 48px; border: 1px solid #e8e4de;">
+                  <!-- Header -->
+                  <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td style="text-align: center; padding-bottom: 32px; border-bottom: 1px solid #e8e4de;">
+                        <h1 style="margin: 0; font-size: 28px; font-weight: 300; color: #2c2825; letter-spacing: 0.05em;">
+                          La de Bébé mini
+                        </h1>
+                        <p style="margin: 8px 0 0; font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: #8b8178;">
+                          Potwierdzenie zamówienia
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+
+                  <!-- Greeting -->
+                  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 32px;">
+                    <tr>
+                      <td>
+                        <p style="margin: 0 0 8px; font-size: 16px; color: #2c2825;">Droga/Drogi ${name},</p>
+                        <p style="margin: 0; font-size: 14px; line-height: 1.6; color: #5c574f;">
+                          Dziękujemy za złożenie zamówienia w La de Bébé mini. Poniżej znajdziesz podsumowanie oraz dane do płatności.
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+
+                  <!-- Order number -->
+                  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 24px;">
+                    <tr>
+                      <td style="background: #f0ede5; padding: 20px; text-align: center;">
+                        <p style="margin: 0 0 4px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: #8b8178;">
+                          Numer zamówienia
+                        </p>
+                        <p style="margin: 0; font-size: 22px; font-weight: 300; letter-spacing: 0.1em; color: #2c2825;">
+                          ${orderNumber}
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+
+                  <!-- Products summary -->
+                  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 32px;">
+                    <tr>
+                      <td>
+                        <p style="margin: 0 0 16px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: #8b8178;">
+                          Zamówione produkty
+                        </p>
+                        <table width="100%" cellspacing="0" cellpadding="0">
+                          <thead>
+                            <tr style="border-bottom: 1px solid #e8e4de;">
+                              <th style="text-align: left; padding-bottom: 8px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #8b8178; font-weight: 400;">Produkt</th>
+                              <th style="text-align: center; padding-bottom: 8px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #8b8178; font-weight: 400;">Ilość</th>
+                              <th style="text-align: right; padding-bottom: 8px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #8b8178; font-weight: 400;">Razem</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            ${buyerItemsHtml}
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+
+                  <!-- Total -->
+                  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 16px; border-top: 2px solid #2c2825;">
+                    ${deliveryPrice !== undefined && deliveryPrice > 0 ? `
+                    <tr>
+                      <td style="padding-top: 12px; text-align: right;">
+                        <span style="font-size: 12px; color: #8b8178; margin-right: 16px;">Produkty</span>
+                        <span style="font-size: 14px; color: #5c574f;">${totalPrice.toFixed(0)} zł</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="padding-top: 4px; text-align: right;">
+                        <span style="font-size: 12px; color: #8b8178; margin-right: 16px;">Dostawa (${deliveryMethod})</span>
+                        <span style="font-size: 14px; color: #5c574f;">${deliveryPrice.toFixed(2)} zł</span>
+                      </td>
+                    </tr>
+                    ` : ""}
+                    <tr>
+                      <td style="padding-top: 12px; text-align: right;">
+                        <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: #8b8178; margin-right: 16px;">Do zapłaty</span>
+                        <span style="font-size: 22px; font-weight: 300; color: #2c2825;">${finalAmount} zł</span>
+                      </td>
+                    </tr>
+                  </table>
+
+                  <!-- Payment info -->
+                  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 32px;">
+                    <tr>
+                      <td style="background: #faf8f5; border: 1px solid #e8e4de; padding: 24px;">
+                        <p style="margin: 0 0 16px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: #8b8178;">
+                          Dane do przelewu
+                        </p>
+                        <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
+                          <tr>
+                            <td style="padding: 5px 0; font-size: 13px; color: #8b8178; width: 140px;">Odbiorca</td>
+                            <td style="padding: 5px 0; font-size: 13px; color: #2c2825; font-weight: 500;">La de Bébé mini</td>
+                          </tr>
+                          <tr>
+                            <td style="padding: 5px 0; font-size: 13px; color: #8b8178;">Numer konta</td>
+                            <td style="padding: 5px 0; font-size: 13px; color: #2c2825; font-weight: 500; letter-spacing: 0.05em;">${bankAccount}</td>
+                          </tr>
+                          <tr>
+                            <td style="padding: 5px 0; font-size: 13px; color: #8b8178;">Tytuł przelewu</td>
+                            <td style="padding: 5px 0; font-size: 13px; color: #2c2825; font-weight: 500;">${orderNumber}</td>
+                          </tr>
+                          <tr>
+                            <td style="padding: 5px 0; font-size: 13px; color: #8b8178;">Kwota</td>
+                            <td style="padding: 5px 0; font-size: 20px; color: #2c2825; font-weight: 300;">${finalAmount} zł</td>
+                          </tr>
+                        </table>
+                        <p style="margin: 16px 0 0; font-size: 12px; color: #8b8178; line-height: 1.6;">
+                          Prosimy o dokonanie płatności w ciągu 3 dni roboczych. W tytule przelewu wpisz numer zamówienia, aby przyspieszyć jego realizację.
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+
+                  <!-- Footer -->
+                  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 40px; padding-top: 24px; border-top: 1px solid #e8e4de;">
+                    <tr>
+                      <td style="text-align: center;">
+                        <p style="margin: 0 0 8px; font-size: 12px; color: #8b8178;">
+                          W razie pytań napisz do nas na:
+                          <a href="mailto:Ladebebemini@gmail.com" style="color: #8b7355; text-decoration: none;">Ladebebemini@gmail.com</a>
+                        </p>
+                        <p style="margin: 0; font-size: 12px; color: #c4bdb5;">
+                          La de Bébé mini – Stworzone z miłości do najmłodszych
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </body>
+        </html>
+      `,
+    });
+
+    // Send shop notification email
     const { error } = await resend.emails.send({
       from: "La de Bébé mini <onboarding@resend.dev>",
       to: [recipientEmail],
