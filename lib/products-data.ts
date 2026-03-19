@@ -102,14 +102,8 @@ export const categories: Category[] = [
         description: "Bawełna organiczna, kołnierzyk z koronką, stópki",
         sizes: ["56", "62", "74", "80", "86"],
       },
-      {
-        id: "spiochy-5",
-        title: "Śpiochy bawełna organiczna western",
-        price: "109 zł",
-        image: "/images/product-spiochy-5.jpg",
-        description: "Bawełna organiczna, kołnierzyk peter pan, motywy western, stópki",
-        sizes: ["56", "62", "74", "80", "86"],
-      },
+
+
     ],
   },
   {
@@ -142,14 +136,14 @@ export const categories: Category[] = [
     products: [
       {
         id: "posciel-konie-chlopiec",
-        title: "Bawełna Satynowa 100% wzór konie- dla chłopca",
+        title: "Pościel Bawełna Satynowa 100% wzór konie- dla chłopca",
         price: "169 zł",
         image: "/images/posciel-konie.jpg",
         description: "Bawełna 100%, wzór konie i podkowy w odcieniach niebieskich, zestaw 2-częściowy (poszewka + poszwa)",
       },
       {
         id: "posciel-konie-dziewczynka",
-        title: "Bawełna Satynowa 100% wzór konie- dla dziewczynki",
+        title: "Pościel Bawełna Satynowa 100% wzór konie- dla dziewczynki",
         price: "169 zł",
         image: "/images/posciel-konie.jpg",
         description: "Bawełna 100%, wzór konie, podkowy i różowe wstążki, zestaw 2-częściowy (poszewka + poszwa)",
