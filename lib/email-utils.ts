@@ -51,10 +51,22 @@ export function generateOrderNumber(): string {
 /**
  * Get email address for sending from
  * Falls back to test domain if custom domain not configured
- * Note: Uses ASCII-only name for maximum compatibility
+ * Validates that EMAIL_FROM_ADDRESS is a proper email format
  */
 export function getFromEmail(): string {
-  return process.env.EMAIL_FROM_ADDRESS || "La de Bebe mini <onboarding@resend.dev>";
+  const customEmail = process.env.EMAIL_FROM_ADDRESS;
+  
+  console.log("[v0] EMAIL_FROM_ADDRESS raw value:", customEmail);
+  
+  // Check if EMAIL_FROM_ADDRESS is set and looks like a valid email (contains @ symbol)
+  if (customEmail && customEmail.includes("@") && !customEmail.startsWith("re_")) {
+    console.log("[v0] Using custom email:", customEmail);
+    return customEmail;
+  }
+  
+  console.log("[v0] Using fallback email");
+  // Fall back to test domain
+  return "onboarding@resend.dev";
 }
 
 /**
