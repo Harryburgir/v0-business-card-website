@@ -7,6 +7,8 @@ import {
   generateOrderNumber,
   getFromEmail,
   hasCustomDomain,
+  getOwnerEmail,
+  isTestMode,
   validateOrderData,
   validateResendConfig,
 } from "@/lib/email-utils";
@@ -90,13 +92,15 @@ export async function POST(request: Request) {
       )
       .join("");
 
-    const ownerEmail = "Ladebebemini@gmail.com";
+    // Get owner email - in test mode this may be overridden by RESEND_TEST_EMAIL
+    const ownerEmail = getOwnerEmail();
     
     // Email configuration - use custom domain if available, otherwise use Resend's test domain
     // NOTE: With onboarding@resend.dev, emails can only be sent to the verified owner email
     // To send to customers, you need to verify your own domain in Resend
     const fromEmail = getFromEmail();
     const customDomainConfigured = hasCustomDomain();
+    const testMode = isTestMode();
 
     // 1. Send order notification to shop owner (Ladebebemini)
     const { error: ownerEmailError } = await resend.emails.send({

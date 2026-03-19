@@ -33,6 +33,9 @@ export function ProductCard({ product, categorySlug }: ProductCardProps) {
     setTimeout(() => setAdded(false), 1500);
   };
 
+  const isBoy = product.id.includes("chlopiec");
+  const isGirl = product.id.includes("dziewczynka");
+
   return (
     <div className="group">
       <div className="relative aspect-[3/4] overflow-hidden bg-warm/50">
@@ -43,6 +46,19 @@ export function ProductCard({ product, categorySlug }: ProductCardProps) {
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-foreground/0 transition-colors duration-300 group-hover:bg-foreground/5" />
+        {(isBoy || isGirl) && (
+          <div className="absolute left-3 top-3">
+            <span
+              className={`inline-block px-3 py-1 text-xs uppercase tracking-widest font-medium ${
+                isBoy
+                  ? "bg-sky-100 text-sky-700"
+                  : "bg-pink-100 text-pink-700"
+              }`}
+            >
+              {isBoy ? "dla chlopca" : "dla dziewczynki"}
+            </span>
+          </div>
+        )}
         {/* Add to cart overlay - visible on touch devices, slides in on hover for desktop */}
         <div className="absolute inset-x-0 bottom-0 translate-y-0 md:translate-y-full transition-transform duration-300 md:group-hover:translate-y-0">
           <button
