@@ -34,8 +34,9 @@ export function Hero() {
                 alt="La de Bébé mini"
                 width={580}
                 height={260}
-                className="relative h-auto w-full object-contain opacity-90 brightness-95 drop-shadow-[0_0_8px_rgba(236,72,153,0.15)]"
+                className="relative w-full object-contain opacity-90 brightness-95 drop-shadow-[0_0_8px_rgba(236,72,153,0.15)]"
                 priority
+                style={{ width: '100%', height: 'auto' }}
               />
             </div>
           </div>

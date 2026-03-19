@@ -1,5 +1,11 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
+import {
+  sanitizeHtml,
+  validateContactData,
+  getFromEmail,
+  validateResendConfig,
+} from "@/lib/email-utils";
 
 interface ContactFormData {
   name: string;
@@ -10,35 +16,45 @@ interface ContactFormData {
 
 export async function POST(request: Request) {
   try {
+    // Validate configuration
+    const configError = validateResendConfig();
+    if (configError) {
+      console.error(configError);
+      return NextResponse.json(
+        { error: "Konfiguracja serwera jest niepełna. Skontaktuj się z administratorem." },
+        { status: 500 }
+      );
+    }
+
     const resend = new Resend(process.env.RESEND_API_KEY);
     const data: ContactFormData = await request.json();
+
+    // Validate contact data
+    const validationError = validateContactData(data);
+    if (validationError) {
+      return NextResponse.json(
+        { error: validationError },
+        { status: 400 }
+      );
+    }
+
     const { name, email, subject, message } = data;
 
-    // Validate required fields
-    if (!name || !email || !subject || !message) {
-      return NextResponse.json(
-        { error: "Wszystkie pola są wymagane" },
-        { status: 400 }
-      );
-    }
+    // Sanitize all user inputs
+    const safeName = sanitizeHtml(name);
+    const safeEmail = sanitizeHtml(email);
+    const safeSubject = sanitizeHtml(subject);
+    const safeMessage = sanitizeHtml(message);
 
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return NextResponse.json(
-        { error: "Nieprawidłowy format email" },
-        { status: 400 }
-      );
-    }
-
-    // Send email via Resend - test mode: only Ladebebemini@gmail.com can receive
+    // Send email via Resend to shop owner
     const recipientEmail = "Ladebebemini@gmail.com";
+    const fromEmail = getFromEmail();
     
     const { data: emailData, error } = await resend.emails.send({
-      from: "La de Bébé mini <onboarding@resend.dev>",
+      from: fromEmail,
       to: [recipientEmail],
       replyTo: email,
-      subject: `[La de Bébé mini] ${subject}`,
+      subject: `[La de Bébé mini] ${safeSubject}`,
       html: `
         <!DOCTYPE html>
         <html>
@@ -72,24 +88,24 @@ export async function POST(request: Request) {
                           Od
                         </p>
                         <p style="margin: 0 0 8px; font-size: 18px; color: #2c2825;">
-                          ${name}
+                          ${safeName}
                         </p>
                         <p style="margin: 0 0 32px; font-size: 14px; color: #5c574f;">
-                          <a href="mailto:${email}" style="color: #8b7355; text-decoration: none;">${email}</a>
+                          <a href="mailto:${safeEmail}" style="color: #8b7355; text-decoration: none;">${safeEmail}</a>
                         </p>
                         
                         <p style="margin: 0 0 24px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: #8b8178;">
                           Temat
                         </p>
                         <p style="margin: 0 0 32px; font-size: 16px; color: #2c2825;">
-                          ${subject}
+                          ${safeSubject}
                         </p>
                         
                         <p style="margin: 0 0 24px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: #8b8178;">
                           Wiadomość
                         </p>
                         <div style="padding: 24px; background-color: #faf8f5; border-left: 3px solid #d4c4b0;">
-                          <p style="margin: 0; font-size: 15px; line-height: 1.7; color: #3d3a36; white-space: pre-wrap;">${message}</p>
+                          <p style="margin: 0; font-size: 15px; line-height: 1.7; color: #3d3a36; white-space: pre-wrap;">${safeMessage}</p>
                         </div>
                       </td>
                     </tr>
@@ -100,7 +116,7 @@ export async function POST(request: Request) {
                     <tr>
                       <td style="text-align: center;">
                         <p style="margin: 0; font-size: 12px; color: #8b8178;">
-                          Odpowiedz bezpośrednio na ten email, aby skontaktować się z ${name}
+                          Odpowiedz bezpośrednio na ten email, aby skontaktować się z ${safeName}
                         </p>
                       </td>
                     </tr>
