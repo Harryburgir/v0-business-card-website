@@ -98,6 +98,8 @@ export async function POST(request: Request) {
     const fromEmail = getFromEmail();
     const customDomainConfigured = hasCustomDomain();
 
+    console.log("[v0] fromEmail value:", fromEmail);
+
     // 1. Send order notification to shop owner (Ladebebemini)
     const { error: ownerEmailError } = await resend.emails.send({
       from: fromEmail,

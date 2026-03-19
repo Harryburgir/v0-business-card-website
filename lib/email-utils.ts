@@ -51,9 +51,10 @@ export function generateOrderNumber(): string {
 /**
  * Get email address for sending from
  * Falls back to test domain if custom domain not configured
+ * Note: Uses ASCII-only name for maximum compatibility
  */
 export function getFromEmail(): string {
-  return process.env.EMAIL_FROM_ADDRESS || "La de Bébé mini <onboarding@resend.dev>";
+  return process.env.EMAIL_FROM_ADDRESS || "La de Bebe mini <onboarding@resend.dev>";
 }
 
 /**
