@@ -22,13 +22,13 @@ export function About() {
               <span className="block text-balance">do najmłodszych</span>
             </h2>
             <p className="mt-8 text-lg leading-relaxed text-muted-foreground">
-              La de Bébé mini to marka stworzona z myślą o dzieciach, które dopiero przychodzą na świat 
-              oraz o maluszkach w pierwszym roku życia. Wierzymy, że pierwsze ubranka powinny być nie tylko piękne, 
+              La de Bébé mini to marka stworzona z myślą o dzieciach, które dopiero przychodzą na świat
+              oraz o maluszkach w pierwszym roku życia. Wierzymy, że pierwsze ubranka powinny być nie tylko piękne,
               ale przede wszystkim delikatne i bezpieczne dla wrażliwej skóry dziecka.
             </p>
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-              W naszej ofercie znajdują się starannie wybrane ubranka wykonane z naturalnych tkanin, 
-              które nie są barwione chemicznie. Stawiamy na materiały przyjazne dla skóry, oddychające 
+              W naszej ofercie znajdują się starannie wybrane ubranka wykonane z naturalnych tkanin,
+              które nie są barwione chemicznie. Stawiamy na materiały przyjazne dla skóry, oddychające
               i komfortowe, aby zapewnić maluszkom wygodę już od pierwszych dni życia.
             </p>
           </div>
@@ -50,7 +50,7 @@ export function About() {
               Subtelny design
             </h3>
             <p className="mt-3 text-muted-foreground">
-              Ponadczasowy styl w naturalnych odcieniach. Piękno tkwi w prostocie i delikatności.
+              Piękne unikalne printy akwarelowe.
             </p>
           </div>
           <div className="border-t border-warm pt-8">
