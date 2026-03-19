@@ -59,7 +59,7 @@ export function About() {
               Komfort od pierwszych dni
             </h3>
             <p className="mt-3 text-muted-foreground">
-              Oddychające i miękkie materiały, które otulają maluszka delikatnością i troską.
+              Funkcjonalne kontrukcje ułatwiające czynności dnia codziennego.
             </p>
           </div>
         </div>
