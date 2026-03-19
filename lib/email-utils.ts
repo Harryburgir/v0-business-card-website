@@ -51,9 +51,15 @@ export function generateOrderNumber(): string {
 /**
  * Get email address for sending from
  * Falls back to test domain if custom domain not configured
+ * Note: Name cannot contain special characters like accents (é, ń, etc.)
  */
 export function getFromEmail(): string {
-  return process.env.EMAIL_FROM_ADDRESS || "La de Bébé mini <onboarding@resend.dev>";
+  // Use custom domain if set, otherwise use simple Resend test email
+  if (process.env.EMAIL_FROM_ADDRESS) {
+    return process.env.EMAIL_FROM_ADDRESS;
+  }
+  // Simple format without display name to avoid encoding issues
+  return "onboarding@resend.dev";
 }
 
 /**
