@@ -1,5 +1,11 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
+import {
+  sanitizeHtml,
+  validateContactData,
+  getFromEmail,
+  validateResendConfig,
+} from "@/lib/email-utils";
 
 interface ContactFormData {
   name: string;
@@ -8,20 +14,12 @@ interface ContactFormData {
   message: string;
 }
 
-// Sanitize user input to prevent XSS in emails
-function sanitizeHtml(str: string): string {
-  return str
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
-
 export async function POST(request: Request) {
   try {
-    if (!process.env.RESEND_API_KEY) {
-      console.error("RESEND_API_KEY is not configured");
+    // Validate configuration
+    const configError = validateResendConfig();
+    if (configError) {
+      console.error(configError);
       return NextResponse.json(
         { error: "Konfiguracja serwera jest niepełna. Skontaktuj się z administratorem." },
         { status: 500 }
@@ -30,24 +28,17 @@ export async function POST(request: Request) {
 
     const resend = new Resend(process.env.RESEND_API_KEY);
     const data: ContactFormData = await request.json();
+
+    // Validate contact data
+    const validationError = validateContactData(data);
+    if (validationError) {
+      return NextResponse.json(
+        { error: validationError },
+        { status: 400 }
+      );
+    }
+
     const { name, email, subject, message } = data;
-
-    // Validate required fields
-    if (!name || !email || !subject || !message) {
-      return NextResponse.json(
-        { error: "Wszystkie pola są wymagane" },
-        { status: 400 }
-      );
-    }
-
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return NextResponse.json(
-        { error: "Nieprawidłowy format email" },
-        { status: 400 }
-      );
-    }
 
     // Sanitize all user inputs
     const safeName = sanitizeHtml(name);
@@ -57,7 +48,7 @@ export async function POST(request: Request) {
 
     // Send email via Resend to shop owner
     const recipientEmail = "Ladebebemini@gmail.com";
-    const fromEmail = process.env.EMAIL_FROM_ADDRESS || "La de Bébé mini <onboarding@resend.dev>";
+    const fromEmail = getFromEmail();
     
     const { data: emailData, error } = await resend.emails.send({
       from: fromEmail,

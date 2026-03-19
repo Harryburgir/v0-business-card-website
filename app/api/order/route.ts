@@ -1,5 +1,15 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
+import {
+  sanitizeHtml,
+  validateEmail,
+  validatePolishPhone,
+  generateOrderNumber,
+  getFromEmail,
+  hasCustomDomain,
+  validateOrderData,
+  validateResendConfig,
+} from "@/lib/email-utils";
 
 interface OrderItem {
   id: string;
@@ -23,26 +33,12 @@ interface OrderData {
   finalTotal?: number;
 }
 
-function generateOrderNumber(): string {
-  const timestamp = Date.now().toString(36).toUpperCase();
-  const random = Math.random().toString(36).substring(2, 6).toUpperCase();
-  return `LDB-${timestamp}-${random}`;
-}
-
-// Sanitize user input to prevent XSS in emails
-function sanitizeHtml(str: string): string {
-  return str
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
-
 export async function POST(request: Request) {
   try {
-    if (!process.env.RESEND_API_KEY) {
-      console.error("RESEND_API_KEY is not configured");
+    // Validate configuration
+    const configError = validateResendConfig();
+    if (configError) {
+      console.error(configError);
       return NextResponse.json(
         { error: "Konfiguracja serwera jest niepełna. Skontaktuj się z administratorem." },
         { status: 500 }
@@ -51,34 +47,17 @@ export async function POST(request: Request) {
 
     const resend = new Resend(process.env.RESEND_API_KEY);
     const data: OrderData = await request.json();
+
+    // Validate order data
+    const validationError = validateOrderData(data);
+    if (validationError) {
+      return NextResponse.json(
+        { error: validationError },
+        { status: 400 }
+      );
+    }
+
     const { name, email, phone, address, notes, items, totalPrice, deliveryMethod, deliveryPrice, finalTotal } = data;
-
-    if (!name || !email || !address || !items?.length) {
-      return NextResponse.json(
-        { error: "Brakuje wymaganych danych zamówienia" },
-        { status: 400 }
-      );
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return NextResponse.json(
-        { error: "Nieprawidłowy format email" },
-        { status: 400 }
-      );
-    }
-
-    // Validate phone format if provided (Polish format: +48 XXX XXX XXX or XXX XXX XXX)
-    if (phone) {
-      const phoneClean = phone.replace(/[\s\-\(\)]/g, "");
-      const phoneRegex = /^(\+48)?[0-9]{9}$/;
-      if (!phoneRegex.test(phoneClean)) {
-        return NextResponse.json(
-          { error: "Nieprawidłowy format numeru telefonu" },
-          { status: 400 }
-        );
-      }
-    }
 
     const orderNumber = generateOrderNumber();
     
@@ -116,8 +95,8 @@ export async function POST(request: Request) {
     // Email configuration - use custom domain if available, otherwise use Resend's test domain
     // NOTE: With onboarding@resend.dev, emails can only be sent to the verified owner email
     // To send to customers, you need to verify your own domain in Resend
-    const fromEmail = process.env.EMAIL_FROM_ADDRESS || "La de Bébé mini <onboarding@resend.dev>";
-    const hasCustomDomain = !!process.env.EMAIL_FROM_ADDRESS;
+    const fromEmail = getFromEmail();
+    const customDomainConfigured = hasCustomDomain();
 
     // 1. Send order notification to shop owner (Ladebebemini)
     const { error: ownerEmailError } = await resend.emails.send({
@@ -293,7 +272,7 @@ export async function POST(request: Request) {
     let buyerEmailSent = false;
     let buyerEmailError = null;
 
-    if (hasCustomDomain) {
+    if (customDomainConfigured) {
       const buyerResult = await resend.emails.send({
         from: fromEmail,
         to: [email],

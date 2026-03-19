@@ -36,6 +36,7 @@ export function Hero() {
                 height={260}
                 className="relative h-auto w-full object-contain opacity-90 brightness-95 drop-shadow-[0_0_8px_rgba(236,72,153,0.15)]"
                 priority
+                style={{ height: 'auto' }}
               />
             </div>
           </div>
