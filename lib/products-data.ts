@@ -141,27 +141,6 @@ export const categories: Category[] = [
     longDescription: "Nasze pościele wykonane są z najmiększejszej bawełny, zapewniając maluszkowi bezpieczny i komfortowy sen. Każdy zestaw jest starannie dobrany pod kątem delikatności tkaniny i ponadczasowej estetyki.",
     products: [
       {
-        id: "posciel-1",
-        title: "Pościel z bawełny satynowej",
-        price: "149 zł",
-        image: "/images/product-posciel-1.jpg",
-        description: "Poszewka + poszwa, bawełna satynowa",
-      },
-      {
-        id: "posciel-2",
-        title: "Pościel bawełniana beżowa",
-        price: "149 zł",
-        image: "/images/product-posciel-2.jpg",
-        description: "Miękka bawełna, zestaw 2-częściowy",
-      },
-      {
-        id: "posciel-3",
-        title: "Zestaw pościel + otulacz",
-        price: "149 zł",
-        image: "/images/product-posciel-3.jpg",
-        description: "Kompletny zestaw do łóżeczka",
-      },
-      {
         id: "posciel-konie-chlopiec",
         title: "Pościel Konie - dla chłopca",
         price: "169 zł",
