@@ -142,10 +142,10 @@ export const categories: Category[] = [
     products: [
       {
         id: "posciel-1",
-        title: "Pościel muślinowa ecru",
+        title: "Pościel z bawełny satynowej",
         price: "149 zł",
         image: "/images/product-posciel-1.jpg",
-        description: "Poszewka + poszwa, 100% muślin",
+        description: "Poszewka + poszwa, bawełna satynowa",
       },
       {
         id: "posciel-2",
