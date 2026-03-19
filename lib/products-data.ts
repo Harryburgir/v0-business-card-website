@@ -138,18 +138,18 @@ export const categories: Category[] = [
     slug: "posciele",
     title: "Pościele",
     description: "Delikatne pościele i otulacze dla maluszków",
-    longDescription: "Nasze pościele wykonane są z najmiększejszej bawełny, zapewniając maluszkowi bezpieczny i komfortowy sen. Każdy zestaw jest starannie dobrany pod kątem delikatności tkaniny i ponadczasowej estetyki.",
+    longDescription: "Nasze pościele wykonane są z bawełny satynowej, zapewniając maluszkowi bezpieczny i komfortowy sen. Każdy zestaw jest starannie dobrany pod kątem delikatności tkaniny i ponadczasowej estetyki.",
     products: [
       {
         id: "posciel-konie-chlopiec",
-        title: "Pościel Konie - dla chłopca",
+        title: "Bawełna Satynowa 100% wzór konie- dla chłopca",
         price: "169 zł",
         image: "/images/posciel-konie.jpg",
         description: "Bawełna 100%, wzór konie i podkowy w odcieniach niebieskich, zestaw 2-częściowy (poszewka + poszwa)",
       },
       {
         id: "posciel-konie-dziewczynka",
-        title: "Pościel Konie - dla dziewczynki",
+        title: "Bawełna Satynowa 100% wzór konie- dla dziewczynki",
         price: "169 zł",
         image: "/images/posciel-konie.jpg",
         description: "Bawełna 100%, wzór konie, podkowy i różowe wstążki, zestaw 2-częściowy (poszewka + poszwa)",
