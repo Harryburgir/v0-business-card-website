@@ -4,6 +4,7 @@ import {
   sanitizeHtml,
   validateContactData,
   getFromEmail,
+  getOwnerEmail,
   validateResendConfig,
 } from "@/lib/email-utils";
 
@@ -47,7 +48,8 @@ export async function POST(request: Request) {
     const safeMessage = sanitizeHtml(message);
 
     // Send email via Resend to shop owner
-    const recipientEmail = "Ladebebemini@gmail.com";
+    // In test mode, uses RESEND_TEST_EMAIL if set
+    const recipientEmail = getOwnerEmail();
     const fromEmail = getFromEmail();
     
     const { data: emailData, error } = await resend.emails.send({

@@ -29,14 +29,11 @@ export function Hero() {
             <div className="relative w-[280px] sm:w-[380px] md:w-[480px] lg:w-[580px]">
               {/* Soft pink-tinted glow for harmony with background */}
               <div className="absolute inset-0 blur-lg bg-pink-200/10 rounded-full scale-100" />
-              <Image
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src="/images/ladebebe-logo.png"
                 alt="La de Bébé mini"
-                width={580}
-                height={260}
-                className="relative w-full object-contain opacity-90 brightness-95 drop-shadow-[0_0_8px_rgba(236,72,153,0.15)]"
-                priority
-                style={{ width: '100%', height: 'auto' }}
+                className="relative w-full h-auto object-contain opacity-90 brightness-95 drop-shadow-[0_0_8px_rgba(236,72,153,0.15)]"
               />
             </div>
           </div>
