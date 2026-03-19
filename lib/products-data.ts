@@ -161,6 +161,20 @@ export const categories: Category[] = [
         image: "/images/product-posciel-3.jpg",
         description: "Kompletny zestaw do łóżeczka",
       },
+      {
+        id: "posciel-konie-chlopiec",
+        title: "Pościel Konie - dla chłopca",
+        price: "169 zł",
+        image: "/images/posciel-konie.jpg",
+        description: "Bawełna 100%, wzór konie i podkowy w odcieniach niebieskich, zestaw 2-częściowy (poszewka + poszwa)",
+      },
+      {
+        id: "posciel-konie-dziewczynka",
+        title: "Pościel Konie - dla dziewczynki",
+        price: "169 zł",
+        image: "/images/posciel-konie.jpg",
+        description: "Bawełna 100%, wzór konie, podkowy i różowe wstążki, zestaw 2-częściowy (poszewka + poszwa)",
+      },
     ],
   },
   {
