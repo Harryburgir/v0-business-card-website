@@ -158,6 +158,14 @@ export const categories: Category[] = [
         description: "Bawełna organiczna, kołnierzyk peter pan, motywy western, stópki",
         sizes: ["56", "62", "74", "80", "86"],
       },
+      {
+        id: "spiochy-6",
+        title: "Śpiochy białe motywy jeździeckie",
+        price: "109 zł",
+        image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/nowe%20%C5%9Bpiochy%20-vI2hQ4jCqW3YZMqVpWJZT15wiXImPC.jpg",
+        description: "Bawełna organiczna, kołnierzyk peter pan, haft jeździecki, stópki",
+        sizes: ["56", "62", "74", "80", "86"],
+      },
     ],
   },
   {
