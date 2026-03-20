@@ -163,8 +163,8 @@ export const categories: Category[] = [
   {
     slug: "pieluszki",
     title: "Pieluszki",
-    description: "Delikatne pieluszki bawełniane",
-    longDescription: "Wielofunkcyjne pieluszki bawełniane, idealne do otulania, jako podkładka czy ściereczka. Wykonane z najdelikatniejszej bawełny, który z każdym praniem staje się coraz miękka.",
+    description: "Delikatne pieluszki muślinowe",
+    longDescription: "Wielofunkcyjne pieluszki muślinowe, idealne do otulania, jako podkładka czy ściereczka. Wykonane z najdelikatniejszej bawełny, który z każdym praniem staje się coraz miękka.",
     products: [
       {
         id: "pieluszka-1",
