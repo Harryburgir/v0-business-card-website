@@ -35,6 +35,9 @@ export function Header() {
           <Link href="#kolekcje" className="text-sm uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground">
             Kolekcje
           </Link>
+          <Link href="#ladebebe" className="text-sm tracking-widest text-muted-foreground transition-colors hover:text-foreground font-serif italic">
+            La de Bébé
+          </Link>
           <Link href="#produkty" className="text-sm uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground">
             Produkty
           </Link>
@@ -94,6 +97,13 @@ export function Header() {
               className="text-sm uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
             >
               Kolekcje
+            </Link>
+            <Link
+              href="#ladebebe"
+              onClick={() => setIsMenuOpen(false)}
+              className="font-serif text-base italic text-muted-foreground transition-colors hover:text-foreground"
+            >
+              La de Bébé
             </Link>
             <Link
               href="#produkty"

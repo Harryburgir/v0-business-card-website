@@ -23,46 +23,6 @@ export const categories: Category[] = [
     longDescription: "Nasze body z naturalnej bawełny to podstawa garderoby każdego maluszka. Dostępne z krótkim i długim rękawem, zapewniają komfort i bezpieczeństwo delikatnej skórze.",
     products: [
       {
-        id: "body-kr-1",
-        title: "Body krótki rękaw",
-        price: "69 zł",
-        image: "/images/product-body-kr-1.jpg",
-        description: "Kopertowe zapięcie, motywy western",
-        sizes: ["56", "62", "74", "80", "86"],
-      },
-      {
-        id: "body-kr-2",
-        title: "Body krótki rękaw różowe",
-        price: "69 zł",
-        image: "/images/product-body-kr-2.jpg",
-        description: "Kopertowe zapięcie, motywy western",
-        sizes: ["56", "62", "74", "80", "86"],
-      },
-      {
-        id: "body-dl-1",
-        title: "Body długi rękaw kratka niebieska",
-        price: "69 zł",
-        image: "/images/product-body-dl-1.jpg",
-        description: "Kopertowe zapięcie, wzór w kratkę",
-        sizes: ["56", "62", "74", "80", "86"],
-      },
-      {
-        id: "body-dl-2",
-        title: "Body długi rękaw różowe",
-        price: "69 zł",
-        image: "/images/product-body-dl-2.jpg",
-        description: "Kopertowe zapięcie, motywy western",
-        sizes: ["56", "62", "74", "80", "86"],
-      },
-      {
-        id: "body-dl-3",
-        title: "Body długi rękaw kratka różowa",
-        price: "69 zł",
-        image: "/images/product-body-dl-3.jpg",
-        description: "Kopertowe zapięcie, wzór w kratkę",
-        sizes: ["56", "62", "74", "80", "86"],
-      },
-      {
         id: "body-kr-3",
         title: "Body krótki rękaw kratka różowa",
         price: "69 zł",
@@ -108,6 +68,14 @@ export const categories: Category[] = [
         price: "69 zł",
         image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG-20260318-WA0025-hyFoeyKTuh52Q9HYLiXNF9uish37ar.jpg",
         description: "Kopertowe zapięcie, wzór w kratkę, niebieski",
+        sizes: ["56", "62", "74", "80", "86"],
+      },
+      {
+        id: "body-dl-6",
+        title: "Body długi rękaw białe motywy jeździeckie",
+        price: "69 zł",
+        image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/boooooody-bps9bk4PAUgZzLqvDSHoqPswZaR1HZ.jpg",
+        description: "Kopertowe zapięcie, motywy jeździeckie: konie, podkowy, trofea",
         sizes: ["56", "62", "74", "80", "86"],
       },
     ],
@@ -172,21 +140,21 @@ export const categories: Category[] = [
     slug: "pieluszki",
     title: "Pieluszki",
     description: "Delikatne pieluszki muślinowe",
-    longDescription: "Wielofunkcyjne pieluszki muślinowe, idealne do otulania, jako podkładka czy ściereczka. Wykonane z najdelikatniejszej bawełny, który z każdym praniem staje się coraz miękka.",
+    longDescription: "Wielofunkcyjne pieluszki muślinowe, idealne do otulania, jako podkładka czy ściereczka. Wykonane z muślinu bambusowego, który z każdym praniem staje się coraz miękka.",
     products: [
       {
         id: "pieluszka-1",
         title: "Zestaw 3 pieluszek kratka różowa",
         price: "49 zł",
         image: "/images/product-pieluszka-1.jpg",
-        description: "3 sztuki,100% bawełna, wzór w kratkę",
+        description: "3 sztuki, Muślin Bambusowy, wzór w kratkę",
       },
       {
         id: "pieluszka-2",
         title: "Zestaw 3 pieluszek kratka niebieska",
         price: "49 zł",
         image: "/images/product-pieluszka-2.jpg",
-        description: "3 sztuki, 100% bawełna, wzór w kratkę",
+        description: "3 sztuki, Muślin Bambusowy, wzór w kratkę",
       },
     ],
   },
@@ -242,17 +210,78 @@ export const categories: Category[] = [
         description: "Bawełna, wzór w kratkę, ozdobna falbanka",
         sizes: ["56", "62", "74", "80", "86"],
       },
-      {
-        id: "spodenki-4",
-        title: "Spodenki białe ze stópkami",
-        price: "69 zł",
-        image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Spodenki-k41wMq21yNVYBmXWLwuyRtQk69Xjiv.jpeg",
-        description: "Bawełna organiczna, ażurowy wzór, kokardka",
-        sizes: ["56", "62", "74", "80", "86"],
-      },
+
     ],
   },
 ];
+
+export interface LadebebeCategory {
+  slug: string;
+  title: string;
+  description: string;
+  longDescription: string;
+  ageRange: string;
+  products: Product[];
+}
+
+export const ladebebeCategories: LadebebeCategory[] = [
+  {
+    slug: "spodnie-krotkie",
+    title: "Spodnie krótkie",
+    description: "Wygodne spodenki na ciepłe dni",
+    longDescription: "Lekkie i przewiewne spodenki idealne na wiosenne i letnie dni. Naturalne tkaniny, wygodny krój i stylowe wzory dla aktywnych dzieci.",
+    ageRange: "2-8 lat",
+    products: [],
+  },
+  {
+    slug: "bluzka-krotki-rekaw",
+    title: "Bluzka z krótkim rękawem",
+    description: "Letnie bluzeczki z krótkim rękawem",
+    longDescription: "Przewiewne bluzki z krótkim rękawem, idealne na cieplejsze dni. Wykonane z naturalnych tkanin, zapewniają komfort i swobodę ruchów.",
+    ageRange: "2-8 lat",
+    products: [],
+  },
+  {
+    slug: "leginsy",
+    title: "Leginsy",
+    description: "Wygodne leginsy na co dzień",
+    longDescription: "Miękkie i elastyczne leginsy z naturalnych tkanin. Wygodna gumka w pasie i swobodny krój zapewniają komfort podczas całodziennej zabawy.",
+    ageRange: "2-8 lat",
+    products: [],
+  },
+  {
+    slug: "spodniczka",
+    title: "Spódniczka",
+    description: "Eleganckie spódniczki dla dziewczynek",
+    longDescription: "Kolekcja spódniczek łącząca elegancję z wygodą. Od codziennych fasonów po odświętne kreacje — każda spódniczka wykonana z dbałością o każdy detal.",
+    ageRange: "2-8 lat",
+    products: [],
+  },
+  {
+    slug: "bluzka-dlugi-rekaw",
+    title: "Bluzka z długim rękawem",
+    description: "Ciepłe bluzki na chłodniejsze dni",
+    longDescription: "Starannie zaprojektowane bluzki z długim rękawem z naturalnych tkanin. Delikatne detale i wysoka jakość wykonania tworzą wyjątkowy styl.",
+    ageRange: "2-8 lat",
+    products: [],
+  },
+  {
+    slug: "dresy",
+    title: "Dresy",
+    description: "Wygodne komplety dresowe",
+    longDescription: "Miękkie i ciepłe dresy idealne na aktywne dni. Wygodny krój, elastyczne materiały i stylowe wzory dla dzieci kochających ruch i zabawę.",
+    ageRange: "2-8 lat",
+    products: [],
+  },
+];
+
+export function getLadebebeCategoryBySlug(slug: string): LadebebeCategory | undefined {
+  return ladebebeCategories.find((cat) => cat.slug === slug);
+}
+
+export function getAllLadebebeCategorySlugs(): string[] {
+  return ladebebeCategories.map((cat) => cat.slug);
+}
 
 export function getCategoryBySlug(slug: string): Category | undefined {
   return categories.find((cat) => cat.slug === slug);
