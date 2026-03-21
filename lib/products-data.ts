@@ -159,24 +159,18 @@ export const categories: Category[] = [
     ],
   },
   {
-    slug: "posciele",
-    title: "Pościele",
-    description: "Delikatne pościele i otulacze dla maluszków",
-    longDescription: "Nasze pościele wykonane są z Satyny Bawełnianej, zapewniając maluszkowi bezpieczny i komfortowy sen. Każdy zestaw jest starannie dobrany pod kątem delikatności tkaniny i ponadczasowej estetyki.",
+    slug: "zestawy-do-szpitala",
+    title: "Zestawy do szpitala",
+    description: "Komplety wyprawkowe na pierwsze dni maluszka",
+    longDescription: "Starannie przygotowane zestawy do szpitala wykonane z delikatnego ażurku bawełnianego. Przewiewny, miękki materiał idealny dla wrażliwej skórki noworodka — wszystko, czego potrzebujesz na pierwsze dni po narodzinach.",
     products: [
       {
-        id: "posciel-konie-chlopiec",
-        title: "Pościel Konie - dla chłopca",
-        price: "169 zł",
-        image: "/images/posciel-konie.jpg",
-        description: "Satyna Bawełniana 100%, wzór konie i podkowy w odcieniach niebieskich, zestaw 2-częściowy (poszewka + poszwa)",
-      },
-      {
-        id: "posciel-konie-dziewczynka",
-        title: "Pościel Konie - dla dziewczynki",
-        price: "169 zł",
-        image: "/images/posciel-konie.jpg",
-        description: "Satyna Bawełniana 100%, wzór konie, podkowy i różowe wstążki, zestaw 2-częściowy (poszewka + poszwa)",
+        id: "zestaw-szpital-1",
+        title: "Komplet do szpitala — body i śpiochy",
+        price: "149 zł",
+        image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/komplet%20%282%29-bUAruPw7EaF0QBiU8Pum2TDuSmKFWJ.jpeg",
+        description: "Ażurek bawełniany, body z długim rękawem z falbanką + śpiochy + czapeczka, kolor kremowy",
+        sizes: ["56"],
       },
     ],
   },
@@ -184,7 +178,7 @@ export const categories: Category[] = [
     slug: "spodenki",
     title: "Spodenki",
     description: "Wygodne spodenki dla maluszków",
-    longDescription: "Miękkie i elastyczne spodenki, idealne do noszenia co dzień. Wykonane z naturalnych tkanin, zapewniają swobodę ruchów podczas zabawy i snu.",
+    longDescription: "Miękkie i elastyczne spodenki, idealne do noszenia co dzień. Wykonane z naturalnych tkanin, zapewniaj�� swobodę ruchów podczas zabawy i snu.",
     products: [
       {
         id: "spodenki-1",
@@ -230,7 +224,7 @@ export const ladebebeCategories: LadebebeCategory[] = [
     title: "Spodnie krótkie",
     description: "Wygodne spodenki na ciepłe dni",
     longDescription: "Lekkie i przewiewne spodenki idealne na wiosenne i letnie dni. Naturalne tkaniny, wygodny krój i stylowe wzory dla aktywnych dzieci.",
-    ageRange: "2-8 lat",
+    ageRange: "2-6 lat",
     products: [],
   },
   {
@@ -238,7 +232,7 @@ export const ladebebeCategories: LadebebeCategory[] = [
     title: "Bluzka z krótkim rękawem",
     description: "Letnie bluzeczki z krótkim rękawem",
     longDescription: "Przewiewne bluzki z krótkim rękawem, idealne na cieplejsze dni. Wykonane z naturalnych tkanin, zapewniają komfort i swobodę ruchów.",
-    ageRange: "2-8 lat",
+    ageRange: "2-6 lat",
     products: [],
   },
   {
@@ -246,7 +240,7 @@ export const ladebebeCategories: LadebebeCategory[] = [
     title: "Leginsy",
     description: "Wygodne leginsy na co dzień",
     longDescription: "Miękkie i elastyczne leginsy z naturalnych tkanin. Wygodna gumka w pasie i swobodny krój zapewniają komfort podczas całodziennej zabawy.",
-    ageRange: "2-8 lat",
+    ageRange: "2-6 lat",
     products: [],
   },
   {
@@ -254,7 +248,7 @@ export const ladebebeCategories: LadebebeCategory[] = [
     title: "Spódniczka",
     description: "Eleganckie spódniczki dla dziewczynek",
     longDescription: "Kolekcja spódniczek łącząca elegancję z wygodą. Od codziennych fasonów po odświętne kreacje — każda spódniczka wykonana z dbałością o każdy detal.",
-    ageRange: "2-8 lat",
+    ageRange: "2-6 lat",
     products: [],
   },
   {
@@ -262,7 +256,7 @@ export const ladebebeCategories: LadebebeCategory[] = [
     title: "Bluzka z długim rękawem",
     description: "Ciepłe bluzki na chłodniejsze dni",
     longDescription: "Starannie zaprojektowane bluzki z długim rękawem z naturalnych tkanin. Delikatne detale i wysoka jakość wykonania tworzą wyjątkowy styl.",
-    ageRange: "2-8 lat",
+    ageRange: "2-6 lat",
     products: [],
   },
   {
@@ -270,7 +264,7 @@ export const ladebebeCategories: LadebebeCategory[] = [
     title: "Dresy",
     description: "Wygodne komplety dresowe",
     longDescription: "Miękkie i ciepłe dresy idealne na aktywne dni. Wygodny krój, elastyczne materiały i stylowe wzory dla dzieci kochających ruch i zabawę.",
-    ageRange: "2-8 lat",
+    ageRange: "2-6 lat",
     products: [],
   },
 ];
