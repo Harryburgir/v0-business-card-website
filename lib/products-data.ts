@@ -110,6 +110,14 @@ export const categories: Category[] = [
         description: "Kopertowe zapięcie, wzór w kratkę, niebieski",
         sizes: ["56", "62", "74", "80", "86"],
       },
+      {
+        id: "body-dl-6",
+        title: "Body długi rękaw białe motywy jeździeckie",
+        price: "69 zł",
+        image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/boooooody-bps9bk4PAUgZzLqvDSHoqPswZaR1HZ.jpg",
+        description: "Kopertowe zapięcie, motywy jeździeckie: konie, podkowy, trofea",
+        sizes: ["56", "62", "74", "80", "86"],
+      },
     ],
   },
   {
