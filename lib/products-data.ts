@@ -172,7 +172,7 @@ export const categories: Category[] = [
     slug: "pieluszki",
     title: "Pieluszki",
     description: "Delikatne pieluszki muślinowe",
-    longDescription: "Wielofunkcyjne pieluszki muślinowe, idealne do otulania, jako podkładka czy ściereczka.
+    longDescription: "Wielofunkcyjne pieluszki muślinowe, idealne do otulania, jako podkładka czy ściereczka. Wykonane z muślinu bambusowego, który z każdym praniem staje się coraz miękka.",
     products: [
       {
         id: "pieluszka-1",
