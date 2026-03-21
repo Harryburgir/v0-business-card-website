@@ -270,13 +270,12 @@ export async function POST(request: Request) {
       );
     }
 
-    // 2. Send confirmation email to buyer (only if custom domain is configured)
-    // With Resend's test domain (onboarding@resend.dev), you can only send to your own verified email
-    // To enable customer confirmations, add EMAIL_FROM_ADDRESS env var with your verified domain
+    // 2. Send confirmation email to buyer
+    // Always try to send confirmation to customer
     let buyerEmailSent = false;
     let buyerEmailError = null;
 
-    if (customDomainConfigured) {
+    try {
       const buyerResult = await resend.emails.send({
         from: fromEmail,
         to: [email],
@@ -440,6 +439,9 @@ export async function POST(request: Request) {
       } else {
         buyerEmailSent = true;
       }
+    } catch (buyerError) {
+      console.error("Error sending buyer confirmation:", buyerError);
+      buyerEmailError = buyerError;
     }
 
     return NextResponse.json({ 
@@ -447,10 +449,6 @@ export async function POST(request: Request) {
       orderNumber, 
       message: "Zamówienie zostało złożone",
       buyerEmailSent,
-      // Include info about custom domain setup if buyer email wasn't sent
-      ...((!hasCustomDomain) && {
-        note: "Aby wysyłać potwierdzenia do klientów, skonfiguruj własną domenę w Resend i ustaw EMAIL_FROM_ADDRESS"
-      }),
       ...(buyerEmailError && { buyerEmailWarning: "Nie udało się wysłać potwierdzenia do kupującego" })
     });
   } catch (error) {
