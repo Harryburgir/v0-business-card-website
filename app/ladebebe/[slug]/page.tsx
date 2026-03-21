@@ -1,9 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Mail } from "lucide-react";
+import { ArrowLeft, Mail, Clock, Bell } from "lucide-react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { ProductCard } from "@/components/product-card";
 import {
   getLadebebeCategoryBySlug,
   getAllLadebebeCategorySlugs,
@@ -84,32 +83,65 @@ export default async function LadebebeCategoryPage(props: {
           </div>
         </section>
 
-        {/* Products grid */}
+        {/* Coming Soon Section */}
         <section className="px-6 py-16 lg:py-24">
-          <div className="mx-auto max-w-7xl">
-            <div className="mb-12">
-              <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground">
-                Dostępne produkty ({category.products.length})
-              </p>
-            </div>
+          <div className="mx-auto max-w-4xl">
+            <div className="flex flex-col items-center text-center">
+              {/* Icon */}
+              <div className="mb-8 flex h-24 w-24 items-center justify-center rounded-full bg-pink-100">
+                <Clock className="h-12 w-12 text-pink-600" />
+              </div>
 
-            {category.products.length > 0 ? (
-              <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-                {category.products.map((product) => (
-                  <ProductCard
-                    key={product.id}
-                    product={product}
-                    categorySlug={`ladebebe/${category.slug}`}
-                  />
-                ))}
+              {/* Heading */}
+              <h2 className="font-serif text-3xl font-light italic text-foreground md:text-4xl">
+                Już Wkrótce
+              </h2>
+              
+              <p className="mt-6 max-w-xl text-lg text-muted-foreground">
+                Pracujemy nad kolekcją <span className="font-medium text-foreground">{category.title}</span> dla dzieci w wieku {category.ageRange}. 
+                Wkrótce pojawią się tu piękne, wysokiej jakości ubranka.
+              </p>
+
+              {/* Features */}
+              <div className="mt-12 grid gap-6 sm:grid-cols-3">
+                <div className="flex flex-col items-center p-4">
+                  <div className="mb-3 h-12 w-12 rounded-full bg-[#f7f3ef] flex items-center justify-center">
+                    <span className="text-lg">🧵</span>
+                  </div>
+                  <p className="text-sm text-muted-foreground">Naturalne tkaniny</p>
+                </div>
+                <div className="flex flex-col items-center p-4">
+                  <div className="mb-3 h-12 w-12 rounded-full bg-[#f7f3ef] flex items-center justify-center">
+                    <span className="text-lg">🎨</span>
+                  </div>
+                  <p className="text-sm text-muted-foreground">Unikalne wzory</p>
+                </div>
+                <div className="flex flex-col items-center p-4">
+                  <div className="mb-3 h-12 w-12 rounded-full bg-[#f7f3ef] flex items-center justify-center">
+                    <span className="text-lg">✨</span>
+                  </div>
+                  <p className="text-sm text-muted-foreground">Polska jakość</p>
+                </div>
               </div>
-            ) : (
-              <div className="py-16 text-center">
-                <p className="text-lg text-muted-foreground">
-                  Aktualnie brak dostępnych produktów w tej kategorii.
+
+              {/* Newsletter CTA */}
+              <div className="mt-12 w-full max-w-md rounded-lg border border-warm bg-[#f7f3ef] p-6">
+                <div className="flex items-center justify-center gap-2 mb-3">
+                  <Bell className="h-5 w-5 text-pink-600" />
+                  <p className="font-medium text-foreground">Powiadom mnie</p>
+                </div>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Zostaw swój kontakt, a poinformujemy Cię gdy kolekcja będzie dostępna.
                 </p>
+                <Link
+                  href="/#kontakt"
+                  className="inline-flex w-full items-center justify-center gap-2 bg-foreground px-6 py-3 text-sm uppercase tracking-widest text-background transition-colors hover:bg-foreground/90"
+                >
+                  <Mail className="h-4 w-4" />
+                  Skontaktuj się z nami
+                </Link>
               </div>
-            )}
+            </div>
           </div>
         </section>
 

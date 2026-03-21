@@ -1,14 +1,6 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Clock } from "lucide-react";
 import { ladebebeCategories } from "@/lib/products-data";
-
-const categoryIcons: Record<string, string> = {
-  bluzki: "👕",
-  spodnie: "👖",
-  sukienki: "👗",
-  komplety: "🎀",
-  swetry: "🧥",
-};
 
 export function LadebebeSection() {
   return (
@@ -36,21 +28,21 @@ export function LadebebeSection() {
         </div>
 
         {/* Categories Grid */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {ladebebeCategories.map((category) => (
-            <Link
+            <div
               key={category.slug}
-              href={`/ladebebe/${category.slug}`}
-              className="group relative flex flex-col bg-background p-6 transition-all duration-300 hover:shadow-lg"
+              className="group relative flex flex-col bg-background p-6 transition-all duration-300"
             >
-              <div className="absolute inset-0 border border-warm transition-colors duration-300 group-hover:border-primary/40" />
+              <div className="absolute inset-0 border border-warm" />
 
               <div className="relative mb-4 flex items-center justify-between">
                 <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
                   {category.ageRange}
                 </span>
-                <span className="text-xs text-muted-foreground">
-                  {category.products.length} szt.
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-pink-100 px-3 py-1 text-xs font-medium text-pink-700">
+                  <Clock className="h-3 w-3" />
+                  Już wkrótce
                 </span>
               </div>
 
@@ -61,11 +53,10 @@ export function LadebebeSection() {
                 {category.description}
               </p>
 
-              <div className="relative mt-6 flex items-center gap-2 text-xs uppercase tracking-widest text-primary opacity-0 transition-all duration-300 group-hover:opacity-100">
-                Zobacz kolekcję
-                <ArrowRight className="h-3 w-3" />
+              <div className="relative mt-6 flex items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground/60">
+                Wkrótce dostępne
               </div>
-            </Link>
+            </div>
           ))}
         </div>
 
