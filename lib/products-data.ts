@@ -242,14 +242,7 @@ export const categories: Category[] = [
         description: "Bawełna, wzór w kratkę, ozdobna falbanka",
         sizes: ["56", "62", "74", "80", "86"],
       },
-      {
-        id: "spodenki-4",
-        title: "Spodenki białe ze stópkami",
-        price: "69 zł",
-        image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Spodenki-k41wMq21yNVYBmXWLwuyRtQk69Xjiv.jpeg",
-        description: "Bawełna organiczna, ażurowy wzór, kokardka",
-        sizes: ["56", "62", "74", "80", "86"],
-      },
+
     ],
   },
 ];
