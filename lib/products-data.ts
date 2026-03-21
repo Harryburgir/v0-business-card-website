@@ -230,7 +230,7 @@ export const ladebebeCategories: LadebebeCategory[] = [
     title: "Spodnie krótkie",
     description: "Wygodne spodenki na ciepłe dni",
     longDescription: "Lekkie i przewiewne spodenki idealne na wiosenne i letnie dni. Naturalne tkaniny, wygodny krój i stylowe wzory dla aktywnych dzieci.",
-    ageRange: "2-8 lat",
+    ageRange: "2-6 lat",
     products: [],
   },
   {
@@ -238,7 +238,7 @@ export const ladebebeCategories: LadebebeCategory[] = [
     title: "Bluzka z krótkim rękawem",
     description: "Letnie bluzeczki z krótkim rękawem",
     longDescription: "Przewiewne bluzki z krótkim rękawem, idealne na cieplejsze dni. Wykonane z naturalnych tkanin, zapewniają komfort i swobodę ruchów.",
-    ageRange: "2-8 lat",
+    ageRange: "2-6 lat",
     products: [],
   },
   {
@@ -246,7 +246,7 @@ export const ladebebeCategories: LadebebeCategory[] = [
     title: "Leginsy",
     description: "Wygodne leginsy na co dzień",
     longDescription: "Miękkie i elastyczne leginsy z naturalnych tkanin. Wygodna gumka w pasie i swobodny krój zapewniają komfort podczas całodziennej zabawy.",
-    ageRange: "2-8 lat",
+    ageRange: "2-6 lat",
     products: [],
   },
   {
@@ -254,7 +254,7 @@ export const ladebebeCategories: LadebebeCategory[] = [
     title: "Spódniczka",
     description: "Eleganckie spódniczki dla dziewczynek",
     longDescription: "Kolekcja spódniczek łącząca elegancję z wygodą. Od codziennych fasonów po odświętne kreacje — każda spódniczka wykonana z dbałością o każdy detal.",
-    ageRange: "2-8 lat",
+    ageRange: "2-6 lat",
     products: [],
   },
   {
@@ -262,7 +262,7 @@ export const ladebebeCategories: LadebebeCategory[] = [
     title: "Bluzka z długim rękawem",
     description: "Ciepłe bluzki na chłodniejsze dni",
     longDescription: "Starannie zaprojektowane bluzki z długim rękawem z naturalnych tkanin. Delikatne detale i wysoka jakość wykonania tworzą wyjątkowy styl.",
-    ageRange: "2-8 lat",
+    ageRange: "2-6 lat",
     products: [],
   },
   {
@@ -270,7 +270,7 @@ export const ladebebeCategories: LadebebeCategory[] = [
     title: "Dresy",
     description: "Wygodne komplety dresowe",
     longDescription: "Miękkie i ciepłe dresy idealne na aktywne dni. Wygodny krój, elastyczne materiały i stylowe wzory dla dzieci kochających ruch i zabawę.",
-    ageRange: "2-8 lat",
+    ageRange: "2-6 lat",
     products: [],
   },
 ];

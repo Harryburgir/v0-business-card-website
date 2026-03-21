@@ -16,13 +16,13 @@ export function LadebebeSection() {
               <span className="block text-balance italic">La de Bébé</span>
             </h2>
             <p className="mt-4 max-w-lg text-lg text-muted-foreground">
-              Kolekcja dla dzieci w wieku 2–8 lat. Elegancja, naturalność i ponadczasowy styl 
+              Kolekcja dla dzieci w wieku 2–6 lat. Elegancja, naturalność i ponadczasowy styl 
               dopasowany do aktywnego dziecka.
             </p>
           </div>
           <div className="flex items-center gap-2">
             <span className="text-sm uppercase tracking-widest text-muted-foreground">
-              2 — 8 lat
+              2 — 6 lat
             </span>
           </div>
         </div>
