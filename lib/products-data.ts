@@ -168,8 +168,8 @@ export const categories: Category[] = [
         id: "zestaw-szpital-1",
         title: "Komplet do szpitala — body i śpiochy",
         price: "149 zł",
-        image: "/images/collection-newborn.jpg",
-        description: "100% bawełna organiczna, body z długim rękawem + śpiochy ze stópkami, wzór jeździecki",
+        image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/komplet%20%282%29-bUAruPw7EaF0QBiU8Pum2TDuSmKFWJ.jpeg",
+        description: "100% bawełna organiczna, body z długim rękawem + śpiochy ze stópkami, czapeczka",
         sizes: ["56"],
       },
     ],
@@ -178,7 +178,7 @@ export const categories: Category[] = [
     slug: "spodenki",
     title: "Spodenki",
     description: "Wygodne spodenki dla maluszków",
-    longDescription: "Miękkie i elastyczne spodenki, idealne do noszenia co dzień. Wykonane z naturalnych tkanin, zapewniają swobodę ruchów podczas zabawy i snu.",
+    longDescription: "Miękkie i elastyczne spodenki, idealne do noszenia co dzień. Wykonane z naturalnych tkanin, zapewniaj�� swobodę ruchów podczas zabawy i snu.",
     products: [
       {
         id: "spodenki-1",
