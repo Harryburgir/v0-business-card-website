@@ -272,12 +272,13 @@ export async function POST(request: Request) {
 
     if (ownerEmailError) {
       console.error("[v0] Resend owner email error:", JSON.stringify(ownerEmailError, null, 2));
+      console.error("[v0] Error details - from:", fromEmail, "to:", ownerEmail);
       return NextResponse.json(
-        { error: "Nie udało się wysłać zamówienia do sklepu. Spróbuj ponownie." },
+        { error: "Nie udało się wysłać zamówienia do sklepu. Spróbuj ponownie.", details: ownerEmailError },
         { status: 500 }
       );
     }
-    console.log("[v0] Owner email sent successfully!");
+    console.log("[v0] Owner email sent successfully to:", ownerEmail);
 
     // 2. Send confirmation email to buyer (only if custom domain is configured)
     // With Resend's test domain (onboarding@resend.dev), you can only send to your own verified email
