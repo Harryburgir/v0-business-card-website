@@ -53,6 +53,12 @@ export function Hero() {
               Odkryj kolekcje
             </Link>
             <Link
+              href="#ladebebe"
+              className="inline-flex items-center gap-2 bg-pink-100/90 px-8 py-4 text-sm tracking-widest text-pink-900 transition-all hover:bg-pink-100 shadow-lg font-serif italic"
+            >
+              La de Bébé 2-8 lat
+            </Link>
+            <Link
               href="#kontakt"
               className="inline-flex items-center gap-2 border-2 border-white/80 px-8 py-4 text-sm uppercase tracking-widest text-white transition-all hover:bg-white/10 hover:border-white"
             >
