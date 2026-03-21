@@ -37,10 +37,17 @@ interface OrderData {
 
 export async function POST(request: Request) {
   try {
+    // Debug: Log environment configuration
+    console.log("[v0] RESEND_API_KEY exists:", !!process.env.RESEND_API_KEY);
+    console.log("[v0] EMAIL_FROM_ADDRESS:", process.env.EMAIL_FROM_ADDRESS);
+    console.log("[v0] hasCustomDomain():", hasCustomDomain());
+    console.log("[v0] getFromEmail():", getFromEmail());
+    console.log("[v0] getOwnerEmail():", getOwnerEmail());
+
     // Validate configuration
     const configError = validateResendConfig();
     if (configError) {
-      console.error(configError);
+      console.error("[v0] Config error:", configError);
       return NextResponse.json(
         { error: "Konfiguracja serwera jest niepełna. Skontaktuj się z administratorem." },
         { status: 500 }
@@ -49,6 +56,7 @@ export async function POST(request: Request) {
 
     const resend = new Resend(process.env.RESEND_API_KEY);
     const data: OrderData = await request.json();
+    console.log("[v0] Order data received:", JSON.stringify(data, null, 2));
 
     // Validate order data
     const validationError = validateOrderData(data);
@@ -263,12 +271,14 @@ export async function POST(request: Request) {
     });
 
     if (ownerEmailError) {
-      console.error("Resend owner email error:", ownerEmailError);
+      console.error("[v0] Resend owner email error:", JSON.stringify(ownerEmailError, null, 2));
+      console.error("[v0] Error details - from:", fromEmail, "to:", ownerEmail);
       return NextResponse.json(
-        { error: "Nie udało się wysłać zamówienia do sklepu. Spróbuj ponownie." },
+        { error: "Nie udało się wysłać zamówienia do sklepu. Spróbuj ponownie.", details: ownerEmailError },
         { status: 500 }
       );
     }
+    console.log("[v0] Owner email sent successfully to:", ownerEmail);
 
     // 2. Send confirmation email to buyer (only if custom domain is configured)
     // With Resend's test domain (onboarding@resend.dev), you can only send to your own verified email
@@ -276,8 +286,9 @@ export async function POST(request: Request) {
     let buyerEmailSent = false;
     let buyerEmailError = null;
 
-    if (customDomainConfigured) {
-      const buyerResult = await resend.emails.send({
+    if (hasCustomDomain()) {
+      try {
+        const buyerResult = await resend.emails.send({
         from: fromEmail,
         to: [email],
         replyTo: ownerEmail,
@@ -440,6 +451,10 @@ export async function POST(request: Request) {
       } else {
         buyerEmailSent = true;
       }
+    } catch (buyerError) {
+      console.error("Error sending buyer confirmation:", buyerError);
+      buyerEmailError = buyerError;
+    }
     }
 
     return NextResponse.json({ 
@@ -448,7 +463,7 @@ export async function POST(request: Request) {
       message: "Zamówienie zostało złożone",
       buyerEmailSent,
       // Include info about custom domain setup if buyer email wasn't sent
-      ...((!hasCustomDomain) && {
+      ...((!hasCustomDomain()) && {
         note: "Aby wysyłać potwierdzenia do klientów, skonfiguruj własną domenę w Resend i ustaw EMAIL_FROM_ADDRESS"
       }),
       ...(buyerEmailError && { buyerEmailWarning: "Nie udało się wysłać potwierdzenia do kupującego" })
