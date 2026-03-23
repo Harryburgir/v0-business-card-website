@@ -158,22 +158,23 @@ export const categories: Category[] = [
       },
     ],
   },
-  {
-    slug: "zestawy-do-szpitala",
-    title: "Zestawy do szpitala",
-    description: "Komplety wyprawkowe na pierwsze dni maluszka",
-    longDescription: "Starannie przygotowane zestawy do szpitala wykonane z delikatnego ażurku bawełnianego. Przewiewny, miękki materiał idealny dla wrażliwej skórki noworodka — wszystko, czego potrzebujesz na pierwsze dni po narodzinach.",
-    products: [
-      {
-        id: "zestaw-szpital-1",
-        title: "Komplet do szpitala — body i śpiochy",
-        price: "149 zł",
-        image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/komplet%20%282%29-bUAruPw7EaF0QBiU8Pum2TDuSmKFWJ.jpeg",
-        description: "Ażurek bawełniany, body z długim rękawem z falbanką + śpiochy + czapeczka, kolor kremowy",
-        sizes: ["56"],
-      },
-    ],
-  },
+  // UKRYTE - Zestawy do szpitala (aby przywrócić, odkomentuj poniższy blok)
+  // {
+  //   slug: "zestawy-do-szpitala",
+  //   title: "Zestawy do szpitala",
+  //   description: "Komplety wyprawkowe na pierwsze dni maluszka",
+  //   longDescription: "Starannie przygotowane zestawy do szpitala wykonane z delikatnego ażurku bawełnianego. Przewiewny, miękki materiał idealny dla wrażliwej skórki noworodka — wszystko, czego potrzebujesz na pierwsze dni po narodzinach.",
+  //   products: [
+  //     {
+  //       id: "zestaw-szpital-1",
+  //       title: "Komplet do szpitala — body i śpiochy",
+  //       price: "149 zł",
+  //       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/komplet%20%282%29-bUAruPw7EaF0QBiU8Pum2TDuSmKFWJ.jpeg",
+  //       description: "Ażurek bawełniany, body z długim rękawem z falbanką + śpiochy + czapeczka, kolor kremowy",
+  //       sizes: ["56"],
+  //     },
+  //   ],
+  // },
   {
     slug: "spodenki",
     title: "Spodenki",
