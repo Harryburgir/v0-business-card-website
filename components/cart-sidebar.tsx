@@ -57,14 +57,6 @@ const DELIVERY_OPTIONS: DeliveryOption[] = [
     icon: "courier",
   },
   {
-    id: "poczta-polska",
-    name: "Poczta Polska",
-    description: "Przesyłka pocztowa priorytetowa",
-    price: 9.99,
-    estimatedDays: "3-5 dni roboczych",
-    icon: "post",
-  },
-  {
     id: "odbior-osobisty",
     name: "Odbiór osobisty",
     description: "Bezpłatny odbiór we Wrocławiu",
