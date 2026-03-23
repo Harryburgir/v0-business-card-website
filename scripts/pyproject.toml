@@ -1,0 +1,10 @@
+[project]
+name = "ladebebe-migration"
+version = "0.1.0"
+description = "Migrate products to Supabase"
+requires-python = ">=3.8"
+dependencies = [
+    "supabase>=2.4.0",
+]
+
+[tool.uv]
