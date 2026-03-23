@@ -1,7 +1,16 @@
 import Link from "next/link";
-import { categories } from "@/lib/products-data";
+import { getCategories } from "@/lib/supabase-queries";
 
-export function Categories() {
+interface Category {
+  id: string;
+  title: string;
+  description: string;
+  slug: string;
+}
+
+export async function Categories() {
+  const categories = await getCategories();
+
   return (
     <section id="kategorie" className="bg-background px-6 py-24 lg:py-32">
       <div className="mx-auto max-w-7xl">
@@ -19,7 +28,7 @@ export function Categories() {
         </div>
 
         <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-4 lg:gap-8">
-          {categories.map((category) => (
+          {categories.map((category: Category) => (
             <Link
               key={category.slug}
               href={`/kategoria/${category.slug}`}
