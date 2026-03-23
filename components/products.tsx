@@ -2,59 +2,16 @@
 
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { categories } from "@/lib/products-data";
 import { ProductCard } from "@/components/product-card";
-import { useEffect, useState } from "react";
-
-interface Product {
-  id: string;
-  product_id: string;
-  title: string;
-  price: string;
-  price_value: number;
-  image: string;
-  description: string;
-  sizes: string[];
-  category_id: string;
-}
-
-interface Category {
-  id: string;
-  slug: string;
-  title: string;
-}
 
 export function Products() {
-  const [products, setProducts] = useState<Array<{ product: Product; categorySlug: string; categoryTitle: string }>>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchFeaturedProducts() {
-      try {
-        const response = await fetch("/api/featured-products");
-        if (!response.ok) throw new Error("Failed to fetch products");
-        const data = await response.json();
-        setProducts(data);
-      } catch (error) {
-        console.error("[v0] Error fetching featured products:", error);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchFeaturedProducts();
-  }, []);
-
-  if (loading) {
-    return (
-      <section id="produkty" className="bg-warm/40 px-6 py-24 lg:py-32">
-        <div className="mx-auto max-w-7xl">
-          <div className="text-center">
-            <p className="text-muted-foreground">Ładowanie produktów...</p>
-          </div>
-        </div>
-      </section>
-    );
-  }
+  // Get 1 product from each of the first 4 categories
+  const featuredProducts = categories.slice(0, 4).map((cat) => ({
+    product: cat.products[0],
+    categorySlug: cat.slug,
+    categoryTitle: cat.title,
+  }));
 
   return (
     <section id="produkty" className="bg-warm/40 px-6 py-24 lg:py-32">
@@ -76,7 +33,7 @@ export function Products() {
 
         {/* Products Grid */}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {products.map(({ product, categorySlug, categoryTitle }) => (
+          {featuredProducts.map(({ product, categorySlug, categoryTitle }) => (
             <div key={product.id} className="relative">
               {/* Category Badge */}
               <div className="absolute left-3 top-3 z-10">

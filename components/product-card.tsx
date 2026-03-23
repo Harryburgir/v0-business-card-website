@@ -4,18 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { ShoppingBag, Check } from "lucide-react";
 import { useCart } from "@/context/cart-context";
-
-interface Product {
-  id: string;
-  product_id: string;
-  title: string;
-  price: string;
-  price_value: number;
-  image: string;
-  description: string;
-  sizes: string[];
-  category_id: string;
-}
+import type { Product } from "@/lib/products-data";
 
 interface ProductCardProps {
   product: Product;
@@ -35,7 +24,7 @@ export function ProductCard({ product, categorySlug }: ProductCardProps) {
       id: product.id,
       title: product.title,
       price: product.price,
-      priceValue: product.price_value,
+      priceValue: parseFloat(product.price.replace(/[^\d.]/g, "")) || 0,
       image: product.image,
       size: selectedSize,
       categorySlug,
@@ -44,8 +33,8 @@ export function ProductCard({ product, categorySlug }: ProductCardProps) {
     setTimeout(() => setAdded(false), 1500);
   };
 
-  const isBoy = product.product_id.includes("chlopiec") || product.product_id.includes("odkrywcy");
-  const isGirl = product.product_id.includes("dziewczynka");
+  const isBoy = product.id.includes("chlopiec");
+  const isGirl = product.id.includes("dziewczynka");
 
   return (
     <div className="group">
