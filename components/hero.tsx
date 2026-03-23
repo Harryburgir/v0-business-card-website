@@ -10,15 +10,15 @@ export function Hero() {
       {/* Hero Background Image */}
       <div className="absolute inset-0">
         <Image
-          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/hero%20aktualne-DzDz9NkMVCuc9BvHRabOeJdX5V6Olk.png"
-          alt="Przyszła mama w różowym świetle"
+          src="/images/hero-baby.jpg"
+          alt="Śpiące niemowlę w pajacyku La de Bébé mini"
           fill
-          className="object-cover object-center"
+          className="object-cover object-top"
           sizes="100vw"
           priority
         />
-        {/* Subtle overlay for better logo visibility */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40" />
+        {/* Soft warm overlay harmonising with the cream & pink tones of the photo */}
+        <div className="absolute inset-0 bg-gradient-to-b from-pink-50/30 via-transparent to-rose-100/50" />
       </div>
 
       {/* Content */}
@@ -40,7 +40,7 @@ export function Hero() {
           <h1 className="sr-only">La de Bébé mini – Delikatność od pierwszych dni</h1>
           
           {/* Tagline below logo */}
-          <p className="mx-auto mt-8 max-w-lg text-base leading-relaxed text-white/90 md:text-lg font-light tracking-wide">
+          <p className="mx-auto mt-8 max-w-lg text-base leading-relaxed text-rose-800/80 md:text-lg font-light tracking-wide drop-shadow-sm">
             {`Stworzone z mi\u0142o\u015Bci do najm\u0142odszych`}
           </p>
           
@@ -48,19 +48,19 @@ export function Hero() {
           <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Link
               href="#kolekcje"
-              className="inline-flex items-center gap-2 bg-white/95 px-8 py-4 text-sm uppercase tracking-widest text-pink-900 transition-all hover:bg-white shadow-lg"
+              className="inline-flex items-center gap-2 bg-white/90 px-8 py-4 text-sm uppercase tracking-widest text-pink-900 transition-all hover:bg-white shadow-md"
             >
               Odkryj kolekcje
             </Link>
             <Link
               href="#ladebebe"
-              className="inline-flex items-center gap-2 bg-pink-100/90 px-8 py-4 text-sm tracking-widest text-pink-900 transition-all hover:bg-pink-100 shadow-lg font-serif italic"
+              className="inline-flex items-center gap-2 bg-rose-100/80 px-8 py-4 text-sm tracking-widest text-pink-900 transition-all hover:bg-rose-100 shadow-md font-serif italic"
             >
               La de Bébé 2-8 lat
             </Link>
             <Link
               href="#kontakt"
-              className="inline-flex items-center gap-2 border-2 border-white/80 px-8 py-4 text-sm uppercase tracking-widest text-white transition-all hover:bg-white/10 hover:border-white"
+              className="inline-flex items-center gap-2 border-2 border-rose-300/80 px-8 py-4 text-sm uppercase tracking-widest text-rose-800 transition-all hover:bg-white/30 hover:border-rose-400"
             >
               Skontaktuj się
             </Link>
@@ -69,7 +69,7 @@ export function Hero() {
 
         <Link
           href="#o-nas"
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce text-white/80 transition-colors hover:text-white"
+          className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce text-rose-400/80 transition-colors hover:text-rose-500"
           aria-label="Przewiń w dół"
         >
           <ArrowDown className="h-6 w-6" />
