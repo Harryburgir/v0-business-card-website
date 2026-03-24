@@ -5,6 +5,7 @@ export interface Product {
   image: string;
   description: string;
   sizes?: string[];
+  comingSoon?: boolean;
 }
 
 export interface Category {
@@ -171,6 +172,7 @@ export const categories: Category[] = [
         image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/komplet%20%282%29-bUAruPw7EaF0QBiU8Pum2TDuSmKFWJ.jpeg",
         description: "Ażurek bawełniany, body z długim rękawem z falbanką + śpiochy + czapeczka, kolor kremowy",
         sizes: ["56"],
+        comingSoon: true,
       },
       {
         id: "zestaw-szpital-2",
@@ -179,6 +181,7 @@ export const categories: Category[] = [
         image: "/images/zestaw-szpital-rozowy.jpg",
         description: "Prążkowana bawełna, body kopertowe z falbankami na ramionach + śpiochy ze stópkami + czapeczka z węzełkiem + torba, kolor pudrowy róż",
         sizes: ["56"],
+        comingSoon: true,
       },
     ],
   },

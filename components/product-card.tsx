@@ -19,8 +19,10 @@ export function ProductCard({ product, categorySlug }: ProductCardProps) {
   const [added, setAdded] = useState(false);
   const isBoy = product.id.includes("chlopiec");
   const isGirl = product.id.includes("dziewczynka");
+  const comingSoon = product.comingSoon === true;
 
   function handleAdd() {
+    if (comingSoon) return;
     addItem(product, selectedSize, categorySlug);
     setAdded(true);
     setTimeout(() => setAdded(false), 1500);
@@ -34,10 +36,17 @@ export function ProductCard({ product, categorySlug }: ProductCardProps) {
           src={product.image}
           alt={product.title}
           fill
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          className={`object-cover transition-transform duration-500 group-hover:scale-105 ${comingSoon ? "opacity-60 grayscale-[30%]" : ""}`}
         />
         <div className="absolute inset-0 bg-foreground/0 transition-colors duration-300 group-hover:bg-foreground/5" />
-        {(isBoy || isGirl) && (
+        {comingSoon && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="bg-background/90 px-4 py-2 text-xs uppercase tracking-[0.2em] text-foreground border border-foreground/20">
+              Wkrótce premiera
+            </span>
+          </div>
+        )}
+        {!comingSoon && (isBoy || isGirl) && (
           <div className="absolute left-3 top-3">
             <span className={`inline-block px-3 py-1 text-xs uppercase tracking-widest font-medium ${isBoy ? "bg-sky-100 text-sky-700" : "bg-pink-100 text-pink-700"}`}>
               {isBoy ? "dla chlopca" : "dla dziewczynki"}
@@ -57,9 +66,12 @@ export function ProductCard({ product, categorySlug }: ProductCardProps) {
             {product.sizes.map((size) => (
               <button
                 key={size}
-                onClick={() => setSelectedSize(size)}
+                onClick={() => !comingSoon && setSelectedSize(size)}
+                disabled={comingSoon}
                 className={`flex h-7 min-w-[2rem] items-center justify-center border px-2 text-xs transition-colors ${
-                  selectedSize === size
+                  comingSoon
+                    ? "border-border text-border cursor-not-allowed"
+                    : selectedSize === size
                     ? "border-foreground bg-foreground text-background"
                     : "border-border text-muted-foreground hover:border-muted-foreground"
                 }`}
@@ -74,13 +86,21 @@ export function ProductCard({ product, categorySlug }: ProductCardProps) {
           <p className="font-serif text-xl text-foreground">{product.price}</p>
           <button
             onClick={handleAdd}
+            disabled={comingSoon}
             className={`flex items-center gap-2 border px-4 py-2 text-xs uppercase tracking-widest transition-colors ${
-              added
+              comingSoon
+                ? "cursor-not-allowed border-border text-muted-foreground/50 bg-warm/30"
+                : added
                 ? "border-rose-300 bg-rose-200 text-rose-900"
                 : "border-rose-300 bg-rose-100 text-rose-700 hover:bg-rose-200 hover:text-rose-900"
             }`}
           >
-            {added ? (
+            {comingSoon ? (
+              <>
+                <ShoppingBag className="h-3.5 w-3.5" />
+                Wkrótce
+              </>
+            ) : added ? (
               <>
                 <Check className="h-3.5 w-3.5" />
                 Dodano
