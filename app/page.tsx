@@ -2,7 +2,6 @@ import { CollabBanner } from "@/components/collab-banner";
 import { Header } from "@/components/header";
 import { Hero } from "@/components/hero";
 import { About } from "@/components/about";
-import { CollabSection } from "@/components/collab-section";
 import { Categories } from "@/components/categories";
 import { Collections } from "@/components/collections";
 import { Products } from "@/components/products";
@@ -18,7 +17,6 @@ export default function Home() {
       <main>
         <Hero />
         <About />
-        <CollabSection />
         <Products />
         <Categories />
         <Collections />
