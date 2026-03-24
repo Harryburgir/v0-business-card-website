@@ -1,7 +1,7 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
 
-const OWNER_EMAIL = "Ladebebemini@gmail.com";
+const OWNER_EMAIL = "ladebebemini@gmail.com";
 const RESEND_API_KEY = "re_XzDhuLj7_HNbWe7TVwnLDnqUwNubAFNkP";
 
 interface OrderItem {
