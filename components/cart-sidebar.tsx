@@ -374,7 +374,7 @@ export function CartSidebar() {
               onClick={handleClose}
               className="w-full bg-foreground py-4 text-xs uppercase tracking-widest text-background transition-colors hover:bg-primary"
             >
-              Dokonana wpłaty
+              Dokonano wpłaty
             </button>
           </div>
         )}
