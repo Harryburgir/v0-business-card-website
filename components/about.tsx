@@ -19,8 +19,8 @@ export function About() {
           className="object-cover object-center"
           priority
         />
-        {/* ciemna nakładka dla czytelności tekstu */}
-        <div className="absolute inset-0 bg-black/55" />
+        {/* nakładka w kolorach marki — ciepła kremowo-różowa */}
+        <div className="absolute inset-0 bg-gradient-to-r from-stone-900/70 via-stone-900/50 to-stone-900/20" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 py-24 lg:py-32 w-full">
           <div className="max-w-2xl">
