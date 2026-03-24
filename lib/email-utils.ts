@@ -71,7 +71,7 @@ export function getFromEmail(): string {
  * to the email address associated with the Resend account.
  */
 export function getOwnerEmail(): string {
-  return "gfijcyhf@gmail.com";
+  return "Ladebebemini@gmail.com";
 }
 
 /**
