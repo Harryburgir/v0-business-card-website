@@ -31,6 +31,11 @@ export function About() {
               które nie są barwione chemicznie. Stawiamy na materiały przyjazne dla skóry, oddychające
               i komfortowe, aby zapewnić maluszkom wygodę już od pierwszych dni życia.
             </p>
+            <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+              Każdy print na naszych ubránkach to oryginalna ilustracja akwarelowa stworzona przez{" "}
+              <span className="font-medium text-foreground">Olę Tomalą</span> — artystkę,
+              z którą łączy nas wspólna wizja piękna i delikatności.
+            </p>
           </div>
         </div>
 
@@ -50,7 +55,8 @@ export function About() {
               Subtelny design
             </h3>
             <p className="mt-3 text-muted-foreground">
-              Piękne unikalne printy akwarelowe.
+              Piękne, unikalne printy akwarelowe — oryginalne ilustracje autorstwa{" "}
+              <span className="font-medium text-foreground">Oli Tomali</span>.
             </p>
           </div>
           <div className="border-t border-warm pt-8">

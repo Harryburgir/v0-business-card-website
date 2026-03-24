@@ -43,6 +43,12 @@ export function Hero() {
           <p className="mx-auto mt-8 max-w-lg text-base leading-relaxed text-rose-800/80 md:text-lg font-light tracking-wide drop-shadow-sm">
             {`Stworzone z mi\u0142o\u015Bci do najm\u0142odszych`}
           </p>
+
+          {/* Collab tag */}
+          <p className="mt-5 text-xs uppercase tracking-[0.3em] text-rose-700/70 drop-shadow-sm">
+            Kolekcja we współpracy z{" "}
+            <span className="font-semibold">Ola Tomala</span>
+          </p>
           
           {/* CTA Buttons */}
           <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
