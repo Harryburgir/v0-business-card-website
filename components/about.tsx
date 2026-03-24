@@ -9,10 +9,10 @@ export function About() {
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
           <div className="relative aspect-[4/5] overflow-hidden">
             <Image
-              src="/images/about-section.jpg"
-              alt="Właścicielka La de Bébé mini prezentując ubranka dla niemowląt"
+              src="/images/ola-tomala.jpg"
+              alt="Ola Tomala — influencerka i przyszła mama, współtwórczyni kolekcji La de Bébé mini"
               fill
-              className="object-cover"
+              className="object-cover object-top"
             />
           </div>
           <div className="flex flex-col justify-center">
@@ -74,7 +74,7 @@ export function About() {
           <div className="relative aspect-[4/5] overflow-hidden">
             <Image
               src="/images/about-section.jpg"
-              alt="Kolaboracja La de Bébé mini z Olą Tomalą"
+              alt="Ubranka La de Bébé mini — kolekcja we współpracy z Olą Tomalą"
               fill
               className="object-cover"
             />
