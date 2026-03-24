@@ -46,12 +46,11 @@ export function Header() {
           </Link>
         </div>
 
-        {/* Right side: Cart + mobile menu */}
+        {/* Right: cart + mobile menu */}
         <div className="flex items-center gap-3">
-          {/* Cart button */}
           <button
             onClick={openCart}
-            aria-label={`Koszyk${totalCount > 0 ? ` (${totalCount} produktów)` : ""}`}
+            aria-label={`Koszyk${totalCount > 0 ? ` (${totalCount})` : ""}`}
             className="relative flex items-center justify-center text-foreground transition-colors hover:text-primary"
           >
             <ShoppingBag className="h-5 w-5" />
@@ -61,8 +60,6 @@ export function Header() {
               </span>
             )}
           </button>
-
-          {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="text-foreground md:hidden"
