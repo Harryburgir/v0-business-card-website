@@ -1,15 +1,9 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
-import {
-  sanitizeHtml,
-  validateEmail,
-  validatePolishPhone,
-  generateOrderNumber,
-  getFromEmail,
-  getOwnerEmail,
-  validateOrderData,
-  validateResendConfig,
-} from "@/lib/email-utils";
+import { escapeHtml, generateOrderNumber, isValidEmail } from "@/lib/email-utils";
+
+// Your email address - where orders will be sent
+const OWNER_EMAIL = "Ladebebemini@gmail.com";
 
 interface OrderItem {
   id: string;
@@ -35,12 +29,11 @@ interface OrderData {
 
 export async function POST(request: Request) {
   try {
-    // Validate configuration
-    const configError = validateResendConfig();
-    if (configError) {
-      console.error(configError);
+    // Check if API key exists
+    if (!process.env.RESEND_API_KEY) {
+      console.error("RESEND_API_KEY is not set");
       return NextResponse.json(
-        { error: "Konfiguracja serwera jest niepełna. Skontaktuj się z administratorem." },
+        { error: "Konfiguracja serwera jest niepełna." },
         { status: 500 }
       );
     }
@@ -48,40 +41,44 @@ export async function POST(request: Request) {
     const resend = new Resend(process.env.RESEND_API_KEY);
     const data: OrderData = await request.json();
 
-    // Validate order data
-    const validationError = validateOrderData(data);
-    if (validationError) {
+    // Basic validation
+    if (!data.name || !data.email || !data.address || !data.items?.length) {
       return NextResponse.json(
-        { error: validationError },
+        { error: "Wypełnij wszystkie wymagane pola." },
         { status: 400 }
       );
     }
 
-    const { name, email, phone, address, notes, items, totalPrice, deliveryMethod, deliveryPrice, finalTotal } = data;
+    if (!isValidEmail(data.email)) {
+      return NextResponse.json(
+        { error: "Nieprawidłowy format email." },
+        { status: 400 }
+      );
+    }
 
     const orderNumber = generateOrderNumber();
     
-    // Sanitize all user inputs for HTML email content
-    const safeName = sanitizeHtml(name);
-    const safeEmail = sanitizeHtml(email);
-    const safePhone = phone ? sanitizeHtml(phone) : "";
-    const safeAddress = sanitizeHtml(address);
-    const safeNotes = notes ? sanitizeHtml(notes) : "";
-    const safeDeliveryMethod = deliveryMethod ? sanitizeHtml(deliveryMethod) : "Nie wybrano";
+    // Sanitize inputs
+    const safeName = escapeHtml(data.name);
+    const safeEmail = escapeHtml(data.email);
+    const safePhone = data.phone ? escapeHtml(data.phone) : "";
+    const safeAddress = escapeHtml(data.address);
+    const safeNotes = data.notes ? escapeHtml(data.notes) : "";
+    const safeDeliveryMethod = data.deliveryMethod ? escapeHtml(data.deliveryMethod) : "Nie wybrano";
 
-    // Generate items HTML for both emails
-    const itemsHtml = items
+    // Generate items HTML
+    const itemsHtml = data.items
       .map(
         (item) => `
       <tr>
         <td style="padding: 10px 0; border-bottom: 1px solid #f0ede5; font-size: 14px; color: #3d3a36;">
-          ${sanitizeHtml(item.title)}${item.size ? ` <span style="color: #8b8178;">(rozm. ${sanitizeHtml(item.size)})</span>` : ""}
+          ${escapeHtml(item.title)}${item.size ? ` <span style="color: #8b8178;">(rozm. ${escapeHtml(item.size)})</span>` : ""}
         </td>
         <td style="padding: 10px 0; border-bottom: 1px solid #f0ede5; text-align: center; font-size: 14px; color: #3d3a36;">
           ${item.quantity}
         </td>
         <td style="padding: 10px 0; border-bottom: 1px solid #f0ede5; text-align: right; font-size: 14px; color: #3d3a36;">
-          ${sanitizeHtml(item.price)}
+          ${escapeHtml(item.price)}
         </td>
         <td style="padding: 10px 0; border-bottom: 1px solid #f0ede5; text-align: right; font-size: 14px; color: #2c2825; font-weight: 500;">
           ${(item.priceValue * item.quantity).toFixed(0)} zł
@@ -90,15 +87,14 @@ export async function POST(request: Request) {
       )
       .join("");
 
-    // Get owner email
-    const ownerEmail = getOwnerEmail();
-    const fromEmail = getFromEmail();
+    const deliveryPrice = data.deliveryPrice ?? 0;
+    const finalTotal = data.finalTotal ?? data.totalPrice;
 
-    // 1. Send order notification to shop owner (Ladebebemini)
-    const { error: ownerEmailError } = await resend.emails.send({
-      from: fromEmail,
-      to: [ownerEmail],
-      replyTo: email,
+    // Send email to shop owner
+    const { error } = await resend.emails.send({
+      from: "onboarding@resend.dev",
+      to: OWNER_EMAIL,
+      replyTo: data.email,
       subject: `[La de Bébé mini] Nowe zamówienie #${orderNumber} od ${safeName}`,
       html: `
         <!DOCTYPE html>
@@ -119,10 +115,10 @@ export async function POST(request: Request) {
                           La de Bébé mini
                         </h1>
                         <p style="margin: 8px 0 0; font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: #8b8178;">
-                          Nowe zamówienie z koszyka
+                          Nowe zamówienie
                         </p>
                         <p style="margin: 12px 0 0; font-size: 13px; letter-spacing: 0.1em; color: #8b7355;">
-                          Nr zamówienia: <strong>${orderNumber}</strong>
+                          Nr: <strong>${orderNumber}</strong>
                         </p>
                       </td>
                     </tr>
@@ -143,7 +139,7 @@ export async function POST(request: Request) {
                           <tr>
                             <td style="padding: 4px 0; font-size: 14px; color: #5c574f;">Email</td>
                             <td style="padding: 4px 0; font-size: 14px; color: #2c2825;">
-                              <a href="mailto:${safeEmail}" style="color: #8b7355; text-decoration: none;">${safeEmail}</a>
+                              <a href="mailto:${safeEmail}" style="color: #8b7355;">${safeEmail}</a>
                             </td>
                           </tr>
                           ${safePhone ? `<tr>
@@ -169,13 +165,13 @@ export async function POST(request: Request) {
                     <tr>
                       <td>
                         <p style="margin: 0 0 12px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: #8b8178;">
-                          Metoda dostawy
+                          Dostawa
                         </p>
                         <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background: #f0ede5; padding: 16px;">
                           <tr>
                             <td style="font-size: 15px; color: #2c2825; font-weight: 500;">${safeDeliveryMethod}</td>
                             <td style="text-align: right; font-size: 15px; color: #2c2825;">
-                              ${deliveryPrice === 0 ? '<span style="color: #16a34a;">Bezpłatnie</span>' : `${deliveryPrice?.toFixed(2)} zł`}
+                              ${deliveryPrice === 0 ? '<span style="color: #16a34a;">Bezpłatnie</span>' : `${deliveryPrice.toFixed(2)} zł`}
                             </td>
                           </tr>
                         </table>
@@ -210,11 +206,11 @@ export async function POST(request: Request) {
 
                   <!-- Total -->
                   <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 16px; border-top: 2px solid #2c2825;">
-                    ${deliveryPrice !== undefined && deliveryPrice > 0 ? `
+                    ${deliveryPrice > 0 ? `
                     <tr>
                       <td style="padding-top: 12px; text-align: right;">
                         <span style="font-size: 12px; color: #8b8178; margin-right: 16px;">Produkty</span>
-                        <span style="font-size: 14px; color: #5c574f;">${totalPrice.toFixed(0)} zł</span>
+                        <span style="font-size: 14px; color: #5c574f;">${data.totalPrice.toFixed(0)} zł</span>
                       </td>
                     </tr>
                     <tr>
@@ -230,7 +226,7 @@ export async function POST(request: Request) {
                           Do zapłaty
                         </span>
                         <span style="font-size: 22px; font-weight: 300; color: #2c2825;">
-                          ${(finalTotal ?? totalPrice).toFixed(2)} zł
+                          ${finalTotal.toFixed(2)} zł
                         </span>
                       </td>
                     </tr>
@@ -241,7 +237,7 @@ export async function POST(request: Request) {
                     <tr>
                       <td style="text-align: center;">
                         <p style="margin: 0; font-size: 12px; color: #8b8178;">
-                          Odpowiedz na ten email, aby skontaktować się z klientem i potwierdzić zamówienie.
+                          Odpowiedz na ten email, aby skontaktować się z klientem.
                         </p>
                       </td>
                     </tr>
@@ -254,10 +250,10 @@ export async function POST(request: Request) {
       `,
     });
 
-    if (ownerEmailError) {
-      console.error("Resend owner email error:", ownerEmailError);
+    if (error) {
+      console.error("Resend error:", error);
       return NextResponse.json(
-        { error: "Nie udało się wysłać zamówienia do sklepu. Spróbuj ponownie." },
+        { error: "Nie udało się wysłać zamówienia. Spróbuj ponownie." },
         { status: 500 }
       );
     }
@@ -267,8 +263,11 @@ export async function POST(request: Request) {
       orderNumber, 
       message: "Zamówienie zostało złożone",
     });
-  } catch (error) {
-    console.error("Order API error:", error);
-    return NextResponse.json({ error: "Wystąpił błąd serwera" }, { status: 500 });
+  } catch (err) {
+    console.error("Order API error:", err);
+    return NextResponse.json(
+      { error: "Wystąpił błąd serwera." },
+      { status: 500 }
+    );
   }
 }
