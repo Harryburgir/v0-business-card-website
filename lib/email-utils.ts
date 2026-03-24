@@ -66,44 +66,10 @@ export function getFromEmail(): string {
 }
 
 /**
- * Check if custom domain is configured
- * Needed for sending to arbitrary customer emails
- */
-export function hasCustomDomain(): boolean {
-  const customEmail = process.env.EMAIL_FROM_ADDRESS;
-  // Must be a valid email format (contains @) and not be the Resend API key
-  return !!(customEmail && customEmail.includes("@") && !customEmail.startsWith("re_"));
-}
-
-/**
- * Check if we're in Resend test mode (using onboarding@resend.dev)
- * In test mode, can only send to the account owner's email
- */
-export function isTestMode(): boolean {
-  return !hasCustomDomain();
-}
-
-/**
  * Get the recipient email for shop owner notifications
- * In test mode, falls back to RESEND_TEST_EMAIL if set
- * This allows testing when using onboarding@resend.dev
  */
 export function getOwnerEmail(): string {
-  const defaultOwner = "Ladebebemini@gmail.com";
-  
-  // If we have a custom domain, always use the real owner email
-  if (hasCustomDomain()) {
-    return defaultOwner;
-  }
-  
-  // In test mode, check if RESEND_TEST_EMAIL is set for testing
-  const testEmail = process.env.RESEND_TEST_EMAIL;
-  if (testEmail && testEmail.includes("@")) {
-    return testEmail;
-  }
-  
-  // Otherwise use default (may fail in test mode if not same as Resend account email)
-  return defaultOwner;
+  return "Ladebebemini@gmail.com";
 }
 
 /**

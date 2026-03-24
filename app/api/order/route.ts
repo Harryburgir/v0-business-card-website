@@ -6,9 +6,7 @@ import {
   validatePolishPhone,
   generateOrderNumber,
   getFromEmail,
-  hasCustomDomain,
   getOwnerEmail,
-  isTestMode,
   validateOrderData,
   validateResendConfig,
 } from "@/lib/email-utils";
@@ -92,15 +90,9 @@ export async function POST(request: Request) {
       )
       .join("");
 
-    // Get owner email - in test mode this may be overridden by RESEND_TEST_EMAIL
+    // Get owner email
     const ownerEmail = getOwnerEmail();
-    
-    // Email configuration - use custom domain if available, otherwise use Resend's test domain
-    // NOTE: With onboarding@resend.dev, emails can only be sent to the verified owner email
-    // To send to customers, you need to verify your own domain in Resend
     const fromEmail = getFromEmail();
-    const customDomainConfigured = hasCustomDomain();
-    const testMode = isTestMode();
 
     // 1. Send order notification to shop owner (Ladebebemini)
     const { error: ownerEmailError } = await resend.emails.send({
@@ -270,188 +262,10 @@ export async function POST(request: Request) {
       );
     }
 
-    // 2. Send confirmation email to buyer (only if custom domain is configured)
-    // With Resend's test domain (onboarding@resend.dev), you can only send to your own verified email
-    // To enable customer confirmations, add EMAIL_FROM_ADDRESS env var with your verified domain
-    let buyerEmailSent = false;
-    let buyerEmailError = null;
-
-    if (customDomainConfigured) {
-      const buyerResult = await resend.emails.send({
-        from: fromEmail,
-        to: [email],
-        replyTo: ownerEmail,
-        subject: `[La de Bébé mini] Potwierdzenie zamówienia #${orderNumber}`,
-        html: `
-          <!DOCTYPE html>
-          <html>
-            <head>
-              <meta charset="utf-8">
-              <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            </head>
-            <body style="margin: 0; padding: 0; font-family: Georgia, 'Times New Roman', serif; background-color: #faf8f5;">
-              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width: 600px; margin: 0 auto; padding: 40px 20px;">
-                <tr>
-                  <td style="background-color: #ffffff; padding: 48px; border: 1px solid #e8e4de;">
-                    <!-- Header -->
-                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
-                      <tr>
-                        <td style="text-align: center; padding-bottom: 32px; border-bottom: 1px solid #e8e4de;">
-                          <h1 style="margin: 0; font-size: 28px; font-weight: 300; color: #2c2825; letter-spacing: 0.05em;">
-                            La de Bébé mini
-                          </h1>
-                          <p style="margin: 8px 0 0; font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: #8b8178;">
-                            Potwierdzenie zamówienia
-                          </p>
-                        </td>
-                      </tr>
-                    </table>
-
-                    <!-- Thank you message -->
-                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 32px;">
-                      <tr>
-                        <td style="text-align: center;">
-                          <p style="margin: 0; font-size: 18px; color: #2c2825; line-height: 1.6;">
-                            Dziękujemy za zamówienie, <strong>${safeName}</strong>!
-                          </p>
-                          <p style="margin: 16px 0 0; font-size: 14px; color: #5c574f; line-height: 1.6;">
-                            Twoje zamówienie zostało przyjęte i wkrótce się z Tobą skontaktujemy w celu potwierdzenia szczegółów.
-                          </p>
-                          <p style="margin: 24px 0 0; padding: 16px 24px; background: #f0ede5; display: inline-block;">
-                            <span style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8b8178;">Numer zamówienia</span><br>
-                            <span style="font-size: 20px; font-weight: 500; color: #2c2825; letter-spacing: 0.05em;">${orderNumber}</span>
-                          </p>
-                        </td>
-                      </tr>
-                    </table>
-
-                    <!-- Order details -->
-                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 32px;">
-                      <tr>
-                        <td>
-                          <p style="margin: 0 0 16px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: #8b8178;">
-                            Szczegóły zamówienia
-                          </p>
-                          <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background: #faf8f5; padding: 20px;">
-                            <tr>
-                              <td style="padding: 4px 0; font-size: 14px; color: #5c574f; width: 120px;">Adres dostawy</td>
-                              <td style="padding: 4px 0; font-size: 14px; color: #2c2825;">${safeAddress}</td>
-                            </tr>
-                            ${safeDeliveryMethod !== "Nie wybrano" ? `<tr>
-                              <td style="padding: 4px 0; font-size: 14px; color: #5c574f;">Metoda dostawy</td>
-                              <td style="padding: 4px 0; font-size: 14px; color: #2c2825;">${safeDeliveryMethod}</td>
-                            </tr>` : ""}
-                          </table>
-                        </td>
-                      </tr>
-                    </table>
-
-                    <!-- Products -->
-                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 32px;">
-                      <tr>
-                        <td>
-                          <p style="margin: 0 0 16px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: #8b8178;">
-                            Zamówione produkty
-                          </p>
-                          <table width="100%" cellspacing="0" cellpadding="0">
-                            <thead>
-                              <tr style="border-bottom: 1px solid #e8e4de;">
-                                <th style="text-align: left; padding-bottom: 8px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #8b8178; font-weight: 400;">Produkt</th>
-                                <th style="text-align: center; padding-bottom: 8px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #8b8178; font-weight: 400;">Ilość</th>
-                                <th style="text-align: right; padding-bottom: 8px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #8b8178; font-weight: 400;">Cena</th>
-                                <th style="text-align: right; padding-bottom: 8px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #8b8178; font-weight: 400;">Razem</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              ${itemsHtml}
-                            </tbody>
-                          </table>
-                        </td>
-                      </tr>
-                    </table>
-
-                    <!-- Total -->
-                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 16px; border-top: 2px solid #2c2825;">
-                      ${deliveryPrice !== undefined && deliveryPrice > 0 ? `
-                      <tr>
-                        <td style="padding-top: 12px; text-align: right;">
-                          <span style="font-size: 12px; color: #8b8178; margin-right: 16px;">Produkty</span>
-                          <span style="font-size: 14px; color: #5c574f;">${totalPrice.toFixed(0)} zł</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="padding-top: 4px; text-align: right;">
-                          <span style="font-size: 12px; color: #8b8178; margin-right: 16px;">Dostawa</span>
-                          <span style="font-size: 14px; color: #5c574f;">${deliveryPrice.toFixed(2)} zł</span>
-                        </td>
-                      </tr>
-                      ` : ""}
-                      <tr>
-                        <td style="padding-top: 12px; text-align: right;">
-                          <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: #8b8178; margin-right: 16px;">
-                            Do zapłaty
-                          </span>
-                          <span style="font-size: 22px; font-weight: 300; color: #2c2825;">
-                            ${(finalTotal ?? totalPrice).toFixed(2)} zł
-                          </span>
-                        </td>
-                      </tr>
-                    </table>
-
-                    <!-- Payment info -->
-                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 32px; background: #faf8f5; padding: 24px;">
-                      <tr>
-                        <td style="text-align: center;">
-                          <p style="margin: 0 0 8px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: #8b8178;">
-                            Co dalej?
-                          </p>
-                          <p style="margin: 0; font-size: 14px; color: #3d3a36; line-height: 1.6;">
-                            Skontaktujemy się z Tobą wkrótce w celu potwierdzenia zamówienia i ustalenia szczegółów płatności oraz dostawy.
-                          </p>
-                        </td>
-                      </tr>
-                    </table>
-
-                    <!-- Footer -->
-                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 40px; padding-top: 24px; border-top: 1px solid #e8e4de;">
-                      <tr>
-                        <td style="text-align: center;">
-                          <p style="margin: 0; font-size: 12px; color: #8b8178;">
-                            Masz pytania? Odpowiedz na ten email lub skontaktuj się z nami przez formularz na stronie.
-                          </p>
-                          <p style="margin: 16px 0 0; font-size: 12px; color: #8b8178;">
-                            Z serdecznymi pozdrowieniami,<br>
-                            <strong style="color: #2c2825;">La de Bébé mini</strong>
-                          </p>
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-              </table>
-            </body>
-          </html>
-        `,
-      });
-
-      if (buyerResult.error) {
-        console.error("Resend buyer email error:", buyerResult.error);
-        buyerEmailError = buyerResult.error;
-      } else {
-        buyerEmailSent = true;
-      }
-    }
-
     return NextResponse.json({ 
       success: true, 
       orderNumber, 
       message: "Zamówienie zostało złożone",
-      buyerEmailSent,
-      // Include info about custom domain setup if buyer email wasn't sent
-      ...((!hasCustomDomain) && {
-        note: "Aby wysyłać potwierdzenia do klientów, skonfiguruj własną domenę w Resend i ustaw EMAIL_FROM_ADDRESS"
-      }),
-      ...(buyerEmailError && { buyerEmailWarning: "Nie udało się wysłać potwierdzenia do kupującego" })
     });
   } catch (error) {
     console.error("Order API error:", error);
