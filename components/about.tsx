@@ -1,6 +1,12 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
+import { ChevronDown } from "lucide-react";
 
 export function About() {
+  const [showCollab, setShowCollab] = useState(false);
+
   return (
     <section id="o-nas" className="bg-warm/40 px-6 py-24 lg:py-32">
       <div className="mx-auto max-w-7xl">
@@ -33,58 +39,77 @@ export function About() {
               które nie są barwione chemicznie. Stawiamy na materiały przyjazne dla skóry, oddychające
               i komfortowe, aby zapewnić maluszkom wygodę już od pierwszych dni życia.
             </p>
+
+            {/* Przycisk rozwijający szczegóły współpracy */}
+            <button
+              onClick={() => setShowCollab(!showCollab)}
+              className="mt-8 inline-flex items-center gap-2 self-start border border-primary/30 bg-primary/5 px-6 py-3 text-sm font-medium uppercase tracking-[0.15em] text-primary transition-all hover:bg-primary/10 hover:border-primary/50"
+            >
+              <span>Poznaj naszą współpracę z Olą Tomalą</span>
+              <ChevronDown 
+                className={`h-4 w-4 transition-transform duration-300 ${showCollab ? "rotate-180" : ""}`} 
+              />
+            </button>
           </div>
         </div>
 
-        {/* ── Wiersz 2: Kolaboracja z Olą Tomalą ── */}
-        <div className="mt-20 grid gap-12 lg:grid-cols-2 lg:gap-20 items-center">
-          {/* Text side */}
-          <div className="flex flex-col justify-center">
-            <p className="mb-4 text-sm uppercase tracking-[0.3em] text-muted-foreground">
-              Kolaboracja
-            </p>
-            <h3 className="font-serif text-4xl font-light leading-tight text-foreground md:text-5xl">
-              <span className="block text-balance">Stworzone razem</span>
-              <span className="block text-balance font-medium text-primary">z Olą Tomalą</span>
-            </h3>
-            <p className="mt-8 text-lg leading-relaxed text-muted-foreground">
-              Wszystkie ubranka w naszej kolekcji powstały we współpracy z Olą Tomalą —
-              popularną influencerką i przyszłą mamą, znaną m.in. z programów „Love Island"
-              i „Królowa Przetrwania". Wspólnie tworzymy kolekcję, która łączy styl z funkcjonalnością.
-            </p>
-            <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-              Ola, pochodząca ze Świdnicy instruktorka jazdy konnej, doskonale rozumie potrzeby
-              aktywnych mam. Jej naturalność i autentyczność idealnie wpisują się w filozofię
-              naszej marki — piękno w prostocie i troska o najmłodszych.
-            </p>
-            <div className="mt-10 border-t border-warm pt-8">
-              <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground mb-1">
-                Współpraca
-              </p>
-              <p className="font-serif text-2xl font-light text-foreground">
-                Ola Tomala
-              </p>
-              <p className="text-sm text-muted-foreground mt-1">
-                Influencerka &amp; przyszła mama
-              </p>
-            </div>
-          </div>
+        {/* ── Wiersz 2: Kolaboracja z Olą Tomalą (ukryta/rozwijana) ── */}
+        <div
+          className={`grid transition-all duration-500 ease-in-out overflow-hidden ${
+            showCollab ? "grid-rows-[1fr] opacity-100 mt-20" : "grid-rows-[0fr] opacity-0 mt-0"
+          }`}
+        >
+          <div className="overflow-hidden">
+            <div className="grid gap-12 lg:grid-cols-2 lg:gap-20 items-center">
+              {/* Text side */}
+              <div className="flex flex-col justify-center">
+                <p className="mb-4 text-sm uppercase tracking-[0.3em] text-muted-foreground">
+                  Kolaboracja
+                </p>
+                <h3 className="font-serif text-4xl font-light leading-tight text-foreground md:text-5xl">
+                  <span className="block text-balance">Stworzone razem</span>
+                  <span className="block text-balance font-medium text-primary">z Olą Tomalą</span>
+                </h3>
+                <p className="mt-8 text-lg leading-relaxed text-muted-foreground">
+                  Wszystkie ubranka w naszej kolekcji powstały we współpracy z Olą Tomalą —
+                  popularną influencerką i przyszłą mamą, znaną m.in. z programów „Love Island"
+                  i „Królowa Przetrwania". Wspólnie tworzymy kolekcję, która łączy styl z funkcjonalnością.
+                </p>
+                <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+                  Ola, pochodząca ze Świdnicy instruktorka jazdy konnej, doskonale rozumie potrzeby
+                  aktywnych mam. Jej naturalność i autentyczność idealnie wpisują się w filozofię
+                  naszej marki — piękno w prostocie i troska o najmłodszych.
+                </p>
+                <div className="mt-10 border-t border-warm pt-8">
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground mb-1">
+                    Współpraca
+                  </p>
+                  <p className="font-serif text-2xl font-light text-foreground">
+                    Ola Tomala
+                  </p>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    Influencerka &amp; przyszła mama
+                  </p>
+                </div>
+              </div>
 
-          {/* Image side */}
-          <div className="relative aspect-[4/5] overflow-hidden">
-            <Image
-              src="/images/ola-tomala.jpg"
-              alt="Ola Tomala — influencerka i przyszła mama, współtwórczyni kolekcji La de Bébé mini"
-              fill
-              className="object-cover object-top"
-            />
-            <div className="absolute bottom-6 left-6 bg-background/95 backdrop-blur-sm px-5 py-4 shadow-lg">
-              <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground mb-1">
-                Kolekcja stworzona we współpracy z
-              </p>
-              <p className="font-serif text-xl font-medium text-primary">
-                Ola Tomala
-              </p>
+              {/* Image side */}
+              <div className="relative aspect-[4/5] overflow-hidden">
+                <Image
+                  src="/images/ola-tomala.jpg"
+                  alt="Ola Tomala — influencerka i przyszła mama, współtwórczyni kolekcji La de Bébé mini"
+                  fill
+                  className="object-cover object-top"
+                />
+                <div className="absolute bottom-6 left-6 bg-background/95 backdrop-blur-sm px-5 py-4 shadow-lg">
+                  <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground mb-1">
+                    Kolekcja stworzona we współpracy z
+                  </p>
+                  <p className="font-serif text-xl font-medium text-primary">
+                    Ola Tomala
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
