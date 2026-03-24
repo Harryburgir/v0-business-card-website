@@ -96,7 +96,7 @@ export function About() {
               {/* Image side */}
               <div className="relative aspect-[4/5] overflow-hidden">
                 <Image
-                  src="/images/ola-tomala.jpg"
+                  src="/images/ola-tomala-collaboration.jpg"
                   alt="Ola Tomala — influencerka i przyszła mama, współtwórczyni kolekcji La de Bébé mini"
                   fill
                   className="object-cover object-top"
