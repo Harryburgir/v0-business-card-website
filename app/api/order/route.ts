@@ -34,10 +34,8 @@ function escape(str: string): string {
 }
 
 function generateOrderNumber(): string {
-  const now = new Date();
-  const date = now.toISOString().slice(0, 10).replace(/-/g, "");
-  const rand = Math.floor(Math.random() * 9000) + 1000;
-  return `LDB-${date}-${rand}`;
+  const rand = Math.floor(Math.random() * 90000) + 10000;
+  return `LDB-${rand}`;
 }
 
 export async function POST(request: Request) {
