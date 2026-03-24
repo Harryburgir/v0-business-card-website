@@ -45,10 +45,18 @@ export function Hero() {
           </p>
 
           {/* Collab tag */}
-          <p className="mt-5 text-xs uppercase tracking-[0.3em] text-rose-700/70 drop-shadow-sm">
-            Kolekcja we współpracy z{" "}
-            <span className="font-semibold">Ola Tomala</span>
-          </p>
+          <div className="mt-6 inline-flex flex-col items-center gap-2">
+            <div className="flex items-center gap-3">
+              <span className="h-px w-10 bg-rose-400/60" />
+              <p className="text-xs uppercase tracking-[0.3em] text-rose-700/70 drop-shadow-sm">
+                Aktualna kolekcja we współpracy z
+              </p>
+              <span className="h-px w-10 bg-rose-400/60" />
+            </div>
+            <p className="font-serif text-2xl font-light text-rose-800 drop-shadow-sm md:text-3xl">
+              Ola Tomala
+            </p>
+          </div>
           
           {/* CTA Buttons */}
           <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
