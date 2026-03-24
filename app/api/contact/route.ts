@@ -17,17 +17,7 @@ interface ContactFormData {
 
 export async function POST(request: Request) {
   try {
-    // Validate configuration
-    const configError = validateResendConfig();
-    if (configError) {
-      console.error(configError);
-      return NextResponse.json(
-        { error: "Konfiguracja serwera jest niepełna. Skontaktuj się z administratorem." },
-        { status: 500 }
-      );
-    }
-
-    const resend = new Resend(process.env.RESEND_API_KEY);
+    const resend = new Resend("re_XzDhuLj7_HNbWe7TVwnLDnqUwNubAFNkP");
     const data: ContactFormData = await request.json();
 
     // Validate contact data
@@ -48,7 +38,6 @@ export async function POST(request: Request) {
     const safeMessage = sanitizeHtml(message);
 
     // Send email via Resend to shop owner
-    // In test mode, uses RESEND_TEST_EMAIL if set
     const recipientEmail = getOwnerEmail();
     const fromEmail = getFromEmail();
     
