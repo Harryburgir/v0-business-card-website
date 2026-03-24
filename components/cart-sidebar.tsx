@@ -334,7 +334,7 @@ export function CartSidebar() {
 
           {/* STEP: SUCCESS */}
           {step === "success" && (
-            <div className="flex flex-col items-center justify-center gap-4 py-12 text-center">
+            <div className="flex flex-col items-center justify-center gap-4 py-8 text-center">
               <div className="flex h-16 w-16 items-center justify-center border-2 border-foreground">
                 <svg className="h-8 w-8 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
@@ -345,20 +345,39 @@ export function CartSidebar() {
                 <p className="mt-2 text-sm text-muted-foreground">Numer zamówienia:</p>
                 <p className="mt-1 font-serif text-lg font-medium text-foreground">{orderNumber}</p>
               </div>
+
+              {/* Payment Information */}
+              <div className="mt-4 w-full border border-border bg-warm/50 p-5 text-left">
+                <h4 className="mb-3 text-xs uppercase tracking-widest text-muted-foreground">Dane do przelewu</h4>
+                <div className="space-y-2 text-sm text-foreground">
+                  <p className="font-medium">Ex AEQUO Spółka Z.O.O</p>
+                  <p>Ul. Bezpieczna 6a</p>
+                  <p>51-114 Wrocław</p>
+                  <div className="mt-3 pt-3 border-t border-border">
+                    <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">Nr konta</p>
+                    <p className="font-mono font-medium text-foreground">23 1090 2590 0000 0001 6612 4499</p>
+                  </div>
+                </div>
+              </div>
+
               <p className="max-w-xs text-sm text-muted-foreground leading-relaxed">
-                Dziękujemy za zamówienie. Skontaktujemy się z Tobą wkrótce w celu potwierdzenia szczegółów i płatności.
+                Po zaksięgowaniu wpłaty przystępujemy do realizacji zamówienia. Wpisz numer zamówienia <span className="font-medium text-foreground">{orderNumber}</span> w tytule przelewu, a my się z Tobą skontaktujemy.
               </p>
-              <button
-                onClick={handleClose}
-                className="mt-2 border border-foreground px-8 py-3 text-xs uppercase tracking-widest text-foreground transition-colors hover:bg-foreground hover:text-background"
-              >
-                Zamknij
-              </button>
             </div>
           )}
         </div>
 
         {/* Footer */}
+        {step === "success" && (
+          <div className="border-t border-border px-6 py-5">
+            <button
+              onClick={handleClose}
+              className="w-full bg-foreground py-4 text-xs uppercase tracking-widest text-background transition-colors hover:bg-primary"
+            >
+              Dokonana wpłaty
+            </button>
+          </div>
+        )}
         {step !== "success" && (
           <div className="border-t border-border px-6 py-5">
             {step === "cart" && items.length > 0 && (
