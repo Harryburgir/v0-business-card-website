@@ -32,9 +32,9 @@ export function About() {
               i komfortowe, aby zapewnić maluszkom wygodę już od pierwszych dni życia.
             </p>
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-              Każdy print na naszych ubránkach to oryginalna ilustracja akwarelowa stworzona przez{" "}
-              <span className="font-medium text-foreground">Olę Tomalą</span> — artystkę,
-              z którą łączy nas wspólna wizja piękna i delikatności.
+              Nasza kolekcja powstała we współpracy z{" "}
+              <span className="font-medium text-foreground">Olą Tomalą</span> — popularną
+              influencerką i przyszłą mamą, która doskonale rozumie potrzeby młodych rodziców.
             </p>
           </div>
         </div>
@@ -55,8 +55,8 @@ export function About() {
               Subtelny design
             </h3>
             <p className="mt-3 text-muted-foreground">
-              Piękne, unikalne printy akwarelowe — oryginalne ilustracje autorstwa{" "}
-              <span className="font-medium text-foreground">Oli Tomali</span>.
+              Piękne, unikalne wzory wybrane we współpracy z{" "}
+              <span className="font-medium text-foreground">Olą Tomalą</span>.
             </p>
           </div>
           <div className="border-t border-warm pt-8">

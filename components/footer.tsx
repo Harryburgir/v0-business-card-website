@@ -16,7 +16,7 @@ export function Footer() {
             <p className="mt-3 max-w-sm text-sm text-muted-foreground">
               Kolekcja stworzona we współpracy z{" "}
               <span className="font-medium text-foreground">Olą Tomalą</span>{" "}
-              — artystką i ilustratorką akwarelowych printów.
+              — influencerką i przyszłą mamą.
             </p>
             <div className="mt-6 flex gap-4">
               <a

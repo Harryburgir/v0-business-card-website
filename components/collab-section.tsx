@@ -16,25 +16,25 @@ export function CollabSection() {
             </h2>
             <p className="mt-8 text-lg leading-relaxed text-muted-foreground">
               Wszystkie ubranka w naszej kolekcji powstały we współpracy z Olą Tomalą —
-              artystką i ilustratorką, której unikatowe akwarelowe projekty nadają każdemu
-              ubranku wyjątkowy charakter.
+              popularną influencerką i przyszłą mamą, znaną m.in. z programów „Love Island"
+              i „Królowa Przetrwania". Wspólnie tworzymy kolekcję, która łączy styl z funkcjonalnością.
             </p>
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-              Wspólna pasja do piękna, delikatności i naturalności zaowocowała kolekcją,
-              w której każdy print jest oryginalnym dziełem sztuki. To nie są zwykłe
-              ubranka — to noszona sztuka dla najnowszych.
+              Ola, pochodząca ze Świdnicy instruktorka jazdy konnej, doskonale rozumie potrzeby
+              aktywnych mam. Jej naturalność i autentyczność idealnie wpisują się w filozofię
+              naszej marki — piękno w prostocie i troska o najmłodszych.
             </p>
 
             <div className="mt-10 border-t border-warm pt-8 flex items-center gap-5">
               <div>
                 <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground mb-1">
-                  Projekt graficzny
+                  Współpraca
                 </p>
                 <p className="font-serif text-2xl font-light text-foreground">
                   Ola Tomala
                 </p>
                 <p className="text-sm text-muted-foreground mt-1">
-                  Artystka &amp; ilustratorka
+                  Influencerka &amp; przyszła mama
                 </p>
               </div>
             </div>
