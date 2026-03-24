@@ -64,7 +64,7 @@ export function About() {
       {/* ── Sekcja kolaboracji (rozwijana) ── */}
       <div
         className={`bg-warm/40 transition-all duration-500 ease-in-out overflow-hidden ${
-          showCollab ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"
+          showCollab ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <div className="mx-auto max-w-7xl px-6 py-20">
@@ -102,12 +102,12 @@ export function About() {
             </div>
 
             {/* Image side */}
-            <div className="relative aspect-[4/5] overflow-hidden">
+            <div className="relative aspect-[3/4] sm:aspect-[4/5] overflow-hidden">
               <Image
                 src="/images/ola-tomala-collaboration.jpg"
                 alt="Ola Tomala — influencerka i przyszła mama, współtwórczyni kolekcji La de Bébé mini"
                 fill
-                className="object-cover object-top"
+                className="object-cover object-center"
               />
               <div className="absolute bottom-6 left-6 bg-background/95 backdrop-blur-sm px-5 py-4 shadow-lg">
                 <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground mb-1">
