@@ -67,10 +67,11 @@ export function getFromEmail(): string {
 
 /**
  * Get the recipient email for shop owner notifications
- * Uses OWNER_EMAIL env var if set, otherwise falls back to default
+ * In Resend test mode (without verified domain), emails can only be sent
+ * to the email address associated with the Resend account.
  */
 export function getOwnerEmail(): string {
-  return process.env.OWNER_EMAIL || "Ladebebemini@gmail.com";
+  return "gfijcyhf@gmail.com";
 }
 
 /**
