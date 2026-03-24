@@ -6,23 +6,23 @@ import Image from "next/image";
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen">
+    <section className="relative min-h-[100svh]">
       {/* Hero Background Image */}
       <div className="absolute inset-0">
         <Image
           src="/images/hero-baby.jpg"
           alt="Śpiące niemowlę w pajacyku La de Bébé mini"
           fill
-          className="object-cover object-top"
+          className="object-cover object-center sm:object-top"
           sizes="100vw"
           priority
         />
         {/* Soft warm overlay harmonising with the cream & pink tones of the photo */}
-        <div className="absolute inset-0 bg-gradient-to-b from-pink-50/30 via-transparent to-rose-100/50" />
+        <div className="absolute inset-0 bg-gradient-to-b from-rose-100/60 via-pink-50/20 to-rose-100/60 sm:from-pink-50/30 sm:via-transparent sm:to-rose-100/50" />
       </div>
 
       {/* Content */}
-      <div className="relative flex min-h-screen flex-col items-center justify-center px-6">
+      <div className="relative flex min-h-[100svh] flex-col items-center justify-center px-6">
         <div className="mx-auto max-w-4xl text-center">
           {/* Centered Logo - main focal point */}
           <div className="mx-auto flex justify-center">
