@@ -21,27 +21,27 @@ export function About() {
             className="object-cover object-center"
             sizes="100vw"
           />
-          {/* Nakładka spójna z hero — gradient różowo-kremowy */}
-          <div className="absolute inset-0 bg-gradient-to-r from-pink-50/85 via-rose-50/70 to-pink-50/30" />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-pink-50/60" />
+          {/* Przyciemniona nakładka — spójna z hero */}
+          <div className="absolute inset-0 bg-rose-950/40" />
+          <div className="absolute inset-0 bg-gradient-to-b from-rose-950/30 via-transparent to-rose-950/40" />
         </div>
 
         {/* Treść na zdjęciu */}
         <div className="relative mx-auto max-w-7xl w-full px-6 py-32 lg:py-40">
           <div className="max-w-2xl">
-            <p className="mb-4 text-sm uppercase tracking-[0.3em] text-rose-700/70 drop-shadow-sm">
+            <p className="mb-4 text-sm uppercase tracking-[0.3em] text-rose-200/90 drop-shadow-lg">
               O nas
             </p>
-            <h2 className="font-serif text-4xl font-light leading-tight text-rose-900 drop-shadow-sm md:text-5xl lg:text-6xl">
+            <h2 className="font-serif text-4xl font-light leading-tight text-white drop-shadow-lg md:text-5xl lg:text-6xl">
               <span className="block text-balance">Stworzone z miłości</span>
               <span className="block text-balance">do najmłodszych</span>
             </h2>
-            <p className="mt-8 text-lg leading-relaxed text-rose-900/75 drop-shadow-sm">
+            <p className="mt-8 text-lg leading-relaxed text-rose-100/90 drop-shadow-lg">
               La de Bébé mini to marka stworzona z myślą o dzieciach, które dopiero przychodzą na świat
               oraz o maluszkach w pierwszym roku życia. Wierzymy, że pierwsze ubranka powinny być nie tylko piękne,
               ale przede wszystkim delikatne i bezpieczne dla wrażliwej skóry dziecka.
             </p>
-            <p className="mt-6 text-lg leading-relaxed text-rose-900/75 drop-shadow-sm">
+            <p className="mt-6 text-lg leading-relaxed text-rose-100/90 drop-shadow-lg">
               W naszej ofercie znajdują się starannie wybrane ubranka wykonane z naturalnych tkanin,
               które nie są barwione chemicznie. Stawiamy na materiały przyjazne dla skóry, oddychające
               i komfortowe, aby zapewnić maluszkom wygodę już od pierwszych dni życia.

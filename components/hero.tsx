@@ -17,8 +17,9 @@ export function Hero() {
           sizes="100vw"
           priority
         />
-        {/* Soft warm overlay harmonising with the cream & pink tones of the photo */}
-        <div className="absolute inset-0 bg-gradient-to-b from-rose-100/80 via-pink-50/40 to-rose-100/80 sm:from-pink-50/50 sm:via-pink-50/20 sm:to-rose-100/70" />
+        {/* Przyciemniona nakładka — spójna z sekcją O nas */}
+        <div className="absolute inset-0 bg-rose-950/40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-rose-950/30 via-transparent to-rose-950/40" />
       </div>
 
       {/* Content */}
@@ -40,20 +41,20 @@ export function Hero() {
           <h1 className="sr-only">La de Bébé mini – Delikatność od pierwszych dni</h1>
           
           {/* Tagline below logo */}
-          <p className="mx-auto mt-8 max-w-lg text-base leading-relaxed text-rose-800/90 md:text-lg font-light tracking-wide drop-shadow-lg">
+          <p className="mx-auto mt-8 max-w-lg text-base leading-relaxed text-rose-100 md:text-lg font-light tracking-wide drop-shadow-lg">
             {`Stworzone z mi\u0142o\u015Bci do najm\u0142odszych`}
           </p>
 
           {/* Collab tag */}
           <div className="mt-6 inline-flex flex-col items-center gap-2">
             <div className="flex items-center gap-3">
-              <span className="h-px w-10 bg-rose-400/60" />
-              <p className="text-xs uppercase tracking-[0.3em] text-rose-700/80 drop-shadow-lg">
+              <span className="h-px w-10 bg-rose-300/70" />
+              <p className="text-xs uppercase tracking-[0.3em] text-rose-200/90 drop-shadow-lg">
                 Aktualna kolekcja we współpracy z
               </p>
-              <span className="h-px w-10 bg-rose-400/60" />
+              <span className="h-px w-10 bg-rose-300/70" />
             </div>
-            <p className="font-serif text-2xl font-light text-rose-800 drop-shadow-lg md:text-3xl">
+            <p className="font-serif text-2xl font-light text-white drop-shadow-lg md:text-3xl">
               Ola Tomala
             </p>
           </div>
