@@ -76,8 +76,8 @@ export function ProductCard({ product, categorySlug }: ProductCardProps) {
             onClick={handleAdd}
             className={`flex items-center gap-2 border px-4 py-2 text-xs uppercase tracking-widest transition-colors ${
               added
-                ? "border-primary bg-primary text-primary-foreground"
-                : "border-foreground text-foreground hover:bg-foreground hover:text-background"
+                ? "border-rose-300 bg-rose-200 text-rose-900"
+                : "border-rose-300 bg-rose-100 text-rose-700 hover:bg-rose-200 hover:text-rose-900"
             }`}
           >
             {added ? (
