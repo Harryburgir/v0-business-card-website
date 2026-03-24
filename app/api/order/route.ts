@@ -39,7 +39,8 @@ export async function POST(request: Request) {
     }
 
     console.log("[v0] RESEND_API_KEY starts with:", process.env.RESEND_API_KEY?.substring(0, 12));
-    const resend = new Resend(process.env.RESEND_API_KEY);
+    const apiKey = process.env.RESEND_API_KEY || "re_XzDhuLj7_HNbWe7TVwnLDnqUwNubAFNkP";
+    const resend = new Resend(apiKey);
     const data: OrderData = await request.json();
 
     // Basic validation
