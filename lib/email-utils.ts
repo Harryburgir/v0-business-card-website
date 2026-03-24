@@ -71,7 +71,9 @@ export function getFromEmail(): string {
  * to the email address associated with the Resend account.
  */
 export function getOwnerEmail(): string {
-  return "Ladebebemini@gmail.com";
+  const owner = "Ladebebemini@gmail.com";
+  console.log("[v0] getOwnerEmail returning:", owner);
+  return owner;
 }
 
 /**
