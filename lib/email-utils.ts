@@ -67,9 +67,10 @@ export function getFromEmail(): string {
 
 /**
  * Get the recipient email for shop owner notifications
+ * Uses OWNER_EMAIL env var if set, otherwise falls back to default
  */
 export function getOwnerEmail(): string {
-  return "Ladebebemini@gmail.com";
+  return process.env.OWNER_EMAIL || "Ladebebemini@gmail.com";
 }
 
 /**
