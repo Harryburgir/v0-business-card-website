@@ -49,7 +49,7 @@ export function Products() {
         {/* View All Categories CTA */}
         <div className="mt-16 flex flex-col items-center gap-6 text-center">
           <p className="max-w-lg text-muted-foreground">
-            Przeglądaj naszą pełną kolekcję w poszczególnych kategoriach lub dodaj wybrane produkty do koszyka.
+            Przeglądaj naszą pełną kolekcję w poszczególnych kategoriach.
           </p>
           <Link
             href="#kolekcje"

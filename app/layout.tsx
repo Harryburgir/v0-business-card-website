@@ -1,8 +1,6 @@
 import type { Metadata } from 'next'
 import { Cormorant_Garamond, Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
-import { CartProvider } from '@/context/cart-context'
-import { CartSidebar } from '@/components/cart-sidebar'
 import './globals.css'
 
 const cormorant = Cormorant_Garamond({ 
@@ -47,10 +45,7 @@ export default function RootLayout({
   return (
     <html lang="pl">
       <body className={`${cormorant.variable} ${inter.variable} font-sans antialiased`}>
-        <CartProvider>
-          {children}
-          <CartSidebar />
-        </CartProvider>
+        {children}
         <Analytics />
       </body>
     </html>
