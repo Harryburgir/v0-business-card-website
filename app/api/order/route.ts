@@ -29,18 +29,7 @@ interface OrderData {
 
 export async function POST(request: Request) {
   try {
-    // Check if API key exists
-    if (!process.env.RESEND_API_KEY) {
-      console.error("RESEND_API_KEY is not set");
-      return NextResponse.json(
-        { error: "Konfiguracja serwera jest niepełna." },
-        { status: 500 }
-      );
-    }
-
-    console.log("[v0] RESEND_API_KEY starts with:", process.env.RESEND_API_KEY?.substring(0, 12));
-    const apiKey = process.env.RESEND_API_KEY || "re_XzDhuLj7_HNbWe7TVwnLDnqUwNubAFNkP";
-    const resend = new Resend(apiKey);
+    const resend = new Resend("re_XzDhuLj7_HNbWe7TVwnLDnqUwNubAFNkP");
     const data: OrderData = await request.json();
 
     // Basic validation
