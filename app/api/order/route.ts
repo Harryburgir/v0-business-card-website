@@ -114,7 +114,16 @@ export async function POST(request: Request) {
           <tr>
             <td>
               <p style="margin:0 0 12px; font-size:11px; text-transform:uppercase; letter-spacing:0.15em; color:#8b8178; border-bottom:1px solid #f0ede5; padding-bottom:8px;">Dostawa</p>
-              <p style="margin:0; font-size:14px; color:#2c2825;">${escape(delivery)} — ${deliveryPrice === 0 ? "bezplatna" : `${deliveryPrice.toFixed(2)} zl`}</p>
+              <table width="100%" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td style="padding:4px 0; font-size:13px; color:#8b8178; width:120px;">Metoda</td>
+                  <td style="padding:4px 0; font-size:14px; color:#2c2825;">${escape(delivery)}</td>
+                </tr>
+                <tr>
+                  <td style="padding:4px 0; font-size:13px; color:#8b8178;">Koszt dostawy</td>
+                  <td style="padding:4px 0; font-size:14px; color:#2c2825;">${deliveryPrice === 0 ? "Bezpłatna" : `${deliveryPrice.toFixed(2)} zł`}</td>
+                </tr>
+              </table>
             </td>
           </tr>
         </table>

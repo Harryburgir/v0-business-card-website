@@ -6,23 +6,24 @@ import Image from "next/image";
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen">
+    <section className="relative min-h-[100svh]">
       {/* Hero Background Image */}
       <div className="absolute inset-0">
         <Image
           src="/images/hero-baby.jpg"
           alt="Śpiące niemowlę w pajacyku La de Bébé mini"
           fill
-          className="object-cover object-top"
+          className="object-cover object-center sm:object-top"
           sizes="100vw"
           priority
         />
-        {/* Soft warm overlay harmonising with the cream & pink tones of the photo */}
-        <div className="absolute inset-0 bg-gradient-to-b from-pink-50/30 via-transparent to-rose-100/50" />
+        {/* Przyciemniona nakładka — spójna z sekcją O nas */}
+        <div className="absolute inset-0 bg-rose-950/40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-rose-950/30 via-transparent to-rose-950/40" />
       </div>
 
       {/* Content */}
-      <div className="relative flex min-h-screen flex-col items-center justify-center px-6">
+      <div className="relative flex min-h-[100svh] flex-col items-center justify-center px-6">
         <div className="mx-auto max-w-4xl text-center">
           {/* Centered Logo - main focal point */}
           <div className="mx-auto flex justify-center">
@@ -40,9 +41,23 @@ export function Hero() {
           <h1 className="sr-only">La de Bébé mini – Delikatność od pierwszych dni</h1>
           
           {/* Tagline below logo */}
-          <p className="mx-auto mt-8 max-w-lg text-base leading-relaxed text-rose-800/80 md:text-lg font-light tracking-wide drop-shadow-sm">
+          <p className="mx-auto mt-8 max-w-lg text-base leading-relaxed text-rose-100 md:text-lg font-light tracking-wide drop-shadow-lg">
             {`Stworzone z mi\u0142o\u015Bci do najm\u0142odszych`}
           </p>
+
+          {/* Collab tag */}
+          <div className="mt-6 inline-flex flex-col items-center gap-2">
+            <div className="flex items-center gap-3">
+              <span className="h-px w-10 bg-rose-300/70" />
+              <p className="text-xs uppercase tracking-[0.3em] text-rose-200/90 drop-shadow-lg">
+                Aktualna kolekcja we współpracy z
+              </p>
+              <span className="h-px w-10 bg-rose-300/70" />
+            </div>
+            <p className="font-serif text-2xl font-light text-white drop-shadow-lg md:text-3xl">
+              Ola Tomala
+            </p>
+          </div>
           
           {/* CTA Buttons */}
           <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
