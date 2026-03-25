@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { X, Minus, Plus, Trash2, ShoppingBag, ChevronLeft } from "lucide-react";
 import { useCart } from "@/context/cart-context";
 
@@ -151,6 +152,16 @@ export function CartSidebar() {
                 <ul className="flex flex-col gap-5">
                   {items.map((item) => (
                     <li key={`${item.product.id}-${item.selectedSize}`} className="flex gap-4 border-b border-border pb-5">
+                      {/* Zdjęcie produktu */}
+                      <div className="relative h-20 w-20 shrink-0 overflow-hidden bg-warm/50">
+                        <Image
+                          src={item.product.image}
+                          alt={item.product.title}
+                          fill
+                          className="object-cover"
+                          sizes="80px"
+                        />
+                      </div>
                       <div className="flex-1 min-w-0">
                         <p className="font-serif text-base text-foreground leading-snug">{item.product.title}</p>
                         {item.selectedSize && (
@@ -350,7 +361,7 @@ export function CartSidebar() {
               <div className="mt-4 w-full border border-border bg-warm/50 p-5 text-left">
                 <h4 className="mb-3 text-xs uppercase tracking-widest text-muted-foreground">Dane do przelewu</h4>
                 <div className="space-y-2 text-sm text-foreground">
-                  <p className="font-medium">Ex AEQUO Spółka Z.O.O</p>
+                  <p className="font-medium">Ex AEQUO Sp��łka Z.O.O</p>
                   <p>Ul. Bezpieczna 6a</p>
                   <p>51-114 Wrocław</p>
                   <div className="mt-3 pt-3 border-t border-border">
