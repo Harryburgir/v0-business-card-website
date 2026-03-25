@@ -165,19 +165,19 @@ export async function POST(request: Request) {
           <tr>
             <td style="text-align:right; padding:4px 0;">
               <span style="font-size:13px; color:#8b8178; margin-right:16px;">Produkty</span>
-              <span style="font-size:14px; color:#5c574f;">${(totalPrice - deliveryPrice).toFixed(2)} zl</span>
+              <span style="font-size:14px; color:#5c574f;">${(totalPrice - deliveryPrice).toFixed(2)} zł</span>
             </td>
           </tr>
           <tr>
             <td style="text-align:right; padding:4px 0;">
               <span style="font-size:13px; color:#8b8178; margin-right:16px;">Dostawa</span>
-              <span style="font-size:14px; color:#5c574f;">${deliveryPrice.toFixed(2)} zl</span>
+              <span style="font-size:14px; color:#5c574f;">${deliveryPrice.toFixed(2)} zł</span>
             </td>
           </tr>` : ""}
           <tr>
             <td style="text-align:right; padding-top:8px;">
               <span style="font-size:12px; text-transform:uppercase; letter-spacing:0.15em; color:#8b8178; margin-right:16px;">Do zaplaty</span>
-              <span style="font-size:24px; font-weight:300; color:#2c2825;">${totalPrice.toFixed(2)} zl</span>
+              <span style="font-size:24px; font-weight:300; color:#2c2825;">${totalPrice.toFixed(2)} zł</span>
             </td>
           </tr>
         </table>
