@@ -67,7 +67,7 @@ export function CartSidebar() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...form,
-          delivery: selectedDelivery.name,
+          delivery: `${selectedDelivery.name} — ${selectedDelivery.description}`,
           deliveryPrice,
           items: orderItems,
           totalPrice: finalTotal,
