@@ -178,7 +178,7 @@ export function ContactForm() {
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className="flex w-full items-center justify-center gap-2 border border-rose-300/60 bg-white/60 backdrop-blur-sm py-4 text-sm font-medium uppercase tracking-[0.15em] text-rose-800 transition-all hover:bg-white/80 hover:border-rose-400/80 shadow-sm disabled:cursor-not-allowed disabled:opacity-70"
+                  className="flex w-full items-center justify-center gap-2 bg-primary py-4 text-sm uppercase tracking-widest text-primary-foreground transition-all hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-70"
                 >
                   {status === "loading" ? (
                     <>
