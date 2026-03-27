@@ -7,18 +7,21 @@ const collections = [
     subtitle: "0-3 miesiące",
     description: "Pierwsze wyprawki, body i kaftaniki dla maluszków przychodzących na świat",
     image: "/images/collection-newborn.jpg",
+    slug: "spiochy",
   },
   {
     title: "Niemowlaki",
     subtitle: "3-6 miesięcy",
     description: "Delikatne śpioszki, komplety i kocyki dla rozwijających się maluszków",
     image: "/images/collection-baby.jpg",
+    slug: "body",
   },
   {
     title: "Odkrywcy",
     subtitle: "6-12 miesięcy",
     description: "Wygodne ubranka dla pierwszych kroków i zabaw",
     image: "/images/collection-toddler.jpg",
+    slug: "spodenki",
   },
 ];
 
@@ -43,7 +46,7 @@ export function Collections() {
           {collections.map((collection, index) => (
             <Link
               key={index}
-              href="#kontakt"
+              href={`/kategoria/${collection.slug}`}
               className="group cursor-pointer"
             >
               <div className="relative aspect-[3/4] overflow-hidden bg-muted">
