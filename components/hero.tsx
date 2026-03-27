@@ -45,20 +45,6 @@ export function Hero() {
             {`Stworzone z mi\u0142o\u015Bci do najm\u0142odszych`}
           </p>
 
-          {/* Collab tag */}
-          <div className="mt-6 inline-flex flex-col items-center gap-2">
-            <div className="flex items-center gap-3">
-              <span className="h-px w-10 bg-rose-300/70" />
-              <p className="text-xs uppercase tracking-[0.3em] text-rose-200/90 drop-shadow-lg">
-                Aktualna kolekcja we współpracy z
-              </p>
-              <span className="h-px w-10 bg-rose-300/70" />
-            </div>
-            <p className="font-serif text-2xl font-light text-white drop-shadow-lg md:text-3xl">
-              Ola Tomala
-            </p>
-          </div>
-          
           {/* CTA Buttons */}
           <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Link
