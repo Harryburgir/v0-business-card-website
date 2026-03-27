@@ -100,7 +100,7 @@ export async function POST(request: Request) {
             <td>
               <p style="margin:0 0 12px; font-size:11px; text-transform:uppercase; letter-spacing:0.15em; color:#8b8178; border-bottom:1px solid #f0ede5; padding-bottom:8px;">Dane klienta</p>
               <table width="100%" cellspacing="0" cellpadding="0">
-                <tr><td style="padding:4px 0; font-size:13px; color:#8b8178; width:120px;">Imie i nazwisko</td><td style="padding:4px 0; font-size:14px; color:#2c2825;">${escape(name)}</td></tr>
+                <tr><td style="padding:4px 0; font-size:13px; color:#8b8178; width:120px;">Imię i nazwisko</td><td style="padding:4px 0; font-size:14px; color:#2c2825;">${escape(name)}</td></tr>
                 <tr><td style="padding:4px 0; font-size:13px; color:#8b8178;">Email</td><td style="padding:4px 0; font-size:14px; color:#2c2825;">${escape(email)}</td></tr>
                 <tr><td style="padding:4px 0; font-size:13px; color:#8b8178;">Telefon</td><td style="padding:4px 0; font-size:14px; color:#2c2825;">${escape(phone)}</td></tr>
                 <tr><td style="padding:4px 0; font-size:13px; color:#8b8178;">Adres</td><td style="padding:4px 0; font-size:14px; color:#2c2825;">${escape(address)}, ${escape(postalCode)} ${escape(city)}</td></tr>
@@ -114,7 +114,16 @@ export async function POST(request: Request) {
           <tr>
             <td>
               <p style="margin:0 0 12px; font-size:11px; text-transform:uppercase; letter-spacing:0.15em; color:#8b8178; border-bottom:1px solid #f0ede5; padding-bottom:8px;">Dostawa</p>
-              <p style="margin:0; font-size:14px; color:#2c2825;">${escape(delivery)} — ${deliveryPrice === 0 ? "bezplatna" : `${deliveryPrice.toFixed(2)} zl`}</p>
+              <table width="100%" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td style="padding:4px 0; font-size:13px; color:#8b8178; width:120px;">Metoda</td>
+                  <td style="padding:4px 0; font-size:14px; color:#2c2825;">${escape(delivery)}</td>
+                </tr>
+                <tr>
+                  <td style="padding:4px 0; font-size:13px; color:#8b8178;">Koszt dostawy</td>
+                  <td style="padding:4px 0; font-size:14px; color:#2c2825;">${deliveryPrice === 0 ? "Bezpłatna" : `${deliveryPrice.toFixed(2)} zł`}</td>
+                </tr>
+              </table>
             </td>
           </tr>
         </table>
@@ -156,19 +165,19 @@ export async function POST(request: Request) {
           <tr>
             <td style="text-align:right; padding:4px 0;">
               <span style="font-size:13px; color:#8b8178; margin-right:16px;">Produkty</span>
-              <span style="font-size:14px; color:#5c574f;">${(totalPrice - deliveryPrice).toFixed(2)} zl</span>
+              <span style="font-size:14px; color:#5c574f;">${(totalPrice - deliveryPrice).toFixed(2)} zł</span>
             </td>
           </tr>
           <tr>
             <td style="text-align:right; padding:4px 0;">
               <span style="font-size:13px; color:#8b8178; margin-right:16px;">Dostawa</span>
-              <span style="font-size:14px; color:#5c574f;">${deliveryPrice.toFixed(2)} zl</span>
+              <span style="font-size:14px; color:#5c574f;">${deliveryPrice.toFixed(2)} zł</span>
             </td>
           </tr>` : ""}
           <tr>
             <td style="text-align:right; padding-top:8px;">
-              <span style="font-size:12px; text-transform:uppercase; letter-spacing:0.15em; color:#8b8178; margin-right:16px;">Do zaplaty</span>
-              <span style="font-size:24px; font-weight:300; color:#2c2825;">${totalPrice.toFixed(2)} zl</span>
+              <span style="font-size:12px; text-transform:uppercase; letter-spacing:0.15em; color:#8b8178; margin-right:16px;">Do zapłaty</span>
+              <span style="font-size:24px; font-weight:300; color:#2c2825;">${totalPrice.toFixed(2)} zł</span>
             </td>
           </tr>
         </table>
@@ -177,7 +186,7 @@ export async function POST(request: Request) {
         <table width="100%" cellspacing="0" cellpadding="0" style="margin-top:40px; border-top:1px solid #e8e4de; padding-top:20px;">
           <tr>
             <td style="text-align:center;">
-              <p style="margin:0; font-size:12px; color:#8b8178;">La de Bébé mini &mdash; zamowienie zlozone przez strone internetowa</p>
+              <p style="margin:0; font-size:12px; color:#8b8178;">La de Bébé mini &mdash; zamówienie złożone przez stronę internetową</p>
             </td>
           </tr>
         </table>
@@ -200,7 +209,7 @@ export async function POST(request: Request) {
     if (result.error) {
       console.error("Resend error:", result.error);
       return NextResponse.json(
-        { error: "Nie udalo sie wyslac emaila. Sprobuj ponownie." },
+        { error: "Nie udało się wysłać emaila. Spróbuj ponownie." },
         { status: 500 }
       );
     }
