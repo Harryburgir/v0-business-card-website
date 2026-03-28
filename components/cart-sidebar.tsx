@@ -10,6 +10,7 @@ const DELIVERY_OPTIONS = [
   { id: "inpost-kurier", name: "InPost Kurier", description: "Dostawa kurierem pod wskazany adres", price: 23 },
   { id: "dpd", name: "DPD Kurier", description: "Dostawa kurierem DPD", price: 25 },
   { id: "odbior-osobisty", name: "Odbiór osobisty", description: "Bezpłatny odbiór we Wrocławiu", price: 0 },
+  { id: "wysylka-zagranica", name: "Wysyłka za granicę", description: "Indywidualna wycena — skontaktuj się ze sklepem", price: -1 },
 ];
 
 type Step = "cart" | "delivery" | "form" | "success";
@@ -220,7 +221,7 @@ export function CartSidebar() {
                     <p className="mt-0.5 text-sm text-muted-foreground">{option.description}</p>
                   </div>
                   <span className="ml-4 shrink-0 font-serif text-base text-foreground">
-                    {option.price === 0 ? "Bezpłatna" : `${option.price.toFixed(2)} zł`}
+                    {option.price === 0 ? "Bezpłatna" : option.price === -1 ? "Na zapytanie" : `${option.price.toFixed(2)} zł`}
                   </span>
                 </button>
               ))}
@@ -329,7 +330,7 @@ export function CartSidebar() {
                 ))}
                 <div className="flex justify-between py-1.5 text-sm">
                   <span className="text-muted-foreground">Dostawa: {selectedDelivery.name}</span>
-                  <span className="text-foreground">{deliveryPrice === 0 ? "Bezpłatna" : `${deliveryPrice.toFixed(2)} zł`}</span>
+                  <span className="text-foreground">{deliveryPrice === 0 ? "Bezpłatna" : deliveryPrice === -1 ? "Na zapytanie" : `${deliveryPrice.toFixed(2)} zł`}</span>
                 </div>
                 <div className="mt-2 flex justify-between border-t border-border pt-3">
                   <span className="text-xs uppercase tracking-widest text-muted-foreground">Razem</span>
@@ -409,14 +410,28 @@ export function CartSidebar() {
               <div>
                 <div className="mb-4 flex justify-between">
                   <span className="text-xs uppercase tracking-widest text-muted-foreground">Razem z dostawą</span>
-                  <span className="font-serif text-lg text-foreground">{finalTotal.toFixed(2)} zł</span>
+                  <span className="font-serif text-lg text-foreground">{selectedDelivery.id === "wysylka-zagranica" ? "Na zapytanie" : `${finalTotal.toFixed(2)} zł`}</span>
                 </div>
-                <button
-                  onClick={() => setStep("form")}
-                  className="w-full bg-foreground py-4 text-xs uppercase tracking-widest text-background transition-colors hover:bg-primary"
-                >
-                  Dane do wysyłki
-                </button>
+                {selectedDelivery.id === "wysylka-zagranica" ? (
+                  <div className="flex flex-col gap-3">
+                    <p className="text-sm text-muted-foreground bg-warm/50 p-3">
+                      Aby złożyć zamówienie z wysyłką za granicę, skontaktuj się ze sklepem mailowo lub telefonicznie. Podamy Ci indywidualną wycenę dostawy.
+                    </p>
+                    <a
+                      href="mailto:info@ladebebe.com?subject=Zapytanie o wysyłkę za granicę"
+                      className="w-full bg-foreground py-4 text-xs uppercase tracking-widest text-background transition-colors hover:bg-primary text-center"
+                    >
+                      Skontaktuj się
+                    </a>
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => setStep("form")}
+                    className="w-full bg-foreground py-4 text-xs uppercase tracking-widest text-background transition-colors hover:bg-primary"
+                  >
+                    Dane do wysyłki
+                  </button>
+                )}
               </div>
             )}
             {step === "form" && (
