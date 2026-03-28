@@ -6,9 +6,9 @@ import { X, Minus, Plus, Trash2, ShoppingBag, ChevronLeft } from "lucide-react";
 import { useCart } from "@/context/cart-context";
 
 const DELIVERY_OPTIONS = [
-  { id: "inpost-paczkomat", name: "InPost Paczkomat", description: "Odbiór w wybranym Paczkomacie 24/7", price: 12.99 },
-  { id: "inpost-kurier", name: "InPost Kurier", description: "Dostawa kurierem pod wskazany adres", price: 16.99 },
-  { id: "dpd", name: "DPD Kurier", description: "Dostawa kurierem DPD", price: 15.99 },
+  { id: "inpost-paczkomat", name: "InPost Paczkomat", description: "Odbiór w wybranym Paczkomacie 24/7", price: 20 },
+  { id: "inpost-kurier", name: "InPost Kurier", description: "Dostawa kurierem pod wskazany adres", price: 23 },
+  { id: "dpd", name: "DPD Kurier", description: "Dostawa kurierem DPD", price: 25 },
   { id: "odbior-osobisty", name: "Odbiór osobisty", description: "Bezpłatny odbiór we Wrocławiu", price: 0 },
 ];
 
