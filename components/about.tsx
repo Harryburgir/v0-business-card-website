@@ -10,14 +10,14 @@ export function About() {
         <div className="absolute inset-0">
           <Image
             src="/images/about-bg.jpg"
-            alt="Śpiące niemowlę w kremowym pajacyku La de Bébé mini"
+            alt="Właścicielka La de Bébé mini prezentująca ubranka dla niemowląt"
             fill
-            className="object-cover object-center"
+            className="object-cover object-top"
             sizes="100vw"
           />
-          {/* Przyciemniona nakładka — spójna z hero */}
-          <div className="absolute inset-0 bg-rose-950/40" />
-          <div className="absolute inset-0 bg-gradient-to-b from-rose-950/30 via-transparent to-rose-950/40" />
+          {/* Nakładka — ciemniejsza po lewej (tekst), jaśniejsza po prawej (twarz) */}
+          <div className="absolute inset-0 bg-gradient-to-r from-rose-950/60 via-rose-950/40 to-rose-950/20" />
+          <div className="absolute inset-0 bg-gradient-to-b from-rose-950/20 via-transparent to-rose-950/30" />
         </div>
 
         {/* Treść na zdjęciu */}
