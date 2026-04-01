@@ -150,6 +150,13 @@ export const categories: Category[] = [
         image: "/images/product-pieluszka-1.jpg",
         description: "3 sztuki, Muślin Bambusowy - kratka różowa, biała i wzór western",
       },
+      {
+        id: "pieluszka-2",
+        title: "Pieluszki dla chłopca 3 szt.",
+        price: "99 zł",
+        image: "/images/product-pieluszka-2.jpg",
+        description: "3 sztuki, Muślin Bambusowy - kratka niebieska, wzór jeździecki i biała",
+      },
     ],
   },
   {
