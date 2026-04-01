@@ -26,7 +26,7 @@ export const categories: Category[] = [
       {
         id: "body-kr-3",
         title: "Body krótki rękaw kratka różowa",
-        price: "69 zł",
+        price: "79 zł",
         image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG-20260318-WA0029-H0JpNS4IpUlwnWkrgFuHZ4YQGCdlR4.jpg",
         description: "Kopertowe zapięcie, wzór w kratkę, krótki rękaw",
         sizes: ["56", "62", "74", "80", "86"],
@@ -66,7 +66,7 @@ export const categories: Category[] = [
       {
         id: "body-kr-6",
         title: "Body krótki rękaw kratka niebieska",
-        price: "69 zł",
+        price: "79 zł",
         image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG-20260318-WA0025-hyFoeyKTuh52Q9HYLiXNF9uish37ar.jpg",
         description: "Kopertowe zapięcie, wzór w kratkę, niebieski",
         sizes: ["56", "62", "74", "80", "86"],
@@ -90,7 +90,7 @@ export const categories: Category[] = [
       {
         id: "spiochy-1",
         title: "Śpiochy bawełna organiczna wzór western",
-        price: "109 zł",
+        price: "129 zł",
         image: "/images/product-spiochy-1.jpg",
         description: "Bawełna organiczna, kołnierzyk peter pan, stópki",
         sizes: ["56", "62", "74", "80", "86"],
@@ -98,7 +98,7 @@ export const categories: Category[] = [
       {
         id: "spiochy-2",
         title: "Śpiochy bawełna organiczna niebieskie",
-        price: "109 zł",
+        price: "129 zł",
         image: "/images/product-spiochy-2.jpg",
         description: "Bawełna organiczna, biały kołnierzyk peter pan, stópki",
         sizes: ["56", "62", "74", "80", "86"],
@@ -106,7 +106,7 @@ export const categories: Category[] = [
       {
         id: "spiochy-3",
         title: "Śpiochy bawełna organiczna wzór jeździecki",
-        price: "109 zł",
+        price: "129 zł",
         image: "/images/product-spiochy-3.jpg",
         description: "Bawełna organiczna, kołnierzyk peter pan, stópki",
         sizes: ["56", "62", "74", "80", "86"],
@@ -114,7 +114,7 @@ export const categories: Category[] = [
       {
         id: "spiochy-4",
         title: "Śpiochy bawełna organiczna różowe",
-        price: "109 zł",
+        price: "129 zł",
         image: "/images/product-spiochy-4.jpg",
         description: "Bawełna organiczna, kołnierzyk z koronką, stópki",
         sizes: ["56", "62", "74", "80", "86"],
@@ -122,7 +122,7 @@ export const categories: Category[] = [
       {
         id: "spiochy-5",
         title: "Śpiochy bawełna organiczna western",
-        price: "109 zł",
+        price: "129 zł",
         image: "/images/product-spiochy-5.jpg",
         description: "Bawełna organiczna, kołnierzyk peter pan, motywy western, stópki",
         sizes: ["56", "62", "74", "80", "86"],
@@ -130,7 +130,7 @@ export const categories: Category[] = [
       {
         id: "spiochy-6",
         title: "Śpiochy białe motywy jeździeckie",
-        price: "109 zł",
+        price: "129 zł",
         image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/nowe%20%C5%9Bpiochy%20-vI2hQ4jCqW3YZMqVpWJZT15wiXImPC.jpg",
         description: "Bawełna organiczna, kołnierzyk peter pan, haft jeździecki, stópki",
         sizes: ["56", "62", "74", "80", "86"],
@@ -146,14 +146,14 @@ export const categories: Category[] = [
       {
         id: "pieluszka-1",
         title: "Zestaw 3 pieluszek kratka różowa",
-        price: "49 zł",
+        price: "99 zł",
         image: "/images/product-pieluszka-1.jpg",
         description: "3 sztuki, Muślin Bambusowy, wzór w kratkę",
       },
       {
         id: "pieluszka-2",
         title: "Zestaw 3 pieluszek kratka niebieska",
-        price: "49 zł",
+        price: "99 zł",
         image: "/images/product-pieluszka-2.jpg",
         description: "3 sztuki, Muślin Bambusowy, wzór w kratkę",
       },
