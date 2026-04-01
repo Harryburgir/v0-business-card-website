@@ -145,17 +145,10 @@ export const categories: Category[] = [
     products: [
       {
         id: "pieluszka-1",
-        title: "Zestaw 3 pieluszek kratka różowa",
+        title: "Pieluszki dla dziewczynki 3 szt.",
         price: "99 zł",
         image: "/images/product-pieluszka-1.jpg",
-        description: "3 sztuki, Muślin Bambusowy, wzór w kratkę",
-      },
-      {
-        id: "pieluszka-2",
-        title: "Zestaw 3 pieluszek kratka niebieska",
-        price: "99 zł",
-        image: "/images/product-pieluszka-2.jpg",
-        description: "3 sztuki, Muślin Bambusowy, wzór w kratkę",
+        description: "3 sztuki, Muślin Bambusowy - kratka różowa, biała i wzór western",
       },
     ],
   },
