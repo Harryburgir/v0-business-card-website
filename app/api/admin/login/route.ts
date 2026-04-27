@@ -22,6 +22,7 @@ export async function POST(request: NextRequest) {
     }
 
     const token = await createSession();
+    console.log("[v0] Login successful, creating session token");
 
     const response = NextResponse.json({ success: true });
     response.cookies.set(COOKIE_OPTIONS.name, token, {
@@ -31,6 +32,8 @@ export async function POST(request: NextRequest) {
       path: COOKIE_OPTIONS.path,
       maxAge: COOKIE_OPTIONS.maxAge,
     });
+    
+    console.log("[v0] Cookie set with name:", COOKIE_OPTIONS.name);
 
     return response;
   } catch (error) {
