@@ -212,7 +212,7 @@ export default function AdminPage() {
     setSelectedProduct(product);
     setFormData({
       title: product.title,
-      description: product.description,
+      description: product.description || "",
       price: product.price.toString(),
       stock: product.stock.toString(),
       category: product.category,
@@ -788,14 +788,13 @@ function ProductForm({ formData, setFormData, availableSizes, toggleSize, allCat
         <div className="grid gap-2">
           <Label htmlFor="category">Kategoria *</Label>
           <Select 
-            value={formData.category} 
+            value={formData.category || undefined} 
             onValueChange={(value) => setFormData(prev => ({ ...prev, category: value }))}
           >
             <SelectTrigger>
               <SelectValue placeholder="Wybierz kategorie" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="" disabled>Wybierz kategorie</SelectItem>
               {allCategories.map(cat => (
                 <SelectItem key={cat.slug} value={cat.slug}>
                   {cat.title} ({cat.type === "ladebebe" ? "2-6 lat" : "0-1 rok"})
