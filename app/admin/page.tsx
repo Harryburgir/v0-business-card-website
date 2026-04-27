@@ -98,9 +98,7 @@ export default function AdminPage() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await fetch("/api/admin/check", {
-          credentials: "include",
-        });
+        const response = await fetch("/api/admin/check");
         const data = await response.json();
         if (!data.authenticated) {
           router.push("/admin/login");
@@ -117,10 +115,7 @@ export default function AdminPage() {
   const handleLogout = async () => {
     setIsLoggingOut(true);
     try {
-      await fetch("/api/admin/logout", { 
-        method: "POST",
-        credentials: "include",
-      });
+      await fetch("/api/admin/logout", { method: "POST" });
       router.push("/admin/login");
     } catch {
       setIsLoggingOut(false);
