@@ -109,7 +109,7 @@ export default function AdminPage() {
     title: "",
     description: "",
     price: "",
-    stock: "",
+    stock: "40",
     category: "",
     image: "",
     sizes: [] as string[],
@@ -136,7 +136,7 @@ export default function AdminPage() {
       title: "",
       description: "",
       price: "",
-      stock: "",
+      stock: "40",
       category: "",
       image: "",
       sizes: [],
@@ -157,16 +157,16 @@ export default function AdminPage() {
       title: formData.title,
       description: formData.description,
       price: parseInt(formData.price),
-      stock: parseInt(formData.stock) || 0,
+      stock: parseInt(formData.stock) || 40,
       category: formData.category,
       image: formData.image || "/images/placeholder.jpg",
       sizes: formData.sizes.length > 0 ? formData.sizes : undefined,
     };
 
-    setProducts([...products, newProduct]);
+    setProducts(prev => [...prev, newProduct]);
     
     // Add stock to context
-    initializeStock({ [newProduct.id]: parseInt(formData.stock) || 0 });
+    initializeStock({ [newProduct.id]: parseInt(formData.stock) || 40 });
 
     setIsAddDialogOpen(false);
     resetForm();
@@ -187,7 +187,7 @@ export default function AdminPage() {
       sizes: formData.sizes.length > 0 ? formData.sizes : undefined,
     };
 
-    setProducts(products.map(p => 
+    setProducts(prev => prev.map(p => 
       p.id === selectedProduct.id ? updatedProduct : p
     ));
 

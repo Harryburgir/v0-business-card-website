@@ -56,11 +56,13 @@ export function StockProvider({ children }: { children: ReactNode }) {
   }, [stock]);
 
   const initializeStock = useCallback((stocks: Record<string, number>) => {
-    const newMap = new Map<string, number>();
-    Object.entries(stocks).forEach(([productId, quantity]) => {
-      newMap.set(productId, quantity);
+    setStockMap(prev => {
+      const newMap = new Map(prev);
+      Object.entries(stocks).forEach(([productId, quantity]) => {
+        newMap.set(productId, quantity);
+      });
+      return newMap;
     });
-    setStockMap(newMap);
   }, []);
 
   return (
