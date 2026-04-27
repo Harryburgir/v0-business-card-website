@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ShoppingBag, Check } from "lucide-react";
 import type { Product } from "@/lib/products-data";
 import { useCart } from "@/context/cart-context";
+import { useStock } from "@/context/stock-context";
 
 interface ProductCardProps {
   product: Product;
@@ -13,6 +14,7 @@ interface ProductCardProps {
 
 export function ProductCard({ product, categorySlug }: ProductCardProps) {
   const { addItem } = useCart();
+  const { getStock } = useStock();
   const [selectedSize, setSelectedSize] = useState<string>(
     product.sizes && product.sizes.length > 0 ? product.sizes[0] : ""
   );
@@ -20,9 +22,11 @@ export function ProductCard({ product, categorySlug }: ProductCardProps) {
   const isBoy = product.id.includes("chlopiec");
   const isGirl = product.id.includes("dziewczynka");
   const comingSoon = product.comingSoon === true;
+  const currentStock = getStock(product.id);
+  const isOutOfStock = currentStock === 0;
 
   function handleAdd() {
-    if (comingSoon) return;
+    if (comingSoon || isOutOfStock) return;
     addItem(product, selectedSize, categorySlug);
     setAdded(true);
     setTimeout(() => setAdded(false), 1500);
@@ -36,13 +40,20 @@ export function ProductCard({ product, categorySlug }: ProductCardProps) {
           src={product.image}
           alt={product.title}
           fill
-          className={`object-cover transition-transform duration-700 ease-out group-hover:scale-105 ${comingSoon ? "opacity-60 grayscale-[30%]" : ""}`}
+          className={`object-cover transition-transform duration-700 ease-out group-hover:scale-105 ${comingSoon || isOutOfStock ? "opacity-60 grayscale-[30%]" : ""}`}
         />
         <div className="absolute inset-0 bg-foreground/0 transition-colors duration-500 group-hover:bg-foreground/5" />
         {comingSoon && (
           <div className="absolute inset-0 flex items-center justify-center">
             <span className="bg-background/90 px-4 py-2 text-xs uppercase tracking-[0.2em] text-foreground border border-foreground/20">
               Wkrótce premiera
+            </span>
+          </div>
+        )}
+        {isOutOfStock && !comingSoon && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="bg-background/90 px-4 py-2 text-xs uppercase tracking-[0.2em] text-destructive border border-destructive/20">
+              Brak w magazynie
             </span>
           </div>
         )}
@@ -83,12 +94,15 @@ export function ProductCard({ product, categorySlug }: ProductCardProps) {
         )}
 
         <div className="mt-3 flex items-center justify-between gap-3">
-          <p className="font-serif text-xl text-foreground">{product.price}</p>
+          <div>
+            <p className="font-serif text-xl text-foreground">{product.price}</p>
+            <p className="text-xs text-muted-foreground mt-1">Stan: <span className={isOutOfStock ? "text-destructive font-medium" : "text-foreground font-medium"}>{currentStock}</span> szt.</p>
+          </div>
           <button
             onClick={handleAdd}
-            disabled={comingSoon}
+            disabled={comingSoon || isOutOfStock}
             className={`flex items-center gap-2 border px-4 py-2 text-xs uppercase tracking-widest transition-all duration-300 ${
-              comingSoon
+              comingSoon || isOutOfStock
                 ? "cursor-not-allowed border-border text-muted-foreground/50 bg-warm/30"
                 : added
                 ? "border-rose-300 bg-rose-200 text-rose-900 scale-[1.02]"
@@ -99,6 +113,11 @@ export function ProductCard({ product, categorySlug }: ProductCardProps) {
               <>
                 <ShoppingBag className="h-3.5 w-3.5" />
                 Wkrótce
+              </>
+            ) : isOutOfStock ? (
+              <>
+                <ShoppingBag className="h-3.5 w-3.5" />
+                Brak towaru
               </>
             ) : added ? (
               <>
