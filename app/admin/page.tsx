@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { 
   Package, 
   Plus, 
@@ -16,7 +17,9 @@ import {
   ChevronDown,
   X,
   AlertCircle,
-  Check
+  Check,
+  LogOut,
+  Loader2
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -77,6 +80,9 @@ const allCategories = [
 ];
 
 export default function AdminPage() {
+  const router = useRouter();
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const [products, setProducts] = useState<ExtendedProduct[]>(initialProducts);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
@@ -87,6 +93,46 @@ export default function AdminPage() {
   const [selectedProduct, setSelectedProduct] = useState<ExtendedProduct | null>(null);
   const [showSuccessToast, setShowSuccessToast] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+
+  // Check authentication on mount
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const response = await fetch("/api/admin/check");
+        const data = await response.json();
+        if (!data.authenticated) {
+          router.push("/admin/login");
+        } else {
+          setIsAuthenticated(true);
+        }
+      } catch {
+        router.push("/admin/login");
+      }
+    };
+    checkAuth();
+  }, [router]);
+
+  const handleLogout = async () => {
+    setIsLoggingOut(true);
+    try {
+      await fetch("/api/admin/logout", { method: "POST" });
+      router.push("/admin/login");
+    } catch {
+      setIsLoggingOut(false);
+    }
+  };
+
+  // Show loading while checking authentication
+  if (isAuthenticated === null) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-background">
+        <div className="flex flex-col items-center gap-4">
+          <Loader2 className="h-8 w-8 animate-spin text-primary" />
+          <p className="text-sm text-muted-foreground">Sprawdzanie uprawnien...</p>
+        </div>
+      </div>
+    );
+  }
 
   // Form state
   const [formData, setFormData] = useState({
@@ -252,10 +298,25 @@ export default function AdminPage() {
               <h1 className="text-lg font-semibold">Panel Administracyjny</h1>
             </div>
           </div>
-          <Button onClick={() => { resetForm(); setIsAddDialogOpen(true); }} className="gap-2">
-            <Plus className="h-4 w-4" />
-            <span className="hidden sm:inline">Dodaj produkt</span>
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button onClick={() => { resetForm(); setIsAddDialogOpen(true); }} className="gap-2">
+              <Plus className="h-4 w-4" />
+              <span className="hidden sm:inline">Dodaj produkt</span>
+            </Button>
+            <Button 
+              variant="outline" 
+              onClick={handleLogout}
+              disabled={isLoggingOut}
+              className="gap-2"
+            >
+              {isLoggingOut ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <LogOut className="h-4 w-4" />
+              )}
+              <span className="hidden sm:inline">Wyloguj</span>
+            </Button>
+          </div>
         </div>
       </header>
 
