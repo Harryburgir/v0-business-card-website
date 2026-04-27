@@ -2,17 +2,22 @@
 
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { categories } from "@/lib/products-data";
+import { useProducts } from "@/context/products-context";
 import { ProductCard } from "@/components/product-card";
 import { useRevealAnimation, useStaggerAnimation } from "@/hooks/use-reveal-animation";
 
 export function Products() {
-  // Get 1 product from each of the first 4 categories
-  const featuredProducts = categories.slice(0, 4).map((cat) => ({
-    product: cat.products[0],
-    categorySlug: cat.slug,
-    categoryTitle: cat.title,
-  }));
+  const { categories, isLoaded } = useProducts();
+  
+  // Get 1 product from each of the first 4 categories that have products
+  const featuredProducts = categories
+    .filter(cat => cat.products.length > 0)
+    .slice(0, 4)
+    .map((cat) => ({
+      product: cat.products[0],
+      categorySlug: cat.slug,
+      categoryTitle: cat.title,
+    }));
 
   const { ref: headerRef, isRevealed: headerRevealed } = useRevealAnimation<HTMLDivElement>();
   const { containerRef: gridRef, containerClassName: gridClass } = useStaggerAnimation<HTMLDivElement>();
