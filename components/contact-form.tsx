@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Spinner } from "@/components/ui/spinner";
 import { Mail, Phone, MapPin } from "lucide-react";
+import { useRevealAnimation } from "@/hooks/use-reveal-animation";
 
 export function ContactForm() {
   const [formData, setFormData] = useState({
@@ -12,6 +13,8 @@ export function ContactForm() {
     message: "",
   });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const { ref: leftRef, isRevealed: leftRevealed } = useRevealAnimation<HTMLDivElement>();
+  const { ref: rightRef, isRevealed: rightRevealed } = useRevealAnimation<HTMLDivElement>();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,7 +44,10 @@ export function ContactForm() {
     <section id="kontakt" className="px-6 py-24 lg:py-32">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-16 lg:grid-cols-2 lg:gap-24">
-          <div>
+          <div 
+            ref={leftRef}
+            className={`reveal-section ${leftRevealed ? "revealed" : ""}`}
+          >
             <p className="mb-4 text-sm uppercase tracking-[0.3em] text-muted-foreground">
               Kontakt
             </p>
@@ -55,27 +61,27 @@ export function ContactForm() {
             </p>
 
             <div className="mt-12 space-y-6">
-              <div className="flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center bg-warm">
-                  <Mail className="h-5 w-5 text-primary" />
+              <div className="group flex items-center gap-4 transition-transform duration-300 hover:translate-x-2">
+                <div className="flex h-12 w-12 items-center justify-center bg-warm transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground">
+                  <Mail className="h-5 w-5 text-primary transition-colors duration-300 group-hover:text-primary-foreground" />
                 </div>
                 <div>
                   <p className="text-xs uppercase tracking-widest text-muted-foreground">Email</p>
                   <p className="mt-1 text-foreground">Ladebebemini@gmail.com</p>
                 </div>
               </div>
-              <div className="flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center bg-warm">
-                  <Phone className="h-5 w-5 text-primary" />
+              <div className="group flex items-center gap-4 transition-transform duration-300 hover:translate-x-2">
+                <div className="flex h-12 w-12 items-center justify-center bg-warm transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground">
+                  <Phone className="h-5 w-5 text-primary transition-colors duration-300 group-hover:text-primary-foreground" />
                 </div>
                 <div>
                   <p className="text-xs uppercase tracking-widest text-muted-foreground">Telefon</p>
                   <p className="mt-1 text-foreground">518 845 751</p>
                 </div>
               </div>
-              <div className="flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center bg-warm">
-                  <MapPin className="h-5 w-5 text-primary" />
+              <div className="group flex items-center gap-4 transition-transform duration-300 hover:translate-x-2">
+                <div className="flex h-12 w-12 items-center justify-center bg-warm transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground">
+                  <MapPin className="h-5 w-5 text-primary transition-colors duration-300 group-hover:text-primary-foreground" />
                 </div>
                 <div>
                   <p className="text-xs uppercase tracking-widest text-muted-foreground">Showroom</p>
@@ -85,7 +91,11 @@ export function ContactForm() {
             </div>
           </div>
 
-          <div className="bg-warm/50 p-8 lg:p-12">
+          <div 
+            ref={rightRef}
+            className={`bg-warm/50 p-8 lg:p-12 reveal-section ${rightRevealed ? "revealed" : ""}`}
+            style={{ transitionDelay: "150ms" }}
+          >
             <h3 className="mb-8 font-serif text-2xl font-light text-card-foreground">
               Wyślij zapytanie
             </h3>
@@ -119,7 +129,7 @@ export function ContactForm() {
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full border-b border-border bg-transparent py-3 text-foreground placeholder:text-muted-foreground/50 focus:border-primary focus:outline-none"
+                      className="w-full border-b border-border bg-transparent py-3 text-foreground placeholder:text-muted-foreground/50 focus:border-primary focus:outline-none transition-all duration-300 input-focus"
                       placeholder="Jan Kowalski"
                     />
                   </div>
@@ -133,7 +143,7 @@ export function ContactForm() {
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full border-b border-border bg-transparent py-3 text-foreground placeholder:text-muted-foreground/50 focus:border-primary focus:outline-none"
+                      className="w-full border-b border-border bg-transparent py-3 text-foreground placeholder:text-muted-foreground/50 focus:border-primary focus:outline-none transition-all duration-300 input-focus"
                       placeholder="jan@przyklad.pl"
                     />
                   </div>
@@ -149,7 +159,7 @@ export function ContactForm() {
                     required
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    className="w-full border-b border-border bg-transparent py-3 text-foreground placeholder:text-muted-foreground/50 focus:border-primary focus:outline-none"
+                    className="w-full border-b border-border bg-transparent py-3 text-foreground placeholder:text-muted-foreground/50 focus:border-primary focus:outline-none transition-all duration-300 input-focus"
                     placeholder="Zapytanie o produkt"
                   />
                 </div>
@@ -164,7 +174,7 @@ export function ContactForm() {
                     rows={5}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full resize-none border-b border-border bg-transparent py-3 text-foreground placeholder:text-muted-foreground/50 focus:border-primary focus:outline-none"
+                    className="w-full resize-none border-b border-border bg-transparent py-3 text-foreground placeholder:text-muted-foreground/50 focus:border-primary focus:outline-none transition-all duration-300 input-focus"
                     placeholder="Jakie produkty Cię interesują? W jakim rozmiarze?"
                   />
                 </div>
@@ -178,7 +188,7 @@ export function ContactForm() {
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className="flex w-full items-center justify-center gap-2 border border-rose-300/60 bg-white/60 backdrop-blur-sm py-4 text-sm font-medium uppercase tracking-[0.15em] text-rose-800 transition-all hover:bg-white/80 hover:border-rose-400/80 shadow-sm disabled:cursor-not-allowed disabled:opacity-70"
+                  className="flex w-full items-center justify-center gap-2 border border-rose-300/60 bg-white/60 backdrop-blur-sm py-4 text-sm font-medium uppercase tracking-[0.15em] text-rose-800 transition-all duration-300 hover:bg-white/80 hover:border-rose-400/80 hover:scale-[1.01] active:scale-[0.99] shadow-sm disabled:cursor-not-allowed disabled:opacity-70 btn-press"
                 >
                   {status === "loading" ? (
                     <>

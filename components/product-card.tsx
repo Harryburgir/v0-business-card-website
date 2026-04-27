@@ -29,16 +29,16 @@ export function ProductCard({ product, categorySlug }: ProductCardProps) {
   }
 
   return (
-    <div className="group flex flex-col">
+    <div className="group flex flex-col card-hover">
       {/* Image */}
-      <div className="relative aspect-[3/4] overflow-hidden bg-warm/50">
+      <div className="relative aspect-[3/4] overflow-hidden bg-warm/50 image-reveal">
         <Image
           src={product.image}
           alt={product.title}
           fill
-          className={`object-cover transition-transform duration-500 group-hover:scale-105 ${comingSoon ? "opacity-60 grayscale-[30%]" : ""}`}
+          className={`object-cover transition-transform duration-700 ease-out group-hover:scale-105 ${comingSoon ? "opacity-60 grayscale-[30%]" : ""}`}
         />
-        <div className="absolute inset-0 bg-foreground/0 transition-colors duration-300 group-hover:bg-foreground/5" />
+        <div className="absolute inset-0 bg-foreground/0 transition-colors duration-500 group-hover:bg-foreground/5" />
         {comingSoon && (
           <div className="absolute inset-0 flex items-center justify-center">
             <span className="bg-background/90 px-4 py-2 text-xs uppercase tracking-[0.2em] text-foreground border border-foreground/20">
@@ -87,13 +87,13 @@ export function ProductCard({ product, categorySlug }: ProductCardProps) {
           <button
             onClick={handleAdd}
             disabled={comingSoon}
-            className={`flex items-center gap-2 border px-4 py-2 text-xs uppercase tracking-widest transition-colors ${
+            className={`flex items-center gap-2 border px-4 py-2 text-xs uppercase tracking-widest transition-all duration-300 ${
               comingSoon
                 ? "cursor-not-allowed border-border text-muted-foreground/50 bg-warm/30"
                 : added
-                ? "border-rose-300 bg-rose-200 text-rose-900"
-                : "border-rose-300 bg-rose-100 text-rose-700 hover:bg-rose-200 hover:text-rose-900"
-            }`}
+                ? "border-rose-300 bg-rose-200 text-rose-900 scale-[1.02]"
+                : "border-rose-300 bg-rose-100 text-rose-700 hover:bg-rose-200 hover:text-rose-900 hover:scale-[1.03] active:scale-[0.98]"
+            } btn-press`}
           >
             {comingSoon ? (
               <>

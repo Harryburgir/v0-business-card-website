@@ -13,7 +13,7 @@ export function Hero() {
           src="/images/hero-baby.jpg"
           alt="Śpiące niemowlę w pajacyku La de Bébé mini"
           fill
-          className="object-cover object-center sm:object-top"
+          className="object-cover object-center sm:object-top animate-fade-in"
           sizes="100vw"
           priority
         />
@@ -26,8 +26,8 @@ export function Hero() {
       <div className="relative flex min-h-[100svh] flex-col items-center justify-center px-6">
         <div className="mx-auto max-w-4xl text-center">
           {/* Centered Logo - main focal point */}
-          <div className="mx-auto flex justify-center">
-            <div className="relative w-[280px] sm:w-[380px] md:w-[480px] lg:w-[580px]">
+          <div className="mx-auto flex justify-center animate-fade-in-down" style={{ animationDelay: "200ms", animationFillMode: "both" }}>
+            <div className="relative w-[280px] sm:w-[380px] md:w-[480px] lg:w-[580px] animate-soft-float">
               {/* Soft pink-tinted glow for harmony with background */}
               <div className="absolute inset-0 blur-lg bg-pink-200/10 rounded-full scale-100" />
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -41,21 +41,27 @@ export function Hero() {
           <h1 className="sr-only">La de Bébé mini – Delikatność od pierwszych dni</h1>
           
           {/* Tagline below logo */}
-          <p className="mx-auto mt-8 max-w-lg text-base leading-relaxed text-rose-100 md:text-lg font-light tracking-wide drop-shadow-lg">
+          <p 
+            className="mx-auto mt-8 max-w-lg text-base leading-relaxed text-rose-100 md:text-lg font-light tracking-wide drop-shadow-lg animate-fade-in-up"
+            style={{ animationDelay: "400ms", animationFillMode: "both" }}
+          >
             {`Stworzone z mi\u0142o\u015Bci do najm\u0142odszych`}
           </p>
 
           {/* CTA Buttons */}
-          <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+          <div 
+            className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center animate-fade-in-up"
+            style={{ animationDelay: "600ms", animationFillMode: "both" }}
+          >
             <Link
               href="#kolekcje"
-              className="inline-flex items-center gap-2 bg-white/90 px-8 py-4 text-sm uppercase tracking-widest text-pink-900 transition-all hover:bg-white shadow-md"
+              className="inline-flex items-center gap-2 bg-white/90 px-8 py-4 text-sm uppercase tracking-widest text-pink-900 transition-all duration-300 hover:bg-white hover:scale-[1.02] active:scale-[0.98] shadow-md btn-press"
             >
               Odkryj kolekcje
             </Link>
             <Link
               href="#kontakt"
-              className="inline-flex items-center gap-2 border-2 border-rose-300/80 px-8 py-4 text-sm uppercase tracking-widest text-rose-800 transition-all hover:bg-white/30 hover:border-rose-400"
+              className="inline-flex items-center gap-2 border-2 border-rose-300/80 px-8 py-4 text-sm uppercase tracking-widest text-rose-800 transition-all duration-300 hover:bg-white/30 hover:border-rose-400 hover:scale-[1.02] active:scale-[0.98] btn-press"
             >
               Skontaktuj się
             </Link>
@@ -64,8 +70,9 @@ export function Hero() {
 
         <Link
           href="#o-nas"
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce text-rose-400/80 transition-colors hover:text-rose-500"
+          className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce text-rose-400/80 transition-colors duration-300 hover:text-rose-500"
           aria-label="Przewiń w dół"
+          style={{ animationDelay: "1000ms", animationFillMode: "both" }}
         >
           <ArrowDown className="h-6 w-6" />
         </Link>

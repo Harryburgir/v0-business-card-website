@@ -1,13 +1,21 @@
+"use client";
+
 import Link from "next/link";
 import { Instagram, Linkedin, Facebook } from "lucide-react";
+import { useRevealAnimation } from "@/hooks/use-reveal-animation";
 
 export function Footer() {
+  const { ref: footerRef, isRevealed } = useRevealAnimation<HTMLElement>({ threshold: 0.05 });
+
   return (
-    <footer className="border-t border-warm bg-warm/30 px-6 py-16">
+    <footer 
+      ref={footerRef}
+      className={`border-t border-warm bg-warm/30 px-6 py-16 reveal-section ${isRevealed ? "revealed" : ""}`}
+    >
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-2">
-            <Link href="/" className="font-serif text-xl font-medium tracking-wide text-foreground md:text-2xl">
+            <Link href="/" className="font-serif text-xl font-medium tracking-wide text-foreground md:text-2xl link-underline inline-block">
               La de Bébé mini
             </Link>
             <p className="mt-4 max-w-sm text-muted-foreground">
@@ -18,7 +26,7 @@ export function Footer() {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-10 w-10 items-center justify-center bg-warm transition-colors hover:bg-primary hover:text-primary-foreground"
+                className="flex h-10 w-10 items-center justify-center bg-warm transition-all duration-300 hover:bg-primary hover:text-primary-foreground social-icon-hover"
                 aria-label="Instagram"
               >
                 <Instagram className="h-4 w-4" />
@@ -27,7 +35,7 @@ export function Footer() {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-10 w-10 items-center justify-center bg-warm transition-colors hover:bg-primary hover:text-primary-foreground"
+                className="flex h-10 w-10 items-center justify-center bg-warm transition-all duration-300 hover:bg-primary hover:text-primary-foreground social-icon-hover"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="h-4 w-4" />
@@ -36,7 +44,7 @@ export function Footer() {
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-10 w-10 items-center justify-center bg-warm transition-colors hover:bg-primary hover:text-primary-foreground"
+                className="flex h-10 w-10 items-center justify-center bg-warm transition-all duration-300 hover:bg-primary hover:text-primary-foreground social-icon-hover"
                 aria-label="Facebook"
               >
                 <Facebook className="h-4 w-4" />
@@ -49,19 +57,19 @@ export function Footer() {
               Nawigacja
             </h4>
             <nav className="mt-6 flex flex-col gap-3">
-              <Link href="#o-nas" className="text-muted-foreground transition-colors hover:text-foreground">
+              <Link href="#o-nas" className="text-muted-foreground transition-all duration-300 hover:text-foreground hover:translate-x-1 inline-block link-underline">
                 O nas
               </Link>
-              <Link href="#kategorie" className="text-muted-foreground transition-colors hover:text-foreground">
+              <Link href="#kategorie" className="text-muted-foreground transition-all duration-300 hover:text-foreground hover:translate-x-1 inline-block link-underline">
                 Kategorie
               </Link>
-              <Link href="#kolekcje" className="text-muted-foreground transition-colors hover:text-foreground">
+              <Link href="#kolekcje" className="text-muted-foreground transition-all duration-300 hover:text-foreground hover:translate-x-1 inline-block link-underline">
                 Kolekcje
               </Link>
-              <Link href="#produkty" className="text-muted-foreground transition-colors hover:text-foreground">
+              <Link href="#produkty" className="text-muted-foreground transition-all duration-300 hover:text-foreground hover:translate-x-1 inline-block link-underline">
                 Produkty
               </Link>
-              <Link href="#kontakt" className="text-muted-foreground transition-colors hover:text-foreground">
+              <Link href="#kontakt" className="text-muted-foreground transition-all duration-300 hover:text-foreground hover:translate-x-1 inline-block link-underline">
                 Kontakt
               </Link>
             </nav>
@@ -72,9 +80,9 @@ export function Footer() {
               Kontakt
             </h4>
             <div className="mt-6 flex flex-col gap-3 text-muted-foreground">
-              <p>Ladebebemini@gmail.com</p>
-              <p>+48 518 845 751</p>
-              <p>Wrocław</p>
+              <p className="transition-colors duration-300 hover:text-foreground cursor-default">Ladebebemini@gmail.com</p>
+              <p className="transition-colors duration-300 hover:text-foreground cursor-default">+48 518 845 751</p>
+              <p className="transition-colors duration-300 hover:text-foreground cursor-default">Wrocław</p>
             </div>
           </div>
         </div>
@@ -82,10 +90,10 @@ export function Footer() {
         <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-warm pt-8 text-sm text-muted-foreground md:flex-row">
           <p>&copy; {new Date().getFullYear()} La de Bébé mini. Wszelkie prawa zastrzeżone.</p>
           <div className="flex gap-6">
-            <Link href="/polityka-prywatnosci" className="transition-colors hover:text-foreground">
+            <Link href="/polityka-prywatnosci" className="transition-all duration-300 hover:text-foreground link-underline">
               Polityka prywatności
             </Link>
-            <Link href="/regulamin" className="transition-colors hover:text-foreground">
+            <Link href="/regulamin" className="transition-all duration-300 hover:text-foreground link-underline">
               Regulamin
             </Link>
           </div>
