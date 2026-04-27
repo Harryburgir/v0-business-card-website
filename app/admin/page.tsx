@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { 
@@ -16,7 +16,12 @@ import {
   ChevronDown,
   X,
   AlertCircle,
-  Check
+  Check,
+  Upload,
+  ImageIcon,
+  Minus,
+  RefreshCw,
+  Eye
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -497,9 +502,12 @@ export default function AdminPage() {
 
       {/* Add Product Dialog */}
       <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
-        <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-lg">
+        <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-xl">
           <DialogHeader>
-            <DialogTitle>Dodaj nowy produkt</DialogTitle>
+            <DialogTitle className="flex items-center gap-2">
+              <Plus className="h-5 w-5 text-primary" />
+              Dodaj nowy produkt
+            </DialogTitle>
             <DialogDescription>
               Wypelnij dane nowego produktu. Pola oznaczone * sa wymagane.
             </DialogDescription>
@@ -511,14 +519,16 @@ export default function AdminPage() {
             toggleSize={toggleSize}
             allCategories={allCategories}
           />
-          <DialogFooter>
+          <DialogFooter className="gap-2 sm:gap-0">
             <Button variant="outline" onClick={() => setIsAddDialogOpen(false)}>
               Anuluj
             </Button>
             <Button 
               onClick={handleAddProduct}
               disabled={!formData.title || !formData.price || !formData.category}
+              className="gap-2"
             >
+              <Plus className="h-4 w-4" />
               Dodaj produkt
             </Button>
           </DialogFooter>
@@ -527,11 +537,14 @@ export default function AdminPage() {
 
       {/* Edit Product Dialog */}
       <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
-        <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-lg">
+        <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-xl">
           <DialogHeader>
-            <DialogTitle>Edytuj produkt</DialogTitle>
+            <DialogTitle className="flex items-center gap-2">
+              <Edit2 className="h-5 w-5 text-primary" />
+              Edytuj produkt
+            </DialogTitle>
             <DialogDescription>
-              Zaktualizuj dane produktu. Pola oznaczone * sa wymagane.
+              Zaktualizuj dane produktu. Zmiany zostana zapisane natychmiast.
             </DialogDescription>
           </DialogHeader>
           <ProductForm
@@ -540,15 +553,18 @@ export default function AdminPage() {
             availableSizes={availableSizes}
             toggleSize={toggleSize}
             allCategories={allCategories}
+            isEditing
           />
-          <DialogFooter>
+          <DialogFooter className="gap-2 sm:gap-0">
             <Button variant="outline" onClick={() => setIsEditDialogOpen(false)}>
               Anuluj
             </Button>
             <Button 
               onClick={handleEditProduct}
               disabled={!formData.title || !formData.price || !formData.category}
+              className="gap-2"
             >
+              <Check className="h-4 w-4" />
               Zapisz zmiany
             </Button>
           </DialogFooter>
@@ -599,104 +615,328 @@ interface ProductFormProps {
   availableSizes: string[];
   toggleSize: (size: string) => void;
   allCategories: { slug: string; title: string; type: "mini" | "ladebebe" }[];
+  isEditing?: boolean;
 }
 
-function ProductForm({ formData, setFormData, availableSizes, toggleSize, allCategories }: ProductFormProps) {
+function ProductForm({ formData, setFormData, availableSizes, toggleSize, allCategories, isEditing }: ProductFormProps) {
+  const [isDragging, setIsDragging] = useState(false);
+  const [showPreview, setShowPreview] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const descriptionMaxLength = 500;
+  const stockValue = parseInt(formData.stock) || 0;
+  const isLowStock = stockValue < 10;
+  const isOutOfStock = stockValue === 0;
+
+  const handleImageUpload = (file: File) => {
+    if (!file.type.startsWith("image/")) return;
+    
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const result = e.target?.result as string;
+      setFormData(prev => ({ ...prev, image: result }));
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(false);
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(false);
+    const file = e.dataTransfer.files[0];
+    if (file) handleImageUpload(file);
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) handleImageUpload(file);
+  };
+
+  const adjustStock = (amount: number) => {
+    const newValue = Math.max(0, stockValue + amount);
+    setFormData(prev => ({ ...prev, stock: newValue.toString() }));
+  };
+
   return (
-    <div className="grid gap-4 py-4">
-      <div className="grid gap-2">
-        <Label htmlFor="title">Nazwa produktu *</Label>
-        <Input
-          id="title"
-          placeholder="np. Body krotki rekaw rozowe"
-          value={formData.title}
-          onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
-        />
-      </div>
-
-      <div className="grid gap-2">
-        <Label htmlFor="description">Opis</Label>
-        <Textarea
-          id="description"
-          placeholder="Opis produktu..."
-          value={formData.description}
-          onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
-          rows={3}
-        />
-      </div>
-
-      <div className="grid gap-2">
-        <Label htmlFor="category">Kategoria *</Label>
-        <Select 
-          value={formData.category} 
-          onValueChange={(value) => setFormData(prev => ({ ...prev, category: value }))}
+    <div className="grid gap-6 py-4">
+      {/* Image Upload Section */}
+      <div className="grid gap-3">
+        <Label className="flex items-center justify-between">
+          <span>Zdjecie produktu</span>
+          {formData.image && (
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              className="h-7 gap-1.5 text-xs"
+              onClick={() => setShowPreview(!showPreview)}
+            >
+              <Eye className="h-3.5 w-3.5" />
+              {showPreview ? "Ukryj" : "Podglad"}
+            </Button>
+          )}
+        </Label>
+        
+        {/* Image Preview */}
+        {showPreview && formData.image && (
+          <div className="relative aspect-square w-full max-w-[200px] mx-auto overflow-hidden rounded-lg border border-border bg-muted">
+            <Image
+              src={formData.image}
+              alt="Podglad produktu"
+              fill
+              className="object-cover"
+            />
+          </div>
+        )}
+        
+        {/* Drag & Drop Zone */}
+        <div
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
+          onClick={() => fileInputRef.current?.click()}
+          className={`relative cursor-pointer rounded-lg border-2 border-dashed p-6 text-center transition-all ${
+            isDragging
+              ? "border-primary bg-primary/5"
+              : formData.image
+              ? "border-primary/50 bg-primary/5"
+              : "border-border hover:border-primary/50 hover:bg-muted/50"
+          }`}
         >
-          <SelectTrigger>
-            <SelectValue placeholder="Wybierz kategorie" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="" disabled>Wybierz kategorie</SelectItem>
-            {allCategories.map(cat => (
-              <SelectItem key={cat.slug} value={cat.slug}>
-                {cat.title} ({cat.type === "ladebebe" ? "2-6 lat" : "0-1 rok"})
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            onChange={handleFileChange}
+            className="hidden"
+          />
+          
+          {formData.image ? (
+            <div className="flex flex-col items-center gap-2">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
+                <Check className="h-5 w-5 text-primary" />
+              </div>
+              <p className="text-sm font-medium text-foreground">Zdjecie dodane</p>
+              <p className="text-xs text-muted-foreground">Kliknij lub przeciagnij aby zmienic</p>
+            </div>
+          ) : (
+            <div className="flex flex-col items-center gap-2">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-muted">
+                <Upload className="h-5 w-5 text-muted-foreground" />
+              </div>
+              <p className="text-sm font-medium text-foreground">Przeciagnij zdjecie lub kliknij</p>
+              <p className="text-xs text-muted-foreground">PNG, JPG do 5MB</p>
+            </div>
+          )}
+        </div>
+        
+        {/* URL Input Alternative */}
+        <div className="flex items-center gap-2">
+          <div className="h-px flex-1 bg-border" />
+          <span className="text-xs text-muted-foreground">lub podaj URL</span>
+          <div className="h-px flex-1 bg-border" />
+        </div>
+        <Input
+          placeholder="https://example.com/image.jpg"
+          value={formData.image.startsWith("data:") ? "" : formData.image}
+          onChange={(e) => setFormData(prev => ({ ...prev, image: e.target.value }))}
+          className="text-sm"
+        />
       </div>
 
+      {/* Basic Info Section */}
+      <div className="grid gap-4">
+        <div className="grid gap-2">
+          <Label htmlFor="title">Nazwa produktu *</Label>
+          <Input
+            id="title"
+            placeholder="np. Body krotki rekaw rozowe"
+            value={formData.title}
+            onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
+          />
+        </div>
+
+        <div className="grid gap-2">
+          <Label htmlFor="description" className="flex items-center justify-between">
+            <span>Opis produktu</span>
+            <span className={`text-xs ${formData.description.length > descriptionMaxLength * 0.9 ? "text-destructive" : "text-muted-foreground"}`}>
+              {formData.description.length}/{descriptionMaxLength}
+            </span>
+          </Label>
+          <Textarea
+            id="description"
+            placeholder="Opisz produkt - material, wlasciwosci, pielegnacja..."
+            value={formData.description}
+            onChange={(e) => {
+              if (e.target.value.length <= descriptionMaxLength) {
+                setFormData(prev => ({ ...prev, description: e.target.value }));
+              }
+            }}
+            rows={4}
+            className="resize-none"
+          />
+        </div>
+
+        <div className="grid gap-2">
+          <Label htmlFor="category">Kategoria *</Label>
+          <Select 
+            value={formData.category} 
+            onValueChange={(value) => setFormData(prev => ({ ...prev, category: value }))}
+          >
+            <SelectTrigger>
+              <SelectValue placeholder="Wybierz kategorie" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="" disabled>Wybierz kategorie</SelectItem>
+              {allCategories.map(cat => (
+                <SelectItem key={cat.slug} value={cat.slug}>
+                  {cat.title} ({cat.type === "ladebebe" ? "2-6 lat" : "0-1 rok"})
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
+
+      {/* Price & Stock Section */}
       <div className="grid grid-cols-2 gap-4">
         <div className="grid gap-2">
           <Label htmlFor="price">Cena (zl) *</Label>
-          <Input
-            id="price"
-            type="number"
-            min="0"
-            placeholder="np. 79"
-            value={formData.price}
-            onChange={(e) => setFormData(prev => ({ ...prev, price: e.target.value }))}
-          />
+          <div className="relative">
+            <Input
+              id="price"
+              type="number"
+              min="0"
+              placeholder="79"
+              value={formData.price}
+              onChange={(e) => setFormData(prev => ({ ...prev, price: e.target.value }))}
+              className="pr-10"
+            />
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">zl</span>
+          </div>
         </div>
+        
         <div className="grid gap-2">
-          <Label htmlFor="stock">Stan magazynowy</Label>
-          <Input
-            id="stock"
-            type="number"
-            min="0"
-            placeholder="np. 25"
-            value={formData.stock}
-            onChange={(e) => setFormData(prev => ({ ...prev, stock: e.target.value }))}
-          />
+          <Label htmlFor="stock" className="flex items-center gap-2">
+            <span>Stan magazynowy</span>
+            {isEditing && (
+              <Badge 
+                variant={isOutOfStock ? "destructive" : isLowStock ? "secondary" : "outline"}
+                className="text-xs"
+              >
+                {isOutOfStock ? "Brak" : isLowStock ? "Niski" : "OK"}
+              </Badge>
+            )}
+          </Label>
+          <div className="flex items-center gap-2">
+            <Button
+              type="button"
+              variant="outline"
+              size="icon"
+              className="h-10 w-10 shrink-0"
+              onClick={() => adjustStock(-1)}
+              disabled={stockValue <= 0}
+            >
+              <Minus className="h-4 w-4" />
+            </Button>
+            <Input
+              id="stock"
+              type="number"
+              min="0"
+              placeholder="40"
+              value={formData.stock}
+              onChange={(e) => setFormData(prev => ({ ...prev, stock: e.target.value }))}
+              className={`text-center ${isOutOfStock ? "border-destructive text-destructive" : isLowStock ? "border-amber-500" : ""}`}
+            />
+            <Button
+              type="button"
+              variant="outline"
+              size="icon"
+              className="h-10 w-10 shrink-0"
+              onClick={() => adjustStock(1)}
+            >
+              <Plus className="h-4 w-4" />
+            </Button>
+          </div>
+          {/* Quick stock adjustment buttons */}
+          <div className="flex gap-1">
+            {[10, 20, 40].map(amount => (
+              <Button
+                key={amount}
+                type="button"
+                variant="ghost"
+                size="sm"
+                className="h-7 flex-1 text-xs"
+                onClick={() => setFormData(prev => ({ ...prev, stock: amount.toString() }))}
+              >
+                {amount}
+              </Button>
+            ))}
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              className="h-7 gap-1 text-xs"
+              onClick={() => setFormData(prev => ({ ...prev, stock: "40" }))}
+            >
+              <RefreshCw className="h-3 w-3" />
+              Reset
+            </Button>
+          </div>
         </div>
       </div>
 
-      <div className="grid gap-2">
-        <Label htmlFor="image">URL zdjecia</Label>
-        <Input
-          id="image"
-          placeholder="https://example.com/image.jpg"
-          value={formData.image}
-          onChange={(e) => setFormData(prev => ({ ...prev, image: e.target.value }))}
-        />
-      </div>
-
-      <div className="grid gap-2">
-        <Label>Dostepne rozmiary</Label>
+      {/* Sizes Section */}
+      <div className="grid gap-3">
+        <Label className="flex items-center justify-between">
+          <span>Dostepne rozmiary</span>
+          <span className="text-xs text-muted-foreground">
+            {formData.sizes.length} wybrane
+          </span>
+        </Label>
         <div className="flex flex-wrap gap-2">
           {availableSizes.map(size => (
             <button
               key={size}
               type="button"
               onClick={() => toggleSize(size)}
-              className={`rounded-md border px-3 py-1.5 text-sm font-medium transition-colors ${
+              className={`rounded-md border px-3 py-1.5 text-sm font-medium transition-all ${
                 formData.sizes.includes(size)
-                  ? "border-primary bg-primary text-primary-foreground"
-                  : "border-border bg-background text-foreground hover:bg-muted"
+                  ? "border-primary bg-primary text-primary-foreground shadow-sm"
+                  : "border-border bg-background text-foreground hover:bg-muted hover:border-primary/50"
               }`}
             >
               {size}
             </button>
           ))}
+        </div>
+        <div className="flex gap-2">
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            className="h-7 text-xs"
+            onClick={() => setFormData(prev => ({ ...prev, sizes: [...availableSizes] }))}
+          >
+            Zaznacz wszystkie
+          </Button>
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            className="h-7 text-xs"
+            onClick={() => setFormData(prev => ({ ...prev, sizes: [] }))}
+          >
+            Odznacz wszystkie
+          </Button>
         </div>
       </div>
     </div>
