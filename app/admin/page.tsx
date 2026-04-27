@@ -543,7 +543,7 @@ export default function AdminPage() {
             </Button>
             <Button 
               onClick={handleAddProduct}
-              disabled={!formData.title || !formData.price || !formData.category}
+              disabled={!formData.title.trim() || formData.price === "" || !formData.category}
               className="gap-2"
             >
               <Plus className="h-4 w-4" />
@@ -579,7 +579,7 @@ export default function AdminPage() {
             </Button>
             <Button 
               onClick={handleEditProduct}
-              disabled={!formData.title || !formData.price || !formData.category}
+              disabled={!formData.title.trim() || formData.price === "" || !formData.category}
               className="gap-2"
             >
               <Check className="h-4 w-4" />
