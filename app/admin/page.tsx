@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { 
@@ -51,6 +51,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { categories, ladebebeCategories, type Product, type Category, type LadebebeCategory } from "@/lib/products-data";
+import { useStock } from "@/context/stock-context";
 
 interface ExtendedProduct extends Omit<Product, 'price'> {
   price: number;
@@ -64,7 +65,7 @@ const initialProducts: ExtendedProduct[] = [
     cat.products.map(p => ({
       ...p,
       price: parseInt(p.price.replace(/[^\d]/g, "")),
-      stock: Math.floor(Math.random() * 50) + 5,
+      stock: 40,
       category: cat.slug,
     }))
   ),
@@ -87,6 +88,16 @@ export default function AdminPage() {
   const [selectedProduct, setSelectedProduct] = useState<ExtendedProduct | null>(null);
   const [showSuccessToast, setShowSuccessToast] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+  const { initializeStock } = useStock();
+
+  // Initialize stock on mount
+  useEffect(() => {
+    const stockData = initialProducts.reduce((acc, product) => {
+      acc[product.id] = product.stock;
+      return acc;
+    }, {} as Record<string, number>);
+    initializeStock(stockData);
+  }, [initializeStock]);
 
   // Form state
   const [formData, setFormData] = useState({
@@ -148,6 +159,10 @@ export default function AdminPage() {
     };
 
     setProducts([...products, newProduct]);
+    
+    // Add stock to context
+    initializeStock({ [newProduct.id]: parseInt(formData.stock) || 0 });
+
     setIsAddDialogOpen(false);
     resetForm();
     showSuccess("Produkt dodany pomyslnie");
@@ -156,20 +171,24 @@ export default function AdminPage() {
   const handleEditProduct = () => {
     if (!selectedProduct || !formData.title || !formData.price || !formData.category) return;
 
+    const updatedProduct = {
+      ...selectedProduct,
+      title: formData.title,
+      description: formData.description,
+      price: parseInt(formData.price),
+      stock: parseInt(formData.stock) || 0,
+      category: formData.category,
+      image: formData.image || selectedProduct.image,
+      sizes: formData.sizes.length > 0 ? formData.sizes : undefined,
+    };
+
     setProducts(products.map(p => 
-      p.id === selectedProduct.id 
-        ? {
-            ...p,
-            title: formData.title,
-            description: formData.description,
-            price: parseInt(formData.price),
-            stock: parseInt(formData.stock) || 0,
-            category: formData.category,
-            image: formData.image || p.image,
-            sizes: formData.sizes.length > 0 ? formData.sizes : undefined,
-          }
-        : p
+      p.id === selectedProduct.id ? updatedProduct : p
     ));
+
+    // Update stock in context
+    initializeStock({ [selectedProduct.id]: parseInt(formData.stock) || 0 });
+
     setIsEditDialogOpen(false);
     setSelectedProduct(null);
     resetForm();

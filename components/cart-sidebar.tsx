@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { X, Minus, Plus, Trash2, ShoppingBag, ChevronLeft } from "lucide-react";
 import { useCart } from "@/context/cart-context";
+import { useStock } from "@/context/stock-context";
 
 const DELIVERY_OPTIONS = [
   { id: "inpost-paczkomat", name: "InPost Paczkomat", description: "Odbiór w wybranym Paczkomacie 24/7", price: 20 },
@@ -27,6 +28,7 @@ interface FormData {
 
 export function CartSidebar() {
   const { items, isOpen, closeCart, removeItem, updateQuantity, clearCart, totalPrice } = useCart();
+  const { getStock, setStock } = useStock();
   const [step, setStep] = useState<Step>("cart");
   const [selectedDelivery, setSelectedDelivery] = useState(DELIVERY_OPTIONS[0]);
   const [form, setForm] = useState<FormData>({ name: "", email: "", phone: "", address: "", city: "", postalCode: "", notes: "" });
@@ -56,6 +58,16 @@ export function CartSidebar() {
     setSubmitting(true);
 
     try {
+      // Check stock availability
+      for (const item of items) {
+        const currentStock = getStock(item.product.id);
+        if (currentStock < item.quantity) {
+          setError(`Nie ma wystarczającej ilości produktu "${item.product.title}". Dostępnych: ${currentStock}, zamawiane: ${item.quantity}`);
+          setSubmitting(false);
+          return;
+        }
+      }
+
       const orderItems = items.map((i) => ({
         title: i.product.title,
         size: i.selectedSize || "brak rozmiaru",
@@ -80,9 +92,17 @@ export function CartSidebar() {
       if (!res.ok || !data.success) {
         setError(data.error || "Nie udało się wysłać zamówienia. Spróbuj ponownie.");
       } else {
+        // Deduct stock on successful order
+        for (const item of items) {
+          const currentStock = getStock(item.product.id);
+          if (currentStock >= item.quantity) {
+            setStock(item.product.id, currentStock - item.quantity);
+          }
+        }
+        
         setOrderNumber(data.orderNumber);
         setStep("success");
-        clearCart();
+        setTimeout(() => clearCart(), 300);
       }
     } catch {
       setError("Błąd połączenia. Sprawdź internet i spróbuj ponownie.");
