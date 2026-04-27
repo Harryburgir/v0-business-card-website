@@ -83,7 +83,20 @@ const allCategories = [
 ];
 
 export default function AdminPage() {
-  const [products, setProducts] = useState<ExtendedProduct[]>(initialProducts);
+  const [products, setProducts] = useState<ExtendedProduct[]>(() => {
+    // Load products from localStorage, fallback to initialProducts
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('admin_products');
+      if (saved) {
+        try {
+          return JSON.parse(saved);
+        } catch (e) {
+          console.error("Failed to parse saved products:", e);
+        }
+      }
+    }
+    return initialProducts;
+  });
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
@@ -95,14 +108,19 @@ export default function AdminPage() {
   const [successMessage, setSuccessMessage] = useState("");
   const { initializeStock } = useStock();
 
+  // Save products to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem('admin_products', JSON.stringify(products));
+  }, [products]);
+
   // Initialize stock on mount
   useEffect(() => {
-    const stockData = initialProducts.reduce((acc, product) => {
+    const stockData = products.reduce((acc, product) => {
       acc[product.id] = product.stock;
       return acc;
     }, {} as Record<string, number>);
     initializeStock(stockData);
-  }, [initializeStock]);
+  }, [products, initializeStock]);
 
   // Form state
   const [formData, setFormData] = useState({
