@@ -1,11 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, useCallback, type ReactNode } from "react";
-
-interface StockItem {
-  productId: string;
-  quantity: number;
-}
+import { categories, ladebebeCategories } from "@/lib/products-data";
 
 interface StockContextValue {
   stock: Map<string, number>;
@@ -18,8 +14,29 @@ interface StockContextValue {
 
 const StockContext = createContext<StockContextValue | null>(null);
 
+// Initialize stock with all products set to 40
+function createInitialStock(): Map<string, number> {
+  const stockMap = new Map<string, number>();
+  
+  // Add mini bebe products (0-1 rok)
+  categories.forEach(category => {
+    category.products.forEach(product => {
+      stockMap.set(product.id, 40);
+    });
+  });
+  
+  // Add ladebebe products (2-6 lat)
+  ladebebeCategories.forEach(category => {
+    category.products.forEach(product => {
+      stockMap.set(product.id, 40);
+    });
+  });
+  
+  return stockMap;
+}
+
 export function StockProvider({ children }: { children: ReactNode }) {
-  const [stock, setStockMap] = useState<Map<string, number>>(new Map());
+  const [stock, setStockMap] = useState<Map<string, number>>(() => createInitialStock());
 
   const getStock = useCallback((productId: string) => {
     return stock.get(productId) || 0;
