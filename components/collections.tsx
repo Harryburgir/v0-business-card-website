@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useRevealAnimation, useStaggerAnimation } from "@/hooks/use-reveal-animation";
 
 const collections = [
   {
@@ -26,10 +29,16 @@ const collections = [
 ];
 
 export function Collections() {
+  const { ref: headerRef, isRevealed: headerRevealed } = useRevealAnimation<HTMLDivElement>();
+  const { containerRef: gridRef, containerClassName: gridClass } = useStaggerAnimation<HTMLDivElement>();
+
   return (
     <section id="kolekcje" className="px-6 py-24 lg:py-32">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-16 text-center">
+        <div 
+          ref={headerRef}
+          className={`mb-16 text-center reveal-section ${headerRevealed ? "revealed" : ""}`}
+        >
           <p className="mb-4 text-sm uppercase tracking-[0.3em] text-muted-foreground">
             Kolekcje
           </p>
@@ -42,24 +51,27 @@ export function Collections() {
           </p>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-3">
+        <div 
+          ref={gridRef}
+          className={`grid gap-8 md:grid-cols-3 ${gridClass}`}
+        >
           {collections.map((collection, index) => (
             <Link
               key={index}
               href={`/kategoria/${collection.slug}`}
               className="group cursor-pointer"
             >
-              <div className="relative aspect-[3/4] overflow-hidden bg-muted">
+              <div className="relative aspect-[3/4] overflow-hidden bg-muted image-reveal">
                 <Image
                   src={collection.image}
                   alt={collection.title}
                   fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-foreground/0 transition-colors duration-300 group-hover:bg-foreground/10" />
+                <div className="absolute inset-0 bg-foreground/0 transition-colors duration-500 group-hover:bg-foreground/10" />
               </div>
-              <div className="mt-6 text-center">
-                <p className="text-xs uppercase tracking-widest text-muted-foreground">
+              <div className="mt-6 text-center transition-transform duration-300 group-hover:-translate-y-1">
+                <p className="text-xs uppercase tracking-widest text-muted-foreground transition-colors duration-300 group-hover:text-primary">
                   {collection.subtitle}
                 </p>
                 <h3 className="mt-2 font-serif text-2xl text-foreground">

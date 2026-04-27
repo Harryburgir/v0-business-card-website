@@ -1,18 +1,24 @@
+"use client";
+
 import Image from "next/image";
+import { useRevealAnimation, useStaggerAnimation } from "@/hooks/use-reveal-animation";
 
 export function About() {
+  const { ref: textRef, isRevealed: textRevealed } = useRevealAnimation<HTMLDivElement>();
+  const { containerRef: pillarsRef, containerClassName: pillarsClass } = useStaggerAnimation<HTMLDivElement>();
+
   return (
     <section id="o-nas" className="relative">
 
       {/* ── Zdjęcie tło z tekstem ── */}
       <div className="relative min-h-[90vh] flex items-center">
         {/* Zdjęcie tło */}
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 image-reveal">
           <Image
             src="/images/about-bg.jpg"
             alt="Właścicielka La de Bébé mini prezentująca ubranka dla niemowląt"
             fill
-            className="object-cover object-top"
+            className="object-cover object-top transition-transform duration-[1.5s] ease-out"
             sizes="100vw"
           />
           {/* Nakładka — ciemniejsza po lewej (tekst), jaśniejsza po prawej (twarz) */}
@@ -22,7 +28,10 @@ export function About() {
 
         {/* Treść na zdjęciu */}
         <div className="relative mx-auto max-w-7xl w-full px-6 py-32 lg:py-40">
-          <div className="max-w-2xl">
+          <div 
+            ref={textRef}
+            className={`max-w-2xl reveal-section ${textRevealed ? "revealed" : ""}`}
+          >
             <p className="mb-4 text-sm uppercase tracking-[0.3em] text-rose-200/90 drop-shadow-lg">
               O nas
             </p>
@@ -47,8 +56,11 @@ export function About() {
       {/* ── Trzy filary ── */}
       <div className="bg-warm/40 border-t border-border/40">
         <div className="mx-auto max-w-7xl px-6 py-20">
-          <div className="grid gap-8 md:grid-cols-3">
-            <div className="border-t border-warm pt-8">
+          <div 
+            ref={pillarsRef}
+            className={`grid gap-8 md:grid-cols-3 ${pillarsClass}`}
+          >
+            <div className="border-t border-warm pt-8 card-hover">
               <span className="font-serif text-5xl font-light text-primary">01</span>
               <h3 className="mt-4 text-lg font-medium uppercase tracking-wide text-foreground">
                 Naturalne tkaniny
@@ -57,7 +69,7 @@ export function About() {
                 Starannie wyselekcjonowane materiały bez barwników chemicznych. Bezpieczne dla najdelikatniejszej skóry.
               </p>
             </div>
-            <div className="border-t border-warm pt-8">
+            <div className="border-t border-warm pt-8 card-hover">
               <span className="font-serif text-5xl font-light text-primary">02</span>
               <h3 className="mt-4 text-lg font-medium uppercase tracking-wide text-foreground">
                 Subtelny design
@@ -66,7 +78,7 @@ export function About() {
                 Piękne, unikalne wzory w delikatnych kolorach pastelowych.
               </p>
             </div>
-            <div className="border-t border-warm pt-8">
+            <div className="border-t border-warm pt-8 card-hover">
               <span className="font-serif text-5xl font-light text-primary">03</span>
               <h3 className="mt-4 text-lg font-medium uppercase tracking-wide text-foreground">
                 Komfort od pierwszych dni
