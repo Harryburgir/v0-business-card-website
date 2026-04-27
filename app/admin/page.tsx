@@ -55,26 +55,9 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { categories, ladebebeCategories, type Product, type Category, type LadebebeCategory } from "@/lib/products-data";
+import { categories, ladebebeCategories, type Product } from "@/lib/products-data";
 import { useStock } from "@/context/stock-context";
-
-interface ExtendedProduct extends Omit<Product, 'price'> {
-  price: number;
-  stock: number;
-  category: string;
-}
-
-// Transform products data to include stock (simulated)
-const initialProducts: ExtendedProduct[] = [
-  ...categories.flatMap(cat => 
-    cat.products.map(p => ({
-      ...p,
-      price: parseInt(p.price.replace(/[^\d]/g, "")),
-      stock: 40,
-      category: cat.slug,
-    }))
-  ),
-];
+import { useProducts, type ExtendedProduct } from "@/context/products-context";
 
 // Combine all categories for selection
 const allCategories = [
@@ -83,7 +66,7 @@ const allCategories = [
 ];
 
 export default function AdminPage() {
-  const [products, setProducts] = useState<ExtendedProduct[]>(initialProducts);
+  const { products, addProduct, updateProduct, deleteProduct, isLoaded } = useProducts();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
@@ -97,12 +80,14 @@ export default function AdminPage() {
 
   // Initialize stock on mount
   useEffect(() => {
-    const stockData = initialProducts.reduce((acc, product) => {
-      acc[product.id] = product.stock;
-      return acc;
-    }, {} as Record<string, number>);
-    initializeStock(stockData);
-  }, [initializeStock]);
+    if (isLoaded) {
+      const stockData = products.reduce((acc, product) => {
+        acc[product.id] = product.stock;
+        return acc;
+      }, {} as Record<string, number>);
+      initializeStock(stockData);
+    }
+  }, [products, initializeStock, isLoaded]);
 
   // Form state
   const [formData, setFormData] = useState({
@@ -163,7 +148,7 @@ export default function AdminPage() {
       sizes: formData.sizes.length > 0 ? formData.sizes : undefined,
     };
 
-    setProducts(prev => [...prev, newProduct]);
+    addProduct(newProduct);
     
     // Add stock to context
     initializeStock({ [newProduct.id]: parseInt(formData.stock) || 40 });
@@ -176,8 +161,7 @@ export default function AdminPage() {
   const handleEditProduct = () => {
     if (!selectedProduct || !formData.title || !formData.price || !formData.category) return;
 
-    const updatedProduct = {
-      ...selectedProduct,
+    updateProduct(selectedProduct.id, {
       title: formData.title,
       description: formData.description,
       price: parseInt(formData.price),
@@ -185,11 +169,7 @@ export default function AdminPage() {
       category: formData.category,
       image: formData.image || selectedProduct.image,
       sizes: formData.sizes.length > 0 ? formData.sizes : undefined,
-    };
-
-    setProducts(prev => prev.map(p => 
-      p.id === selectedProduct.id ? updatedProduct : p
-    ));
+    });
 
     // Update stock in context
     initializeStock({ [selectedProduct.id]: parseInt(formData.stock) || 0 });
@@ -202,7 +182,7 @@ export default function AdminPage() {
 
   const handleDeleteProduct = () => {
     if (!selectedProduct) return;
-    setProducts(products.filter(p => p.id !== selectedProduct.id));
+    deleteProduct(selectedProduct.id);
     setIsDeleteDialogOpen(false);
     setSelectedProduct(null);
     showSuccess("Produkt usuniety");
@@ -525,7 +505,7 @@ export default function AdminPage() {
             </Button>
             <Button 
               onClick={handleAddProduct}
-              disabled={!formData.title || !formData.price || !formData.category}
+              disabled={!formData.title.trim() || formData.price === "" || !formData.category}
               className="gap-2"
             >
               <Plus className="h-4 w-4" />
@@ -561,7 +541,7 @@ export default function AdminPage() {
             </Button>
             <Button 
               onClick={handleEditProduct}
-              disabled={!formData.title || !formData.price || !formData.category}
+              disabled={!formData.title.trim() || formData.price === "" || !formData.category}
               className="gap-2"
             >
               <Check className="h-4 w-4" />

@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { categories } from "@/lib/products-data";
+import { useProducts } from "@/context/products-context";
 import { useRevealAnimation, useStaggerAnimation } from "@/hooks/use-reveal-animation";
 
 export function Categories() {
+  const { categories } = useProducts();
   const { ref: headerRef, isRevealed: headerRevealed } = useRevealAnimation<HTMLDivElement>();
   const { containerRef: gridRef, containerClassName: gridClass } = useStaggerAnimation<HTMLDivElement>();
 

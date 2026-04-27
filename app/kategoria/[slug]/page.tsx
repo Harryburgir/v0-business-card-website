@@ -1,33 +1,42 @@
+"use client";
+
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, useParams } from "next/navigation";
 import { ArrowLeft, Mail } from "lucide-react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { ProductCard } from "@/components/product-card";
-import { getCategoryBySlug, getAllCategorySlugs } from "@/lib/products-data";
+import { useProducts } from "@/context/products-context";
 
-export async function generateStaticParams() {
-  const slugs = getAllCategorySlugs();
-  return slugs.map((slug) => ({ slug }));
-}
-
-export async function generateMetadata(props: { params: Promise<{ slug: string }> }) {
-  const params = await props.params;
-  const category = getCategoryBySlug(params.slug);
-  if (!category) return { title: "Kategoria nie znaleziona" };
+export default function CategoryPage() {
+  const params = useParams();
+  const slug = params.slug as string;
+  const { getCategoryBySlug, isLoaded } = useProducts();
   
-  return {
-    title: `${category.title} | La de Bébé mini`,
-    description: category.description,
-  };
-}
+  const category = getCategoryBySlug(slug);
 
-export default async function CategoryPage(props: { params: Promise<{ slug: string }> }) {
-  const params = await props.params;
-  const category = getCategoryBySlug(params.slug);
-
-  if (!category) {
+  if (isLoaded && !category) {
     notFound();
+  }
+
+  if (!isLoaded || !category) {
+    return (
+      <>
+        <Header />
+        <main className="min-h-screen bg-background pt-20">
+          <section className="bg-warm/30 px-6 py-16 lg:py-24">
+            <div className="mx-auto max-w-7xl">
+              <div className="animate-pulse">
+                <div className="h-4 w-32 bg-muted rounded mb-8" />
+                <div className="h-8 w-48 bg-muted rounded mb-4" />
+                <div className="h-16 w-full max-w-lg bg-muted rounded" />
+              </div>
+            </div>
+          </section>
+        </main>
+        <Footer />
+      </>
+    );
   }
 
   return (
