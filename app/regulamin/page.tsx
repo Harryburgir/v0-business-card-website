@@ -55,8 +55,22 @@ export default function RegulaminPage() {
                 lub telefonicznie: <strong>+48 518 845 751</strong>.
               </p>
               <p>
-                1.4. Korzystanie ze Sklepu oznacza akceptację niniejszego Regulaminu oraz 
-                <Link href="/polityka-prywatnosci" className="text-primary hover:underline"> Polityki Prywatności</Link>.
+                1.4. Korzystanie ze Sklepu, w tym przeglądanie oferty, składanie Zamówień oraz dokonywanie płatności,
+                jest równoznaczne z zapoznaniem się i akceptacją niniejszego Regulaminu oraz{" "}
+                <Link href="/polityka-prywatnosci" className="text-primary hover:underline">Polityki Prywatności</Link>.
+              </p>
+              <p>
+                1.5. <strong>Usługodawca (La de Bébé mini) wyraża zgodę na świadczenie usług drogą elektroniczną
+                na warunkach określonych niniejszym Regulaminem.</strong> Usługodawca akceptuje niniejszy Regulamin
+                w całości i zobowiązuje się do jego przestrzegania w relacjach z Klientami. Akceptacja Regulaminu
+                przez Usługodawcę jest niezbędnym warunkiem korzystania przez Usługodawcę z usług Operatora płatności
+                oraz innych dostawców usług zewnętrznych zintegrowanych ze Sklepem.
+              </p>
+              <p>
+                1.6. W przypadku jakichkolwiek rozbieżności pomiędzy niniejszym Regulaminem a regulaminami
+                podmiotów zewnętrznych (Operatora płatności, dostawców logistycznych), w relacji między
+                Sprzedawcą a Klientem pierwszeństwo stosowania mają postanowienia niniejszego Regulaminu,
+                chyba że przepisy prawa stanowią inaczej.
               </p>
             </section>
 
@@ -66,8 +80,10 @@ export default function RegulaminPage() {
                 <li><strong>Klient</strong> — osoba fizyczna posiadająca pełną zdolność do czynności prawnych, osoba prawna lub jednostka organizacyjna nieposiadająca osobowości prawnej, która korzysta ze Sklepu</li>
                 <li><strong>Konsument</strong> — Klient będący osobą fizyczną dokonującą zakupu niezwiązanego bezpośrednio z jej działalnością gospodarczą lub zawodową</li>
                 <li><strong>Produkt</strong> — towar prezentowany w Sklepie, przeznaczony do sprzedaży</li>
-                <li><strong>Zamówienie</strong> — oświadczenie woli Klienta składane za pośrednictwem formularza kontaktowego, zmierzające do zawarcia umowy sprzedaży</li>
+                <li><strong>Zamówienie</strong> — oświadczenie woli Klienta składane za pośrednictwem formularza kontaktowego lub systemu płatności, zmierzające do zawarcia umowy sprzedaży</li>
                 <li><strong>Koszyk</strong> — funkcjonalność Sklepu umożliwiająca wybór Produktów przed złożeniem Zamówienia</li>
+                <li><strong>Operator płatności</strong> — zewnętrzny dostawca usług płatniczych (m.in. Stripe lub inny podmiot wskazany przez Sprzedawcę) przetwarzający transakcje finansowe w Sklepie</li>
+                <li><strong>Usługodawca</strong> — La de Bébé mini jako podmiot świadczący usługi drogą elektroniczną w rozumieniu ustawy o świadczeniu usług drogą elektroniczną z dnia 18 lipca 2002 r.</li>
               </ul>
             </section>
 
@@ -106,18 +122,22 @@ export default function RegulaminPage() {
             <section className="mb-12">
               <h2 className="text-2xl mb-4">5. Składanie zamówień</h2>
               <p>
-                5.1. Zamówienia można składać poprzez formularz kontaktowy dostępny na stronie Sklepu, 
-                e-mail lub telefonicznie.
+                5.1. Zamówienia można składać poprzez formularz kontaktowy dostępny na stronie Sklepu,
+                system płatności online, e-mail lub telefonicznie — przez całą dobę, 7 dni w tygodniu.
               </p>
               <p>
-                5.2. Złożenie Zamówienia wymaga podania danych niezbędnych do jego realizacji: imienia i nazwiska, 
-                adresu e-mail, adresu dostawy oraz numeru telefonu.
+                5.2. Złożenie Zamówienia wymaga podania danych niezbędnych do jego realizacji: imienia i nazwiska,
+                adresu e-mail, adresu dostawy oraz numeru telefonu. W przypadku płatności elektronicznej Klient
+                zostaje przekierowany na stronę Operatora płatności w celu sfinalizowania transakcji.
               </p>
               <p>
-                5.3. Po złożeniu Zamówienia Klient otrzymuje potwierdzenie przyjęcia Zamówienia na podany adres e-mail.
+                5.3. Po złożeniu Zamówienia Klient otrzymuje automatyczne potwierdzenie przyjęcia Zamówienia
+                na podany adres e-mail. Potwierdzenie to nie jest równoznaczne z zawarciem umowy sprzedaży.
               </p>
               <p>
-                5.4. Umowa sprzedaży zostaje zawarta z chwilą potwierdzenia przyjęcia Zamówienia przez Sprzedawcę.
+                5.4. Umowa sprzedaży zostaje zawarta z chwilą potwierdzenia przyjęcia Zamówienia do realizacji
+                przez Sprzedawcę (odrębna wiadomość e-mail) lub — w przypadku płatności elektronicznej —
+                z chwilą potwierdzenia autoryzacji płatności.
               </p>
               <p>
                 5.5. Sprzedawca zastrzega sobie prawo do odmowy realizacji Zamówienia w przypadku:
@@ -126,20 +146,61 @@ export default function RegulaminPage() {
                 <li>Podania nieprawidłowych lub niepełnych danych przez Klienta</li>
                 <li>Braku możliwości kontaktu z Klientem</li>
                 <li>Braku dostępności Produktu</li>
+                <li>Odrzucenia lub cofnięcia autoryzacji płatności przez Operatora płatności</li>
+                <li>Uzasadnionego podejrzenia działania niezgodnego z Regulaminem lub przepisami prawa</li>
               </ul>
             </section>
 
             <section className="mb-12">
               <h2 className="text-2xl mb-4">6. Płatności</h2>
-              <p>6.1. Dostępne formy płatności:</p>
+              <p>
+                6.1. Sklep obsługuje płatności elektroniczne realizowane za pośrednictwem zewnętrznego
+                Operatora płatności. Korzystanie z płatności elektronicznych jest dobrowolne — Klient
+                może wybrać alternatywną formę rozliczenia wskazaną poniżej.
+              </p>
+              <p>6.2. Dostępne formy płatności:</p>
               <ul className="list-disc pl-6 space-y-2">
-                <li><strong>Przelew bankowy</strong> — na rachunek wskazany w potwierdzeniu Zamówienia</li>
-                <li><strong>Płatność przy odbiorze</strong> — gotówką lub kartą w przypadku odbioru osobistego</li>
-                <li><strong>Płatność za pobraniem</strong> — przy odbiorze przesyłki od kuriera</li>
+                <li>
+                  <strong>Płatność elektroniczna online</strong> — karta płatnicza (Visa, Mastercard),
+                  BLIK lub inny instrument płatniczy obsługiwany przez Operatora płatności.
+                  Transakcja realizowana jest w czasie rzeczywistym za pośrednictwem bezpiecznego
+                  łącza szyfrowanego (SSL/TLS).
+                </li>
+                <li><strong>Przelew bankowy</strong> — na rachunek wskazany w potwierdzeniu Zamówienia; realizacja następuje po zaksięgowaniu wpłaty</li>
+                <li><strong>Płatność przy odbiorze osobistym</strong> — gotówką lub kartą w showroomie we Wrocławiu</li>
+                <li><strong>Płatność za pobraniem</strong> — przy odbiorze przesyłki od kuriera (możliwa dopłata operacyjna)</li>
               </ul>
               <p>
-                6.2. W przypadku płatności przelewem, Zamówienie jest realizowane po zaksięgowaniu wpłaty 
-                na rachunku Sprzedawcy.
+                6.3. <strong>Warunki korzystania z płatności elektronicznych — akceptacja przez Usługodawcę.</strong>{" "}
+                Świadczenie usług płatności elektronicznych w Sklepie jest możliwe wyłącznie po uprzednim
+                zawarciu przez Usługodawcę (La de Bébé mini) umowy z Operatorem płatności oraz zaakceptowaniu
+                regulaminu tego Operatora. Usługodawca zobowiązuje się do przestrzegania wszystkich wymogów
+                nałożonych przez Operatora płatności, w tym wymogów w zakresie bezpieczeństwa transakcji (PCI DSS),
+                przeciwdziałania praniu pieniędzy (AML) i ochrony danych osobowych.
+              </p>
+              <p>
+                6.4. Dane karty płatniczej oraz dane do przelewu elektronicznego <strong>nie są przechowywane
+                przez Sprzedawcę</strong> — są przetwarzane wyłącznie przez Operatora płatności, który
+                ponosi odpowiedzialność za ich bezpieczeństwo zgodnie z obowiązującymi standardami i
+                własnym regulaminem.
+              </p>
+              <p>
+                6.5. Zamówienie uważa się za opłacone w momencie:
+              </p>
+              <ul className="list-disc pl-6 space-y-2">
+                <li>przy płatnościach elektronicznych — z chwilą otrzymania przez Sprzedawcę potwierdzenia autoryzacji transakcji od Operatora płatności</li>
+                <li>przy przelewie bankowym — z chwilą zaksięgowania pełnej kwoty na rachunku Sprzedawcy</li>
+                <li>przy płatności za pobraniem — z chwilą odbioru przesyłki i uiszczenia należności</li>
+              </ul>
+              <p>
+                6.6. W przypadku nieudanej transakcji elektronicznej lub cofnięcia autoryzacji, Zamówienie
+                zostaje anulowane, a Klient informowany jest drogą e-mail. Zwrot środków następuje automatycznie
+                za pośrednictwem Operatora płatności, zgodnie z jego procedurami, nie później niż w ciągu
+                <strong> 7 dni roboczych</strong>.
+              </p>
+              <p>
+                6.7. Sprzedawca wystawia dokument sprzedaży (paragon lub fakturę VAT) na życzenie Klienta.
+                Prośbę o fakturę należy zgłosić podczas składania Zamówienia, podając dane do faktury.
               </p>
             </section>
 
@@ -184,9 +245,11 @@ export default function RegulaminPage() {
                 w oryginalnym opakowaniu wraz z metkami.
               </p>
               <p>
-                8.5. Sprzedawca zwraca wszystkie otrzymane płatności, w tym koszty dostawy (z wyjątkiem dodatkowych 
-                kosztów wynikających z wybranego przez Konsumenta sposobu dostawy innego niż najtańszy), 
+                8.5. Sprzedawca zwraca wszystkie otrzymane płatności, w tym koszty dostawy (z wyjątkiem dodatkowych
+                kosztów wynikających z wybranego przez Konsumenta sposobu dostawy innego niż najtańszy),
                 niezwłocznie, nie później niż w terminie 14 dni od dnia otrzymania zwróconego Produktu.
+                Zwrot płatności dokonanych kartą lub przelewem elektronicznym następuje na rachunek źródłowy
+                za pośrednictwem Operatora płatności.
               </p>
               <p>
                 8.6. Koszty zwrotu Produktu ponosi Konsument.
