@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { AdminAuth } from "@/components/admin-auth";
 
 export const metadata: Metadata = {
   title: "Panel Administracyjny | La de Bebe mini",
@@ -10,5 +11,5 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return <AdminAuth>{children}</AdminAuth>;
 }
