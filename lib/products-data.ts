@@ -231,10 +231,10 @@ export interface LadebebeCategory {
 
 export const ladebebeCategories: LadebebeCategory[] = [
   {
-    slug: "spodnie-krotkie",
-    title: "Spodnie krótkie",
-    description: "Wygodne spodenki na ciepłe dni",
-    longDescription: "Lekkie i przewiewne spodenki idealne na wiosenne i letnie dni. Naturalne tkaniny, wygodny krój i stylowe wzory dla aktywnych dzieci.",
+    slug: "spodnie-i-spodniczki",
+    title: "Spodnie i spódniczki",
+    description: "Wygodne spodnie i spódniczki na każdą porę roku",
+    longDescription: "Lekkie i przewiewne spodnie oraz spódniczki idealne na każdy dzień. Naturalne tkaniny, wygodny krój i stylowe wzory dla aktywnych dzieci.",
     ageRange: "2-6 lat",
     products: [],
   },
