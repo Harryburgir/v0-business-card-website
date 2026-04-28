@@ -24,7 +24,7 @@ const collections = [
     subtitle: "6-12 miesięcy",
     description: "Wygodne ubranka dla pierwszych kroków i zabaw",
     image: "/images/collection-toddler.jpg",
-    slug: "spodenki",
+    slug: "spodnie-i-spodniczki",
   },
 ];
 

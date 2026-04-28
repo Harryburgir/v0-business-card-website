@@ -186,14 +186,14 @@ export const categories: Category[] = [
     ],
   },
   {
-    slug: "spodenki",
-    title: "Spodenki",
-    description: "Wygodne spodenki dla maluszków",
-    longDescription: "Miękkie i elastyczne spodenki, idealne do noszenia co dzień. Wykonane z naturalnych tkanin, zapewniaj�� swobodę ruchów podczas zabawy i snu.",
+    slug: "spodnie-i-spodniczki",
+    title: "Spodnie i spódniczki",
+    description: "Wygodne spodnie i spódniczki dla maluszków",
+    longDescription: "Miękkie i elastyczne spodnie oraz spódniczki, idealne do noszenia co dzień. Wykonane z naturalnych tkanin, zapewniające swobodę ruchów podczas zabawy i snu.",
     products: [
       {
         id: "spodenki-1",
-        title: "Spodenki różowe z falbanką",
+        title: "Spodnie różowe z falbanką",
         price: "59 zł",
         image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/spodnie-BqKjdb93YurCThQ1DuYuS0YiMLCqwW.jpeg",
         description: "Miękka bawełna, ozdobna falbanka",
@@ -201,7 +201,7 @@ export const categories: Category[] = [
       },
       {
         id: "spodenki-2",
-        title: "Spodenki niebieskie",
+        title: "Spodnie niebieskie",
         price: "59 zł",
         image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/spodnie%20%282%29-dleEzvDI28GOHKPrAyP8y6a9f5gSsp.jpeg",
         description: "Naturalna bawełna, wygodna gumka",
@@ -209,7 +209,7 @@ export const categories: Category[] = [
       },
       {
         id: "spodenki-3",
-        title: "Spodenki różowe w kratkę z falbanką",
+        title: "Spodnie różowe w kratkę z falbanką",
         price: "59 zł",
         image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Spodnie%20%283%29-BGPTUy6cOz2wmPFzAgyyaVq8kle7qx.jpeg",
         description: "Bawełna, wzór w kratkę, ozdobna falbanka",
@@ -231,12 +231,37 @@ export interface LadebebeCategory {
 
 export const ladebebeCategories: LadebebeCategory[] = [
   {
-    slug: "spodnie-krotkie",
-    title: "Spodnie krótkie",
-    description: "Wygodne spodenki na ciepłe dni",
-    longDescription: "Lekkie i przewiewne spodenki idealne na wiosenne i letnie dni. Naturalne tkaniny, wygodny krój i stylowe wzory dla aktywnych dzieci.",
+    slug: "spodnie-i-spodniczki",
+    title: "Spodnie i spódniczki",
+    description: "Wygodne spodnie i spódniczki na każdą porę roku",
+    longDescription: "Lekkie i przewiewne spodnie oraz spódniczki idealne na każdy dzień. Naturalne tkaniny, wygodny krój i stylowe wzory dla aktywnych dzieci.",
     ageRange: "2-6 lat",
-    products: [],
+    products: [
+      {
+        id: "spodnie-1",
+        title: "Spodnie różowe z falbanką",
+        price: "59 zł",
+        image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/spodnie-BqKjdb93YurCThQ1DuYuS0YiMLCqwW.jpeg",
+        description: "Miękka bawełna, ozdobna falbanka",
+        sizes: ["56", "62", "74", "80", "86"],
+      },
+      {
+        id: "spodnie-2",
+        title: "Spodnie niebieskie",
+        price: "59 zł",
+        image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/spodnie%20%282%29-dleEzvDI28GOHKPrAyP8y6a9f5gSsp.jpeg",
+        description: "Naturalna bawełna, wygodna gumka",
+        sizes: ["56", "62", "74", "80", "86"],
+      },
+      {
+        id: "spodnie-3",
+        title: "Spodnie różowe w kratkę z falbanką",
+        price: "59 zł",
+        image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Spodnie%20%283%29-BGPTUy6cOz2wmPFzAgyyaVq8kle7qx.jpeg",
+        description: "Bawełna, wzór w kratkę, ozdobna falbanka",
+        sizes: ["56", "62", "74", "80", "86"],
+      },
+    ],
   },
   {
     slug: "bluzka-krotki-rekaw",
