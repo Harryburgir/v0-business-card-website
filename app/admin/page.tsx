@@ -55,6 +55,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { Switch } from "@/components/ui/switch";
 import { categories, ladebebeCategories, type Product } from "@/lib/products-data";
 import { useStock } from "@/context/stock-context";
 import { useProducts, type ExtendedProduct } from "@/context/products-context";
@@ -186,6 +187,19 @@ export default function AdminPage() {
     setIsDeleteDialogOpen(false);
     setSelectedProduct(null);
     showSuccess("Produkt usuniety");
+  };
+
+  const handleToggleSoldOut = (product: ExtendedProduct) => {
+    const newSoldOut = !product.soldOut;
+    updateProduct(product.id, {
+      soldOut: newSoldOut,
+      stock: newSoldOut ? 0 : product.stock,
+    });
+    // Sync zeroed stock to StockContext so product-card sees it immediately
+    if (newSoldOut) {
+      initializeStock({ [product.id]: 0 });
+    }
+    showSuccess(newSoldOut ? "Produkt oznaczony jako wyprzedany" : "Produkt przywrocony do sprzedazy");
   };
 
   const openEditDialog = (product: ExtendedProduct) => {
@@ -394,6 +408,7 @@ export default function AdminPage() {
                     categoryTitle={getCategoryTitle(product.category)}
                     onEdit={() => openEditDialog(product)}
                     onDelete={() => openDeleteDialog(product)}
+                    onToggleSoldOut={() => handleToggleSoldOut(product)}
                   />
                 ))}
               </div>
@@ -408,6 +423,7 @@ export default function AdminPage() {
                         categoryTitle={getCategoryTitle(product.category)}
                         onEdit={() => openEditDialog(product)}
                         onDelete={() => openDeleteDialog(product)}
+                        onToggleSoldOut={() => handleToggleSoldOut(product)}
                       />
                     ))}
                   </div>
@@ -467,6 +483,7 @@ export default function AdminPage() {
                             categoryTitle={category.title}
                             onEdit={() => openEditDialog(product)}
                             onDelete={() => openDeleteDialog(product)}
+                            onToggleSoldOut={() => handleToggleSoldOut(product)}
                             compact
                           />
                         ))}
@@ -928,22 +945,29 @@ interface ProductCardProps {
   categoryTitle: string;
   onEdit: () => void;
   onDelete: () => void;
+  onToggleSoldOut: () => void;
   compact?: boolean;
 }
 
-function ProductCard({ product, categoryTitle, onEdit, onDelete, compact }: ProductCardProps) {
-  const isLowStock = product.stock < 10;
+function ProductCard({ product, categoryTitle, onEdit, onDelete, onToggleSoldOut, compact }: ProductCardProps) {
+  const isLowStock = product.stock < 10 && !product.soldOut;
 
   return (
-    <Card className="group overflow-hidden transition-all hover:shadow-md">
+    <Card className={`group overflow-hidden transition-all hover:shadow-md ${product.soldOut ? "opacity-75" : ""}`}>
       <div className="relative aspect-square overflow-hidden bg-muted">
         <Image
           src={product.image}
           alt={product.title}
           fill
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
+          className={`object-cover transition-transform duration-300 group-hover:scale-105 ${product.soldOut ? "grayscale" : ""}`}
         />
-        {isLowStock && (
+        {product.soldOut ? (
+          <div className="absolute left-2 top-2">
+            <Badge variant="destructive" className="text-xs uppercase tracking-wide">
+              Wyprzedane
+            </Badge>
+          </div>
+        ) : isLowStock && (
           <div className="absolute left-2 top-2">
             <Badge variant="destructive" className="text-xs">
               Niski stan
@@ -973,8 +997,8 @@ function ProductCard({ product, categoryTitle, onEdit, onDelete, compact }: Prod
         </p>
         <div className="mt-3 flex items-center justify-between">
           <span className="font-semibold text-primary">{product.price} zl</span>
-          <span className={`text-sm ${isLowStock ? "text-destructive" : "text-muted-foreground"}`}>
-            {product.stock} szt.
+          <span className={`text-sm ${product.soldOut ? "text-destructive font-medium" : isLowStock ? "text-destructive" : "text-muted-foreground"}`}>
+            {product.soldOut ? "Wyprzedane" : `${product.stock} szt.`}
           </span>
         </div>
         {product.sizes && product.sizes.length > 0 && (
@@ -991,6 +1015,16 @@ function ProductCard({ product, categoryTitle, onEdit, onDelete, compact }: Prod
             )}
           </div>
         )}
+        <div className="mt-3 flex items-center justify-between border-t pt-3">
+          <Label htmlFor={`soldout-${product.id}`} className="text-xs font-medium cursor-pointer select-none">
+            Wyprzedane
+          </Label>
+          <Switch
+            id={`soldout-${product.id}`}
+            checked={!!product.soldOut}
+            onCheckedChange={onToggleSoldOut}
+          />
+        </div>
       </CardContent>
     </Card>
   );
@@ -1002,25 +1036,30 @@ interface ProductListItemProps {
   categoryTitle: string;
   onEdit: () => void;
   onDelete: () => void;
+  onToggleSoldOut: () => void;
 }
 
-function ProductListItem({ product, categoryTitle, onEdit, onDelete }: ProductListItemProps) {
-  const isLowStock = product.stock < 10;
+function ProductListItem({ product, categoryTitle, onEdit, onDelete, onToggleSoldOut }: ProductListItemProps) {
+  const isLowStock = product.stock < 10 && !product.soldOut;
 
   return (
-    <div className="flex items-center gap-4 p-4 transition-colors hover:bg-muted/50">
+    <div className={`flex items-center gap-4 p-4 transition-colors hover:bg-muted/50 ${product.soldOut ? "opacity-70" : ""}`}>
       <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-lg bg-muted">
         <Image
           src={product.image}
           alt={product.title}
           fill
-          className="object-cover"
+          className={`object-cover ${product.soldOut ? "grayscale" : ""}`}
         />
       </div>
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2">
           <h3 className="font-medium truncate">{product.title}</h3>
-          {isLowStock && (
+          {product.soldOut ? (
+            <Badge variant="destructive" className="text-xs shrink-0 uppercase tracking-wide">
+              Wyprzedane
+            </Badge>
+          ) : isLowStock && (
             <Badge variant="destructive" className="text-xs shrink-0">
               Niski stan
             </Badge>
@@ -1034,11 +1073,21 @@ function ProductListItem({ product, categoryTitle, onEdit, onDelete }: ProductLi
       <div className="flex items-center gap-6">
         <div className="text-right">
           <p className="font-semibold text-primary">{product.price} zl</p>
-          <p className={`text-sm ${isLowStock ? "text-destructive" : "text-muted-foreground"}`}>
-            {product.stock} szt.
+          <p className={`text-sm ${product.soldOut ? "text-destructive font-medium" : isLowStock ? "text-destructive" : "text-muted-foreground"}`}>
+            {product.soldOut ? "Wyprzedane" : `${product.stock} szt.`}
           </p>
         </div>
-        <div className="flex gap-1">
+        <div className="flex items-center gap-3">
+          <div className="flex flex-col items-center gap-1">
+            <Label htmlFor={`soldout-list-${product.id}`} className="text-xs text-muted-foreground cursor-pointer">
+              Wyprzedane
+            </Label>
+            <Switch
+              id={`soldout-list-${product.id}`}
+              checked={!!product.soldOut}
+              onCheckedChange={onToggleSoldOut}
+            />
+          </div>
           <Button size="icon" variant="ghost" className="h-8 w-8" onClick={onEdit}>
             <Edit2 className="h-4 w-4" />
           </Button>

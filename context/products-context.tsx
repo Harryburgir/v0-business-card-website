@@ -7,6 +7,7 @@ export interface ExtendedProduct extends Omit<Product, 'price'> {
   price: number | string;
   stock: number;
   category: string;
+  soldOut?: boolean;
 }
 
 interface ProductsContextType {

@@ -6,6 +6,7 @@ import { ShoppingBag, Check } from "lucide-react";
 import type { Product } from "@/lib/products-data";
 import { useCart } from "@/context/cart-context";
 import { useStock } from "@/context/stock-context";
+import { useProducts } from "@/context/products-context";
 
 interface ProductCardProps {
   product: Product;
@@ -15,6 +16,7 @@ interface ProductCardProps {
 export function ProductCard({ product, categorySlug }: ProductCardProps) {
   const { addItem } = useCart();
   const { getStock } = useStock();
+  const { products } = useProducts();
   const [selectedSize, setSelectedSize] = useState<string>(
     product.sizes && product.sizes.length > 0 ? product.sizes[0] : ""
   );
@@ -22,7 +24,9 @@ export function ProductCard({ product, categorySlug }: ProductCardProps) {
   const isBoy = product.id.includes("chlopiec");
   const isGirl = product.id.includes("dziewczynka");
   const comingSoon = product.comingSoon === true;
-  const currentStock = getStock(product.id);
+  const extendedProduct = products.find(p => p.id === product.id);
+  const isSoldOut = extendedProduct?.soldOut === true;
+  const currentStock = isSoldOut ? 0 : getStock(product.id);
   const isOutOfStock = currentStock === 0;
 
   function handleAdd() {
