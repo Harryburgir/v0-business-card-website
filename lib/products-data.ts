@@ -236,7 +236,32 @@ export const ladebebeCategories: LadebebeCategory[] = [
     description: "Wygodne spodnie i spódniczki na każdą porę roku",
     longDescription: "Lekkie i przewiewne spodnie oraz spódniczki idealne na każdy dzień. Naturalne tkaniny, wygodny krój i stylowe wzory dla aktywnych dzieci.",
     ageRange: "2-6 lat",
-    products: [],
+    products: [
+      {
+        id: "spodnie-1",
+        title: "Spodnie różowe z falbanką",
+        price: "59 zł",
+        image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/spodnie-BqKjdb93YurCThQ1DuYuS0YiMLCqwW.jpeg",
+        description: "Miękka bawełna, ozdobna falbanka",
+        sizes: ["56", "62", "74", "80", "86"],
+      },
+      {
+        id: "spodnie-2",
+        title: "Spodnie niebieskie",
+        price: "59 zł",
+        image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/spodnie%20%282%29-dleEzvDI28GOHKPrAyP8y6a9f5gSsp.jpeg",
+        description: "Naturalna bawełna, wygodna gumka",
+        sizes: ["56", "62", "74", "80", "86"],
+      },
+      {
+        id: "spodnie-3",
+        title: "Spodnie różowe w kratkę z falbanką",
+        price: "59 zł",
+        image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Spodnie%20%283%29-BGPTUy6cOz2wmPFzAgyyaVq8kle7qx.jpeg",
+        description: "Bawełna, wzór w kratkę, ozdobna falbanka",
+        sizes: ["56", "62", "74", "80", "86"],
+      },
+    ],
   },
   {
     slug: "bluzka-krotki-rekaw",
