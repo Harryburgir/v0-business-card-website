@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 
-const ADMIN_PASSWORD = "Labadebebemini2026!!";
+const ADMIN_PASSWORD = "Ladebebe2026!!";
 const AUTH_KEY = "admin_authenticated";
 
 interface AdminAuthProps {
